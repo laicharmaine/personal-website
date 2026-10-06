@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #fff8f3;
+  --ink: #1c1917;
+  --coral-50: #fff1ee;
+  --coral-100: #ffe0d9;
+  --coral-200: #ffc5b8;
+  --coral-500: #e85a4f;
+  --coral-600: #d4453a;
+  --coral-700: #b5362d;
+  --coral-800: #962f28;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-coral-50: var(--coral-50);
+  --color-coral-100: var(--coral-100);
+  --color-coral-200: var(--coral-200);
+  --color-coral-500: var(--coral-500);
+  --color-coral-600: var(--coral-600);
+  --color-coral-700: var(--coral-700);
+  --color-coral-800: var(--coral-800);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Subtle entrance for hero content */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.6s ease-out 0.12s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.6s ease-out 0.24s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-fade-up-delay-2 {
+    animation: none;
+  }
+}
+
+/* Focus rings for a11y */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--coral-500);
+  outline-offset: 2px;
+}
