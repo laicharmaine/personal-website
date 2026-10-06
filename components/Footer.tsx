@@ -10,7 +10,7 @@ export default function Footer() {
           </p>
           <p className="mt-1 text-sm text-stone-500">{site.tagline}</p>
         </div>
-        <div className="flex flex-wrap gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <a
             href={`mailto:${site.email}`}
             className="font-medium text-stone-600 underline-offset-4 hover:text-coral-600 hover:underline"
@@ -33,6 +33,14 @@ export default function Footer() {
           >
             GitHub
           </a>
+          <form action="/api/logout" method="POST" className="inline">
+            <button
+              type="submit"
+              className="font-medium text-stone-500 underline-offset-4 hover:text-coral-600 hover:underline"
+            >
+              Log out
+            </button>
+          </form>
         </div>
       </div>
       <div className="border-t border-stone-200/80 py-3 text-center text-xs text-stone-400">
