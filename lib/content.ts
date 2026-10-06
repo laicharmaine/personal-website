@@ -6,7 +6,7 @@
 export const site = {
   name: "Charmaine Lai",
   tagline: "Marketing mind → PM/PMM. Kellogg MBAi.",
-  location: "Evanston, CT · targeting Bay Area",
+  location: "Evanston, IL · targeting Bay Area",
   email: "hello@charmainelai.com", // DRAFT placeholder — replace with real email
   linkedin: "https://www.linkedin.com/in/charmainelai", // DRAFT — confirm URL
   github: "https://github.com/laicharmaine",
