@@ -9,90 +9,96 @@ export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  // The password screen is its own little "log on" desktop.
+  if (pathname === "/login" || pathname.startsWith("/login/")) return null;
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-200/80 bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-50 border-b-2 border-ink bg-paper">
+      <div className="mx-auto flex h-11 max-w-6xl items-center gap-2 px-3 sm:px-6">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-tight text-ink transition hover:text-coral-600"
+          className="group flex items-center gap-2 pr-2"
+          aria-label={`${site.name} — home`}
         >
-          {site.name}
+          <span
+            aria-hidden
+            className="holo grid h-7 w-7 place-items-center border-2 border-ink font-pixel text-[0.7rem] leading-none text-ink shadow-[2px_2px_0_var(--ink)] transition-transform group-hover:-rotate-6"
+          >
+            CL
+          </span>
+          <span className="font-pixel text-sm tracking-tight">
+            {site.name}
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
-                isActive(item.href)
-                  ? "bg-coral-500 text-white shadow-sm"
-                  : "text-stone-600 hover:bg-coral-50 hover:text-coral-700"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="ml-2 hidden h-full items-stretch md:flex" aria-label="Main">
+          {nav.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`flex items-center px-3 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-ink text-lime"
+                    : "text-ink hover:bg-peri-light"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
+
+        <p className="ml-auto hidden items-center gap-2 font-mono text-xs text-ink-soft lg:flex">
+          <span
+            aria-hidden
+            className="blink inline-block h-2 w-2 border border-ink bg-lime"
+          />
+          Open to PM / PMM · Summer ’27
+        </p>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-stone-700 hover:bg-coral-50 md:hidden"
+          className="btn btn-secondary ml-auto px-3 py-1 text-xs md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
-          aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden
-          >
-            {open ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
+          <span className="font-pixel">Menu</span>
+          <span aria-hidden>{open ? "▴" : "▾"}</span>
         </button>
       </div>
 
       {open && (
         <nav
           id="mobile-nav"
-          className="border-t border-stone-200/80 px-4 py-3 md:hidden"
+          className="absolute right-3 top-full mt-1 w-56 border-2 border-ink bg-paper shadow-[4px_4px_0_var(--ink)] md:hidden"
           aria-label="Mobile"
         >
-          <ul className="flex flex-col gap-1">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 text-sm font-medium ${
-                    isActive(item.href)
-                      ? "bg-coral-500 text-white"
-                      : "text-stone-700 hover:bg-coral-50"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+          <ul className="py-1">
+            {nav.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex items-center justify-between px-4 py-2.5 text-sm font-medium ${
+                      active ? "bg-ink text-lime" : "text-ink hover:bg-peri-light"
+                    }`}
+                  >
+                    {item.label}
+                    {active && <span aria-hidden>✓</span>}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       )}

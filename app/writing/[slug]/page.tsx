@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DraftBadge from "@/components/DraftBadge";
+import Window from "@/components/Window";
 import { getPost, posts } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -34,39 +35,40 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <Link
-        href="/writing"
-        className="text-sm font-medium text-coral-600 hover:text-coral-700"
-      >
-        ← All writing
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      <Link href="/writing" className="btn btn-secondary px-3 py-1.5 text-sm">
+        <span aria-hidden>◂</span> All writing
       </Link>
 
-      <header className="mt-6 mb-8">
-        <div className="flex flex-wrap items-center gap-2">
-          <time className="text-sm text-stone-500">{formatDate(post.date)}</time>
-          {post.draft && <DraftBadge />}
-        </div>
-        <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          {post.title}
-        </h1>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <li
-              key={tag}
-              className="rounded-full bg-coral-50 px-2.5 py-0.5 text-xs font-medium text-coral-700"
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-      </header>
+      <Window
+        as="article"
+        title={`${post.slug}.txt`}
+        className="mt-6"
+        bodyClassName="px-5 py-7 sm:px-10 sm:py-10"
+      >
+        <header className="mb-8 border-b-2 border-dashed border-platinum-dark pb-6">
+          <div className="flex flex-wrap items-center gap-3">
+            <time className="font-mono text-sm text-ink-soft">{formatDate(post.date)}</time>
+            {post.draft && <DraftBadge />}
+          </div>
+          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+            {post.title}
+          </h1>
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tags">
+            {post.tags.map((tag) => (
+              <li key={tag} className="chip bg-peri-light">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </header>
 
-      <div className="space-y-4 text-base leading-relaxed text-stone-700 sm:text-lg">
-        {post.body.map((para) => (
-          <p key={para.slice(0, 40)}>{para}</p>
-        ))}
-      </div>
-    </article>
+        <div className="max-w-prose space-y-5 text-base leading-relaxed text-ink sm:text-lg">
+          {post.body.map((para) => (
+            <p key={para.slice(0, 40)}>{para}</p>
+          ))}
+        </div>
+      </Window>
+    </div>
   );
 }

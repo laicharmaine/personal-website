@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import DraftBadge from "@/components/DraftBadge";
+import Window from "@/components/Window";
 import { education, experience, skills } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -9,84 +10,104 @@ export const metadata: Metadata = {
     "Education, experience, and skills — draft resume content for Charmaine Lai.",
 };
 
+function SectionTab({ children, extra }: { children: React.ReactNode; extra?: React.ReactNode }) {
+  return (
+    <div className="mb-2 flex flex-wrap items-center gap-3 border-b-2 border-ink">
+      <h2 className="-mb-[2px] border-2 border-b-0 border-ink bg-ink px-3 py-1 font-pixel text-sm text-lime">
+        {children}
+      </h2>
+      {extra}
+    </div>
+  );
+}
+
+type Entry = {
+  key: string;
+  period: string;
+  title: React.ReactNode;
+  meta: string;
+  metaClass: string;
+  bullets: string[];
+};
+
+function EntryList({ entries }: { entries: Entry[] }) {
+  return (
+    <ol className="divide-y-2 divide-dashed divide-platinum-dark">
+      {entries.map((e) => (
+        <li key={e.key} className="grid gap-2 py-6 sm:grid-cols-[10rem_1fr] sm:gap-8">
+          <time className="font-mono text-sm font-medium text-ink-soft sm:pt-0.5">
+            {e.period}
+          </time>
+          <div>
+            <h3 className="text-lg font-semibold leading-snug">{e.title}</h3>
+            <p className={`mt-0.5 text-sm font-medium ${e.metaClass}`}>{e.meta}</p>
+            <ul className="pixel-list mt-3 space-y-1.5 text-[0.95rem] leading-relaxed text-ink-soft">
+              {e.bullets.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export default function ExperiencePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
       <PageHeader
         eyebrow="Resume"
+        path="/experience"
         title="Experience"
         description="Timeline-style sections with clearly labeled draft bullets. Swap in real employers, dates, and wins."
         showDraft
       />
 
-      <section className="mb-14">
-        <h2 className="mb-6 font-display text-2xl font-semibold text-ink">
-          Education
-        </h2>
-        <ol className="relative space-y-8 border-l-2 border-coral-200 pl-6">
-          {education.map((item) => (
-            <li key={item.school} className="relative">
-              <span
-                className="absolute -left-[1.9rem] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-coral-500 shadow"
-                aria-hidden
-              />
-              <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="font-semibold text-ink">{item.school}</h3>
-                  <time className="text-sm text-stone-500">{item.period}</time>
-                </div>
-                <p className="mt-1 text-sm text-coral-700">{item.degree}</p>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-stone-600">
-                  {item.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <Window as="section" title="resume.doc" bodyClassName="px-5 py-6 sm:px-9 sm:py-8">
+        <section className="mb-10">
+          <SectionTab>Education</SectionTab>
+          <EntryList
+            entries={education.map((item) => ({
+              key: item.school,
+              period: item.period,
+              title: item.school,
+              meta: item.degree,
+              metaClass: "text-peri-deep",
+              bullets: item.bullets,
+            }))}
+          />
+        </section>
 
-      <section className="mb-14">
-        <div className="mb-6 flex flex-wrap items-center gap-3">
-          <h2 className="font-display text-2xl font-semibold text-ink">
-            Work experience
-          </h2>
-          <DraftBadge />
-        </div>
-        <ol className="relative space-y-8 border-l-2 border-coral-200 pl-6">
-          {experience.map((item) => (
-            <li key={`${item.company}-${item.role}`} className="relative">
-              <span
-                className="absolute -left-[1.9rem] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-coral-500 shadow"
-                aria-hidden
-              />
-              <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="font-semibold text-ink">
-                    {item.role}{" "}
-                    <span className="font-normal text-stone-500">@</span>{" "}
-                    {item.company}
-                  </h3>
-                  <time className="text-sm text-stone-500">{item.period}</time>
-                </div>
-                <p className="mt-1 text-sm text-stone-500">{item.location}</p>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-stone-600">
-                  {item.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+        <section>
+          <SectionTab extra={<DraftBadge className="mb-1" />}>Work experience</SectionTab>
+          <EntryList
+            entries={experience.map((item) => ({
+              key: `${item.company}-${item.role}`,
+              period: item.period,
+              title: (
+                <>
+                  {item.role} <span className="font-normal text-ink-soft">@</span>{" "}
+                  {item.company}
+                </>
+              ),
+              meta: item.location,
+              metaClass: "text-ink-soft",
+              bullets: item.bullets,
+            }))}
+          />
+        </section>
+      </Window>
 
-      <section>
-        <h2 className="mb-6 font-display text-2xl font-semibold text-ink">
-          Skills
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-3">
+      <Window
+        as="section"
+        title="skills.cfg — Properties"
+        accent="platinum"
+        className="mt-10 lg:ml-16"
+        bodyClassName="px-5 py-6 sm:px-8"
+      >
+        <h2 className="mb-5 font-display text-3xl font-bold">Skills</h2>
+        <div className="grid gap-5 md:grid-cols-3">
           {(
             [
               ["Product", skills.product],
@@ -94,27 +115,25 @@ export default function ExperiencePage() {
               ["Tools", skills.tools],
             ] as const
           ).map(([label, items]) => (
-            <div
-              key={label}
-              className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-coral-600">
-                {label}
-              </h3>
-              <ul className="mt-3 space-y-2 text-sm text-stone-700">
+            <fieldset key={label} className="groupbox">
+              <legend>{label}</legend>
+              <ul className="space-y-2 text-sm">
                 {items.map((s) => (
-                  <li key={s} className="flex gap-2">
-                    <span className="text-coral-500" aria-hidden>
-                      ▹
+                  <li key={s} className="flex items-start gap-2.5">
+                    <span
+                      aria-hidden
+                      className="bevel-in mt-0.5 grid h-4 w-4 flex-none place-items-center text-[0.7rem] font-bold leading-none"
+                    >
+                      ✓
                     </span>
                     {s}
                   </li>
                 ))}
               </ul>
-            </div>
+            </fieldset>
           ))}
         </div>
-      </section>
+      </Window>
     </div>
   );
 }
