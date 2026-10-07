@@ -1,17 +1,13 @@
-import DraftNote from "./DraftNote";
-
 type Props = {
   eyebrow?: string;
   title: string;
   description?: string;
-  showDraft?: boolean;
 };
 
 export default function PageHeader({
   eyebrow,
   title,
   description,
-  showDraft = false,
 }: Props) {
   return (
     <header className="mb-10">
@@ -26,7 +22,6 @@ export default function PageHeader({
           {description}
         </p>
       )}
-      {showDraft && <DraftNote className="mt-4" />}
     </header>
   );
 }

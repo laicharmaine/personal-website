@@ -31,11 +31,11 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — PM / PMM · Kellogg MBAi`,
+    default: `${site.name} — PM / PMM · Northwestern MBAi ’28`,
     template: `%s · ${site.name}`,
   },
   description:
-    "Charmaine Lai — Northwestern Kellogg MBAi. Marketing background targeting product management & product marketing (summer 2027). Fun, clear, customer-obsessed.",
+    "Charmaine Lai: marketer turned product builder. Almost five years in AI marketing at Numenta, now a joint MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
   openGraph: {
     title: `${site.name} — personal site`,
     description: site.headline,

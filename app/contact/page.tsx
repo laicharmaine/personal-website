@@ -2,50 +2,51 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import PixelIcon from "@/components/PixelIcon";
 import Window from "@/components/Window";
-import { site } from "@/lib/content";
+import { cat, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Charmaine Lai — email and LinkedIn.",
+  description: "Get in touch with Charmaine Lai by email or LinkedIn.",
 };
 
 const optionCls =
   "group flex flex-col border-2 border-ink bg-paper p-5 shadow-[4px_4px_0_var(--ink)] transition-[transform,box-shadow,background-color] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-peri-light hover:shadow-[6px_6px_0_var(--ink)] active:translate-x-1 active:translate-y-1 active:shadow-none";
 
+const linkCls =
+  "font-semibold text-peri-deep underline decoration-2 underline-offset-4 hover:bg-peri-light";
+
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
       <PageHeader
-        eyebrow="Hello"
+        eyebrow="Say hi"
         title="Contact"
-        description="Recruiters, classmates, collaborators — the shortest path is email or LinkedIn. No form backend yet; mailto keeps it simple."
-        showDraft
+        description="Hiring for a summer 2027 PM or PMM internship, or just want to talk product, AI, or cats? Email is the fastest way to reach me."
       />
 
       <Window title="New Message" bodyClassName="p-0">
         <dl className="border-b-2 border-ink bg-platinum">
           <div className="flex items-center gap-3 border-b border-platinum-dark px-5 py-2">
             <dt className="w-20 font-mono font-medium">To:</dt>
-            <dd className="bevel-in flex-1 px-2 py-0.5">{site.name}</dd>
+            <dd className="bevel-in min-w-0 flex-1 px-2 py-0.5">{site.name}</dd>
           </div>
           <div className="flex items-center gap-3 px-5 py-2">
             <dt className="w-20 font-mono font-medium">Subject:</dt>
-            <dd className="bevel-in flex-1 px-2 py-0.5">Hello Charmaine</dd>
+            <dd className="bevel-in min-w-0 flex-1 px-2 py-0.5">Summer 2027 internship</dd>
           </div>
         </dl>
 
         <div className="grid gap-6 p-5 sm:grid-cols-2 sm:p-7">
-          <a href={`mailto:${site.email}?subject=Hello%20Charmaine`} className={optionCls}>
+          <a
+            href={`mailto:${site.email}?subject=Summer%202027%20internship`}
+            className={optionCls}
+          >
             <PixelIcon name="mail" size={44} />
             <span className="mt-4 font-mono text-sm font-medium text-peri-deep">Email</span>
-            <span className="mt-1 break-all text-xl font-semibold group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
+            <span className="mt-1 break-all text-lg font-semibold group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4 sm:text-xl">
               {site.email}
             </span>
-            <span className="mt-2 text-ink-soft">
-              Placeholder address — replace in{" "}
-              <code className="bevel-in px-1 font-mono text-xs text-ink">lib/content.ts</code>{" "}
-              with your real inbox. Click opens mailto.
-            </span>
+            <span className="mt-2 text-ink-soft">Opens your mail app.</span>
           </a>
 
           <a
@@ -61,23 +62,29 @@ export default function ContactPage() {
               in
             </span>
             <span className="mt-4 font-mono text-sm font-medium text-peri-deep">LinkedIn</span>
-            <span className="mt-1 break-all text-xl font-semibold group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
-              linkedin.com/in/charmainelai
+            <span className="mt-1 break-all text-lg font-semibold group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4 sm:text-xl">
+              {site.linkedinLabel}
             </span>
-            <span className="mt-2 text-ink-soft">
-              Confirm this URL matches your profile. Opens in a new tab.
-            </span>
+            <span className="mt-2 text-ink-soft">Opens in a new tab.</span>
           </a>
         </div>
       </Window>
 
-      <aside className="mt-10 max-w-[65ch] border-2 border-dashed border-ink/40 px-5 py-4">
-        <h2 className="text-lg font-bold">Prefer a form later?</h2>
-        <p className="mt-1 leading-relaxed text-ink-soft">
-          Easy upgrades: Formspree, Resend + a Route Handler, or a Notion
-          database. No backend required for day one.
-        </p>
-      </aside>
+      <p className="mt-10 max-w-[65ch] leading-relaxed text-ink-soft">
+        Also around: code on{" "}
+        <a href={site.github} target="_blank" rel="noopener noreferrer" className={linkCls}>
+          GitHub
+        </a>{" "}
+        and a very photogenic cat on{" "}
+        <a href={cat.tiktok} target="_blank" rel="noopener noreferrer" className={linkCls}>
+          TikTok
+        </a>{" "}
+        and{" "}
+        <a href={cat.instagram} target="_blank" rel="noopener noreferrer" className={linkCls}>
+          Instagram
+        </a>
+        .
+      </p>
     </div>
   );
 }

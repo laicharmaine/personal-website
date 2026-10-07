@@ -1,32 +1,37 @@
 import Link from "next/link";
-import DraftNote from "@/components/DraftNote";
 import Window from "@/components/Window";
-import { education, projects, site, skills } from "@/lib/content";
+import { cat, projects, site } from "@/lib/content";
 
 const glance = [
-  { label: "Program", value: `Northwestern Kellogg MBAi · ${education[0].period.replace("Expected ", "Class of ")}` },
-  { label: "Background", value: "Marketing — positioning, go-to-market, brand" },
-  { label: "Looking for", value: "Summer 2027 PM / PMM internship" },
-  { label: "Location", value: site.location },
+  {
+    label: "Program",
+    value: "MBA + MS in AI (MBAi), Kellogg + McCormick, Northwestern · Mar 2028",
+  },
+  { label: "Background", value: "Almost 5 years in AI marketing at Numenta, then product consulting" },
+  { label: "Looking for", value: `${site.lookingFor} · ${site.target}`, highlight: true },
+  { label: "Based in", value: site.location },
+  { label: "Languages", value: "English, Cantonese, Mandarin" },
 ];
 
 const strengths = [
   {
-    title: "Marketing roots",
-    body: "Campaigns, positioning, and customer stories — the craft of making people care.",
-    skills: skills.marketing.slice(0, 3),
+    title: "Go-to-market for technical products",
+    body: "I took NuPIC, a CPU-based generative AI platform, from launch to three strategic partnerships in its first quarter.",
+    chips: ["Market research", "Positioning", "Launches"],
   },
   {
-    title: "Product pivot",
-    body: "Learning to ship: research → bets → roadmaps. MBAi for AI-fluent product sense.",
-    skills: skills.product.slice(0, 3),
+    title: "Customer insight → product decisions",
+    body: "My dogfooding sessions shaped three NuPIC iterations. In Hong Kong I turned railroad buyers’ requirements into prioritized capabilities ($7M in potential opportunities).",
+    chips: ["Dogfooding", "Prioritization", "API docs"],
   },
   {
-    title: "Summer 2027",
-    body: "Open to PM, PMM, and exploratory consulting. Teams that talk to users win.",
-    skills: ["PM", "PMM", "Bay Area"],
+    title: "Content people actually read",
+    body: "22k+ readers on my AI writing, a front-page Intel feature, Hacker News trending posts, and a cat with 450k+ followers.",
+    chips: ["Writing", "Events", "Social"],
   },
 ];
+
+const featured = projects.slice(0, 3);
 
 function SectionHeading({
   id,
@@ -71,7 +76,7 @@ export default function HomePage() {
         >
           <div>
             <p className="font-mono text-sm font-medium text-peri-deep">
-              Kellogg MBAi ’27 · PM / PMM candidate
+              Northwestern MBAi ’28 · PM / PMM
             </p>
             <h1
               id="hero-title"
@@ -86,9 +91,22 @@ export default function HomePage() {
               </span>
             </p>
             <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink-soft">
-              {site.headline} Currently at Northwestern Kellogg (MBAi), hunting a{" "}
-              <strong className="font-semibold text-ink">PM / PMM</strong> summer
-              2027 role — preferably Bay Area — and peeking at consulting too.
+              {site.headline} Now I’m doing a joint MBA + MS in AI at
+              Northwestern and looking for a{" "}
+              <strong className="font-semibold text-ink">PM or PMM internship</strong>{" "}
+              in the Bay Area for summer 2027.
+            </p>
+            <p className="mt-3 max-w-[60ch] leading-relaxed text-ink-soft">
+              Off the clock, I’m the Meowmager behind{" "}
+              <a
+                href={cat.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-peri-deep underline decoration-2 underline-offset-4 hover:bg-peri-light"
+              >
+                {cat.handle}
+              </a>{" "}
+              ({cat.followers} followers).
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link href="/experience" className="btn btn-primary px-5 py-3 text-base">
@@ -111,7 +129,13 @@ export default function HomePage() {
                   <dt className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
                     {row.label}
                   </dt>
-                  <dd className="mt-0.5 font-medium leading-snug">{row.value}</dd>
+                  <dd className="mt-0.5 font-medium leading-snug">
+                    {row.highlight ? (
+                      <span className="bg-lime px-1 [box-decoration-break:clone]">{row.value}</span>
+                    ) : (
+                      row.value
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -133,8 +157,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        <DraftNote className="mt-5" />
       </section>
 
       {/* 2 — What she brings */}
@@ -146,10 +168,10 @@ export default function HomePage() {
           <ul className="grid divide-y-2 divide-dashed divide-platinum-dark md:grid-cols-3 md:divide-x-2 md:divide-y-0">
             {strengths.map((s) => (
               <li key={s.title} className="p-6 sm:p-7">
-                <h3 className="text-xl font-bold">{s.title}</h3>
+                <h3 className="text-xl font-bold leading-snug">{s.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink-soft">{s.body}</p>
                 <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${s.title} skills`}>
-                  {s.skills.map((k) => (
+                  {s.chips.map((k) => (
                     <li key={k} className="chip">
                       {k}
                     </li>
@@ -172,29 +194,32 @@ export default function HomePage() {
         </SectionHeading>
         <Window title="case_studies/" bodyClassName="p-0">
           <ol className="divide-y-2 divide-dashed divide-platinum-dark">
-            {projects.map((p, i) => (
+            {featured.map((p) => (
               <li key={p.slug}>
                 <Link
-                  href="/projects"
-                  className="group grid gap-3 px-6 py-6 transition-colors hover:bg-peri-light sm:grid-cols-[4rem_1fr_auto] sm:items-center sm:gap-6 sm:px-7"
+                  href={`/projects#${p.slug}`}
+                  className="group grid gap-3 px-6 py-6 transition-colors hover:bg-peri-light sm:grid-cols-[8.5rem_1fr] sm:items-center sm:gap-7 sm:px-7"
                 >
-                  <span className="font-display text-3xl font-bold leading-none text-peri-deep">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  {p.metric && (
+                    <span className="flex items-baseline gap-2 sm:block">
+                      <span className="block text-4xl font-bold leading-none tracking-tight text-peri-deep">
+                        {p.metric.value}
+                      </span>
+                      <span className="mt-1 block text-sm leading-snug text-ink-soft">
+                        {p.metric.label}
+                      </span>
+                    </span>
+                  )}
                   <span>
-                    <span className="block text-xl font-bold leading-snug group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
+                    <span className="block font-mono text-sm text-ink-soft">
+                      {p.org} · {p.period}
+                    </span>
+                    <span className="mt-0.5 block text-xl font-bold leading-snug group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
                       {p.title}
                     </span>
                     <span className="mt-1 block max-w-[65ch] leading-relaxed text-ink-soft">
-                      {p.oneLiner}
+                      {p.result}
                     </span>
-                  </span>
-                  <span className="flex flex-wrap gap-2 sm:max-w-[13rem] sm:justify-end">
-                    {p.tags.map((t) => (
-                      <span key={t} className="chip">
-                        {t}
-                      </span>
-                    ))}
                   </span>
                 </Link>
               </li>
@@ -205,13 +230,13 @@ export default function HomePage() {
 
       {/* 4 — CTA */}
       <section className="py-16 sm:py-20" aria-labelledby="cta-title">
-        <div className="win flex flex-col gap-6 bg-ink p-7 shadow-[5px_5px_0_var(--peri)] text-paper sm:flex-row sm:items-center sm:justify-between sm:p-9">
+        <div className="win flex flex-col gap-6 bg-ink p-7 text-paper shadow-[5px_5px_0_var(--peri)] sm:flex-row sm:items-center sm:justify-between sm:p-9">
           <div>
             <h2 id="cta-title" className="font-display text-3xl font-bold leading-tight text-lime sm:text-4xl">
               Hiring a summer 2027 PM or PMM intern?
             </h2>
             <p className="mt-2 max-w-[55ch] text-lg text-paper/85">
-              Let’s talk. The full résumé is one click away, and email is the
+              Let’s talk. My full résumé is one click away, and email is the
               fastest way to reach me.
             </p>
           </div>

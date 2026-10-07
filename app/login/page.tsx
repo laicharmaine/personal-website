@@ -94,7 +94,7 @@ export default async function LoginPage({ searchParams }: Props) {
       </Window>
 
       <p className="mt-6 font-mono text-sm text-ink-soft">
-        © {new Date().getFullYear()} Charmaine Lai · Kellogg MBAi ’27
+        © {new Date().getFullYear()} Charmaine Lai · Northwestern MBAi ’28
       </p>
     </div>
   );
