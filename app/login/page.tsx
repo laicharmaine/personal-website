@@ -19,10 +19,10 @@ export default async function LoginPage({ searchParams }: Props) {
 
   return (
     <div className="flex min-h-svh flex-col items-center justify-center px-4 py-12">
-      <p className="mb-6 flex items-center gap-3 font-pixel text-sm text-ink">
+      <p className="mb-6 flex items-center gap-3 text-lg font-semibold text-ink">
         <span
           aria-hidden
-          className="holo grid h-8 w-8 place-items-center border-2 border-ink text-xs shadow-[2px_2px_0_var(--ink)]"
+          className="holo grid h-8 w-8 place-items-center border-2 border-ink font-mono text-xs shadow-[2px_2px_0_var(--ink)]"
         >
           CL
         </span>
@@ -41,11 +41,11 @@ export default async function LoginPage({ searchParams }: Props) {
             <PixelIcon name="key" size={40} />
           </div>
           <div>
-            <p className="font-pixel text-xs text-peri-deep">Private site</p>
+            <p className="font-mono text-sm font-medium text-peri-deep">Private site</p>
             <h1 id="login-title" className="mt-1 font-display text-3xl font-bold leading-none">
               Enter password
             </h1>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+            <p className="mt-2 leading-relaxed text-ink-soft">
               This site is password-protected. Enter the shared password to
               continue.
             </p>
@@ -55,7 +55,7 @@ export default async function LoginPage({ searchParams }: Props) {
         <form action={loginAction} className="mt-7 space-y-4">
           <input type="hidden" name="next" value={next} />
           <div>
-            <label htmlFor="password" className="mb-1.5 block font-pixel text-xs">
+            <label htmlFor="password" className="mb-1.5 block font-semibold">
               Password
             </label>
             <input
@@ -77,7 +77,7 @@ export default async function LoginPage({ searchParams }: Props) {
             >
               <span
                 aria-hidden
-                className="grid h-6 w-6 flex-none place-items-center border-2 border-ink bg-pink font-pixel text-xs"
+                className="grid h-6 w-6 flex-none place-items-center border-2 border-ink bg-pink font-mono text-sm font-bold"
               >
                 !
               </span>
@@ -86,14 +86,14 @@ export default async function LoginPage({ searchParams }: Props) {
           )}
 
           <div className="flex justify-end pt-1">
-            <button type="submit" className="btn btn-primary w-full sm:w-auto sm:min-w-32">
+            <button type="submit" className="btn btn-primary w-full px-5 py-3 text-base sm:w-auto sm:min-w-32">
               Continue
             </button>
           </div>
         </form>
       </Window>
 
-      <p className="mt-6 font-mono text-xs text-ink">
+      <p className="mt-6 font-mono text-sm text-ink-soft">
         © {new Date().getFullYear()} Charmaine Lai · Kellogg MBAi ’27
       </p>
     </div>

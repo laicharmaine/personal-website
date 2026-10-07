@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
-import DraftBadge from "@/components/DraftBadge";
 import Window from "@/components/Window";
 import { education, experience, skills } from "@/lib/content";
+import { clean } from "@/lib/display";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -10,13 +10,12 @@ export const metadata: Metadata = {
     "Education, experience, and skills — draft resume content for Charmaine Lai.",
 };
 
-function SectionTab({ children, extra }: { children: React.ReactNode; extra?: React.ReactNode }) {
+function SectionTab({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mb-2 flex flex-wrap items-center gap-3 border-b-2 border-ink">
-      <h2 className="-mb-[2px] border-2 border-b-0 border-ink bg-ink px-3 py-1 font-pixel text-sm text-lime">
+    <div className="mb-2 border-b-2 border-ink">
+      <h2 className="-mb-[2px] inline-block border-2 border-b-0 border-ink bg-ink px-4 py-1.5 text-lg font-bold text-lime">
         {children}
       </h2>
-      {extra}
     </div>
   );
 }
@@ -34,16 +33,16 @@ function EntryList({ entries }: { entries: Entry[] }) {
   return (
     <ol className="divide-y-2 divide-dashed divide-platinum-dark">
       {entries.map((e) => (
-        <li key={e.key} className="grid gap-2 py-6 sm:grid-cols-[10rem_1fr] sm:gap-8">
-          <time className="font-mono text-sm font-medium text-ink-soft sm:pt-0.5">
+        <li key={e.key} className="grid gap-1.5 py-6 sm:grid-cols-[9.5rem_1fr] sm:gap-8">
+          <time className="font-mono text-[0.95rem] font-medium text-ink-soft sm:pt-0.5">
             {e.period}
           </time>
           <div>
-            <h3 className="text-lg font-semibold leading-snug">{e.title}</h3>
-            <p className={`mt-0.5 text-sm font-medium ${e.metaClass}`}>{e.meta}</p>
-            <ul className="pixel-list mt-3 space-y-1.5 text-[0.95rem] leading-relaxed text-ink-soft">
+            <h3 className="text-xl font-bold leading-snug">{e.title}</h3>
+            <p className={`mt-0.5 font-medium ${e.metaClass}`}>{e.meta}</p>
+            <ul className="pixel-list mt-3 max-w-[65ch] space-y-2 leading-relaxed text-ink">
               {e.bullets.map((b) => (
-                <li key={b}>{b}</li>
+                <li key={b}>{clean(b)}</li>
               ))}
             </ul>
           </div>
@@ -57,10 +56,9 @@ export default function ExperiencePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
       <PageHeader
-        eyebrow="Resume"
-        path="/experience"
+        eyebrow="Résumé"
         title="Experience"
-        description="Timeline-style sections with clearly labeled draft bullets. Swap in real employers, dates, and wins."
+        description="Education, work history, and skills at a glance."
         showDraft
       />
 
@@ -80,7 +78,7 @@ export default function ExperiencePage() {
         </section>
 
         <section>
-          <SectionTab extra={<DraftBadge className="mb-1" />}>Work experience</SectionTab>
+          <SectionTab>Work experience</SectionTab>
           <EntryList
             entries={experience.map((item) => ({
               key: `${item.company}-${item.role}`,
@@ -103,10 +101,10 @@ export default function ExperiencePage() {
         as="section"
         title="skills.cfg — Properties"
         accent="platinum"
-        className="mt-10 lg:ml-16"
+        className="mt-10"
         bodyClassName="px-5 py-6 sm:px-8"
       >
-        <h2 className="mb-5 font-display text-3xl font-bold">Skills</h2>
+        <h2 className="mb-5 text-2xl font-bold">Skills</h2>
         <div className="grid gap-5 md:grid-cols-3">
           {(
             [
@@ -117,12 +115,12 @@ export default function ExperiencePage() {
           ).map(([label, items]) => (
             <fieldset key={label} className="groupbox">
               <legend>{label}</legend>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-2.5">
                 {items.map((s) => (
                   <li key={s} className="flex items-start gap-2.5">
                     <span
                       aria-hidden
-                      className="bevel-in mt-0.5 grid h-4 w-4 flex-none place-items-center text-[0.7rem] font-bold leading-none"
+                      className="bevel-in mt-1 grid h-4 w-4 flex-none place-items-center text-[0.7rem] font-bold leading-none"
                     >
                       ✓
                     </span>

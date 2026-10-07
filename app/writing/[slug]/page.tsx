@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import DraftBadge from "@/components/DraftBadge";
+import DraftNote from "@/components/DraftNote";
 import Window from "@/components/Window";
 import { getPost, posts } from "@/lib/content";
 
@@ -47,11 +47,8 @@ export default async function PostPage({ params }: Props) {
         bodyClassName="px-5 py-7 sm:px-10 sm:py-10"
       >
         <header className="mb-8 border-b-2 border-dashed border-platinum-dark pb-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <time className="font-mono text-sm text-ink-soft">{formatDate(post.date)}</time>
-            {post.draft && <DraftBadge />}
-          </div>
-          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+          <time className="font-mono text-sm text-ink-soft">{formatDate(post.date)}</time>
+          <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
             {post.title}
           </h1>
           <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tags">
@@ -63,11 +60,12 @@ export default async function PostPage({ params }: Props) {
           </ul>
         </header>
 
-        <div className="max-w-prose space-y-5 text-base leading-relaxed text-ink sm:text-lg">
+        <div className="max-w-[65ch] space-y-5 text-lg leading-relaxed text-ink">
           {post.body.map((para) => (
             <p key={para.slice(0, 40)}>{para}</p>
           ))}
         </div>
+        {post.draft && <DraftNote className="mt-8 border-t-2 border-dashed border-platinum-dark pt-5">Draft post — placeholder text that Charmaine is rewriting.</DraftNote>}
       </Window>
     </div>
   );

@@ -3,7 +3,6 @@ import {
   IBM_Plex_Mono,
   IBM_Plex_Sans,
   Pixelify_Sans,
-  Silkscreen,
 } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -12,13 +11,6 @@ import "./globals.css";
 
 const pixelify = Pixelify_Sans({
   variable: "--font-pixelify",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const silkscreen = Silkscreen({
-  variable: "--font-silkscreen",
-  weight: ["400"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -52,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#aeaaff",
+  themeColor: "#dedbff",
 };
 
 export default function RootLayout({
@@ -63,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pixelify.variable} ${silkscreen.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${pixelify.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <Nav />
