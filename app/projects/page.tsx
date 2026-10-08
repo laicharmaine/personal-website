@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
-import Window from "@/components/Window";
 import { projects, sideProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Case studies from Numenta and YES International (launching NuPIC, a website revamp, A Thousand Brains, Brains@Bay) plus side projects like Tabby and @litto_lychee.",
+    "Selected work by Charmaine Lai: launching NuPIC, Numenta’s website revamp, A Thousand Brains, Brains@Bay, and railroad product strategy, plus side projects.",
 };
 
 const steps = [
@@ -15,109 +14,65 @@ const steps = [
   { key: "result", label: "Result" },
 ] as const;
 
-const linkCls =
-  "font-semibold text-peri-deep underline decoration-2 underline-offset-4 hover:bg-peri-light";
-
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageHeader
-        eyebrow="Case studies"
-        title="Projects"
-        description="Five pieces of work, each told as problem → what I did → result. Then a few things I built for fun."
-      />
+    <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <PageHeader eyebrow="Projects" title="Selected work" intro="Five launches and bets. Tap one for the story." />
 
-      <ol className="space-y-8">
-        {projects.map((project, i) => (
-          <li key={project.slug} id={project.slug} className="scroll-mt-24">
-            <Window
-              as="article"
-              title={`case_study_0${i + 1}.doc`}
-              bodyClassName="grid gap-6 p-6 sm:p-8 md:grid-cols-[11rem_1fr] md:gap-9"
-            >
-              <div className="flex flex-col gap-3">
-                {project.metric && (
-                  <div className="border-2 border-ink bg-lime px-4 py-3">
-                    <p className="text-4xl font-bold leading-none tracking-tight">
-                      {project.metric.value}
-                    </p>
-                    <p className="mt-1.5 text-sm font-medium leading-snug">
-                      {project.metric.label}
-                    </p>
+      <ol className="border-t border-ink">
+        {projects.map((p, i) => (
+          <li key={p.slug} id={p.slug} className="scroll-mt-24 border-b border-line">
+            <details className="group">
+              <summary className="row-hover grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-1 py-7 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 sm:px-3">
+                <span className="col-span-2 flex items-baseline gap-3 sm:col-span-1 sm:block">
+                  <span className="display block text-6xl text-accent sm:text-7xl">{p.metric.value}</span>
+                  <span className="font-mono text-xs text-muted sm:mt-2 sm:block">{p.metric.label}</span>
+                </span>
+                <span>
+                  <span className="font-mono text-xs text-muted">
+                    0{i + 1} · {p.org} · {p.year}
+                  </span>
+                  <span className="display-wide mt-1 block text-2xl sm:text-4xl">{p.title}</span>
+                  <span className="mt-1 block text-muted">{p.line}</span>
+                </span>
+                <span
+                  aria-hidden
+                  className="plus grid h-10 w-10 place-items-center rounded-full text-2xl font-light ring-1 ring-ink/30 group-open:bg-ink group-open:text-bone"
+                >
+                  +
+                </span>
+              </summary>
+              <dl className="details-body grid gap-3 px-1 pb-8 sm:ml-[13.5rem] sm:px-3">
+                {steps.map((s) => (
+                  <div key={s.key} className="grid gap-1 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                    <dt className="label pt-0.5">{s.label}</dt>
+                    <dd className="max-w-xl">{p[s.key]}</dd>
                   </div>
-                )}
-                <p className="font-mono text-sm text-ink-soft">
-                  {project.org}
-                  <br />
-                  {project.period}
-                </p>
-              </div>
-              <div className="min-w-0">
-                <h2 className="text-2xl font-bold leading-snug">{project.title}</h2>
-                <dl className="mt-4 space-y-3">
-                  {steps.map((s) => (
-                    <div key={s.key} className="grid gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-4">
-                      <dt className="font-mono text-sm font-medium text-peri-deep sm:pt-0.5">
-                        {s.label}
-                      </dt>
-                      <dd className="max-w-[62ch] leading-relaxed text-ink">
-                        {project[s.key]}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-                <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tags">
-                  {project.tags.map((tag) => (
-                    <li key={tag} className="chip">
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Window>
+                ))}
+              </dl>
+            </details>
           </li>
         ))}
       </ol>
 
-      <section className="mt-16" aria-labelledby="side-title">
-        <p className="font-mono text-sm font-medium text-peri-deep">Built for fun</p>
-        <h2 id="side-title" className="mt-1 text-3xl font-bold tracking-tight">
-          Side projects
-        </h2>
-        <Window title="side_projects/" accent="platinum" className="mt-6" bodyClassName="p-0">
-          <ul className="grid divide-y-2 divide-dashed divide-platinum-dark md:grid-cols-3 md:divide-x-2 md:divide-y-0">
-            {sideProjects.map((sp) => (
-              <li key={sp.title} className="flex flex-col p-6 sm:p-7">
-                <p className="font-mono text-sm text-ink-soft">{sp.period}</p>
-                <h3 className="mt-1 text-xl font-bold leading-snug">{sp.title}</h3>
-                <p className="mt-2 flex-1 leading-relaxed text-ink-soft">{sp.body}</p>
-                <ul className="mt-4 flex flex-wrap gap-2" aria-label="Tags">
-                  {sp.tags.map((t) => (
-                    <li key={t} className="chip">
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-                {(sp.links || sp.note) && (
-                  <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
-                    {sp.links?.map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={linkCls}
-                      >
-                        {l.label} <span aria-hidden>↗</span>
-                      </a>
-                    ))}
-                    {sp.note && <span className="text-sm text-ink-soft">{sp.note}</span>}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Window>
+      <section className="py-20 sm:py-28" aria-labelledby="side-title">
+        <h2 id="side-title" className="label">Built for fun</h2>
+        <ul className="mt-6 grid gap-10 border-t border-ink pt-8 md:grid-cols-3 md:gap-12">
+          {sideProjects.map((sp) => (
+            <li key={sp.title}>
+              <h3 className="display-wide text-2xl">{sp.title}</h3>
+              <p className="mt-2 text-muted">{sp.line}</p>
+              <p className="mt-3 flex flex-wrap gap-x-5 font-mono text-sm">
+                {sp.links?.map((l) => (
+                  <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="ulink">
+                    {l.label} ↗
+                  </a>
+                ))}
+                {sp.note && <span className="text-muted">{sp.note}</span>}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

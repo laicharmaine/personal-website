@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import PixelIcon from "@/components/PixelIcon";
-import Window from "@/components/Window";
 import { loginAction } from "./actions";
 
 export const metadata: Metadata = {
@@ -18,46 +16,23 @@ export default async function LoginPage({ searchParams }: Props) {
   const hasError = params.error === "1";
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center px-4 py-12">
-      <p className="mb-6 flex items-center gap-3 text-lg font-semibold text-ink">
-        <span
-          aria-hidden
-          className="holo grid h-8 w-8 place-items-center border-2 border-ink font-mono text-xs shadow-[2px_2px_0_var(--ink)]"
-        >
-          CL
-        </span>
-        Charmaine Lai
+    <div className="mx-auto flex min-h-svh max-w-6xl flex-col justify-between px-5 py-8 sm:px-8">
+      <p className="flex items-center gap-2.5">
+        <span aria-hidden className="irid h-3.5 w-3.5 rounded-full ring-1 ring-ink/20" />
+        <span className="display-wide text-lg">Charmaine Lai</span>
       </p>
 
-      <Window
-        as="section"
-        title="Log On"
-        className="win-open w-full max-w-md"
-        bodyClassName="px-6 py-7 sm:px-8"
-        labelledBy="login-title"
-      >
-        <div className="flex gap-4">
-          <div className="bevel-out grid h-16 w-16 flex-none place-items-center">
-            <PixelIcon name="key" size={40} />
-          </div>
-          <div>
-            <p className="font-mono text-sm font-medium text-peri-deep">Private site</p>
-            <h1 id="login-title" className="mt-1 font-display text-3xl font-bold leading-none">
-              Enter password
-            </h1>
-            <p className="mt-2 leading-relaxed text-ink-soft">
-              This site is password-protected. Enter the shared password to
-              continue.
-            </p>
-          </div>
-        </div>
-
-        <form action={loginAction} className="mt-7 space-y-4">
+      <div className="fade-up w-full max-w-md py-16">
+        <p className="label">Private site</p>
+        <h1 className="display mt-4 text-7xl sm:text-8xl">
+          Password<span className="text-accent">.</span>
+        </h1>
+        <form action={loginAction} className="mt-10">
           <input type="hidden" name="next" value={next} />
-          <div>
-            <label htmlFor="password" className="mb-1.5 block font-semibold">
-              Password
-            </label>
+          <label htmlFor="password" className="sr-only">
+            Password
+          </label>
+          <div className="flex items-center gap-3 border-b border-ink pb-2 focus-within:border-accent focus-within:shadow-[0_1px_0_var(--accent)]">
             <input
               id="password"
               name="password"
@@ -65,37 +40,22 @@ export default async function LoginPage({ searchParams }: Props) {
               autoComplete="current-password"
               required
               autoFocus
-              className="bevel-in w-full px-3 py-2.5 font-mono text-base text-ink outline-none placeholder:text-ink-soft/60 focus:bg-peri-light/40"
-              placeholder="••••••••••••"
+              placeholder="Enter password"
+              className="bare min-w-0 flex-1 bg-transparent py-2 text-xl outline-none placeholder:text-muted"
             />
-          </div>
-
-          {hasError && (
-            <p
-              className="flex items-center gap-3 border-2 border-ink bg-[#ffe1ef] px-3 py-2 text-sm font-medium text-ink"
-              role="alert"
-            >
-              <span
-                aria-hidden
-                className="grid h-6 w-6 flex-none place-items-center border-2 border-ink bg-pink font-mono text-sm font-bold"
-              >
-                !
-              </span>
-              Incorrect password. Try again.
-            </p>
-          )}
-
-          <div className="flex justify-end pt-1">
-            <button type="submit" className="btn btn-primary w-full px-5 py-3 text-base sm:w-auto sm:min-w-32">
-              Continue
+            <button type="submit" className="btn btn-solid h-11 px-5">
+              Enter <span aria-hidden className="arrow">→</span>
             </button>
           </div>
+          {hasError && (
+            <p className="mt-4 font-mono text-sm text-[#b3261e]" role="alert">
+              That’s not it. Try again.
+            </p>
+          )}
         </form>
-      </Window>
+      </div>
 
-      <p className="mt-6 font-mono text-sm text-ink-soft">
-        © {new Date().getFullYear()} Charmaine Lai · Northwestern MBAi ’28
-      </p>
+      <p className="font-mono text-xs text-muted">© {new Date().getFullYear()} Charmaine Lai</p>
     </div>
   );
 }

@@ -5,64 +5,138 @@
 
 export const site = {
   name: "Charmaine Lai",
-  tagline: "Marketer turned product builder · Northwestern MBAi ’28",
-  program: "Northwestern MBAi ’28",
-  location: "Evanston, IL (from the Bay Area)",
-  target: "Bay Area",
+  tagline: "Marketer by craft. Product by curiosity.",
   email: "charmaine.lai@kellogg.northwestern.edu",
   linkedin: "https://www.linkedin.com/in/charmaine-lai",
-  linkedinLabel: "linkedin.com/in/charmaine-lai",
   github: "https://github.com/laicharmaine",
-  headline:
-    "I spent almost five years at Numenta taking brain-inspired AI from research lab to market: launching a generative AI platform, rebuilding the website, and writing for 22k+ readers.",
-  lookingFor: "Summer 2027 PM / PMM internship",
+  description:
+    "Charmaine Lai: ex-Numenta AI marketer, now an MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
 };
 
 export const cat = {
   handle: "@litto_lychee",
-  followers: "450k+",
   tiktok: "https://www.tiktok.com/@litto_lychee",
   instagram: "https://www.instagram.com/litto_lychee/",
 };
 
 export const nav = [
-  { href: "/", label: "Home" },
-  { href: "/experience", label: "Experience" },
   { href: "/projects", label: "Projects" },
+  { href: "/experience", label: "Experience" },
   { href: "/writing", label: "Writing" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export type EducationItem = {
-  school: string;
-  detail: string;
-  degree: string;
-  period: string;
-  location: string;
-  bullets: string[];
+/** Home proof points: big number + 2–4 word label. */
+export const proof = [
+  { value: "3", label: "launch-quarter partnerships" },
+  { value: "65%", label: "peak YoY traffic lift" },
+  { value: "Top 5", label: "Bill Gates’ 2021 books" },
+  { value: "450k+", label: "followers (it’s a cat)" },
+];
+
+export const strengths = [
+  "Go-to-market",
+  "Positioning",
+  "Product launches",
+  "Dogfooding",
+  "Market research",
+  "Technical writing",
+  "Community",
+  "AI products",
+];
+
+export type Link = { label: string; href: string };
+
+export type Project = {
+  slug: string;
+  title: string;
+  org: string;
+  year: string;
+  line: string;
+  metric: { value: string; label: string };
+  problem: string;
+  did: string;
+  result: string;
 };
 
-export const education: EducationItem[] = [
+export const projects: Project[] = [
   {
-    school: "Northwestern University",
-    detail: "Kellogg School of Management + McCormick School of Engineering",
-    degree: "Joint degree: MBA + MS in Artificial Intelligence (MBAi)",
-    period: "2026 – Mar 2028",
-    location: "Evanston, IL",
-    bullets: [],
+    slug: "nupic-launch",
+    title: "Launching NuPIC",
+    org: "Numenta",
+    year: "2023–25",
+    line: "Took a CPU-based generative AI platform to market.",
+    metric: { value: "3", label: "partnerships in quarter one" },
+    problem: "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
+    did: "Market research, multi-channel GTM, dogfooding sessions, API docs, 5+ conferences.",
+    result: "3 strategic partnerships in the launch quarter, 3 product iterations, +110% event leads.",
   },
   {
-    school: "University of California, Berkeley",
-    detail: "",
-    degree: "BS, Environmental Economics and Policy",
-    period: "2016 – 2020",
-    location: "Berkeley, CA",
-    bullets: [
-      "DeCal course instructor",
-      "Executive Director, AFX Dance",
-      "President, Asian American Association",
-      "Co-Founder, Humanity First",
+    slug: "numenta-website",
+    title: "Numenta’s website + brand",
+    org: "Numenta",
+    year: "2021–23",
+    line: "Rebuilt the site and brand around the product strategy.",
+    metric: { value: "65%", label: "peak YoY traffic lift" },
+    problem: "The site and brand lagged behind where the product was going.",
+    did: "Coordinated the full revamp, then owned the site: domain, front end, back end.",
+    result: "Traffic up as much as 65% year over year.",
+  },
+  {
+    slug: "a-thousand-brains",
+    title: "A Thousand Brains launch",
+    org: "Numenta",
+    year: "2020–21",
+    line: "Launched Jeff Hawkins’ book with a podcast and live events.",
+    metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
+    problem: "A book about the brain and AI had to reach past the neuroscience crowd.",
+    did: "Multi-channel launch, a companion podcast series, and live events.",
+    result: "Bill Gates named it one of his five favorite books of 2021.",
+  },
+  {
+    slug: "brains-at-bay",
+    title: "Brains@Bay",
+    org: "Numenta",
+    year: "2021–23",
+    line: "Hosted a quarterly neuroscience + AI meetup.",
+    metric: { value: "200+", label: "attendees" },
+    problem: "Numenta wanted a bigger voice where neuroscience meets AI.",
+    did: "Organized and hosted a quarterly meetup for both research crowds.",
+    result: "200+ attendees and more visibility for Numenta.",
+  },
+  {
+    slug: "railroad-product",
+    title: "Railroad product strategy",
+    org: "YES International",
+    year: "2025–26",
+    line: "Turned buyer requirements in China into a product plan.",
+    metric: { value: "$7M", label: "potential opportunities" },
+    problem: "What do railroad buyers in China actually need, and what should the product lead with?",
+    did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations.",
+    result: "$7M in potential opportunities.",
+  },
+];
+
+export type SideProject = { title: string; line: string; links?: Link[]; note?: string };
+
+export const sideProjects: SideProject[] = [
+  {
+    title: "Tabby",
+    line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
+    links: [{ label: "Try it", href: "https://tabby-wmtt.onrender.com" }],
+  },
+  {
+    title: "@litto_lychee",
+    line: "I’m the Meowmager behind a flame-point Siamese with 450k+ followers.",
+    links: [
+      { label: "TikTok", href: "https://www.tiktok.com/@litto_lychee" },
+      { label: "Instagram", href: "https://www.instagram.com/litto_lychee/" },
     ],
+  },
+  {
+    title: "Dayline",
+    line: "My to-dos, calendars, and recruiting pipeline on one screen.",
+    note: "Private",
   },
 ];
 
@@ -71,15 +145,15 @@ export type Job = { company: string; location: string; period: string; roles: Ro
 
 export const experience: Job[] = [
   {
-    company: "YES International Ltd",
+    company: "YES International",
     location: "Hong Kong",
-    period: "2025 – 2026",
+    period: "2025–26",
     roles: [
       {
         title: "Product Consultant",
-        period: "2025 – 2026",
+        period: "2025–26",
         bullets: [
-          "Analyzed market and procurement dynamics in China’s railroad sector, then turned buyer requirements into prioritized product capabilities and deployment recommendations, unlocking $7M in potential opportunities.",
+          "Turned railroad buyers’ requirements in China into prioritized product capabilities, unlocking $7M in potential opportunities.",
         ],
       },
     ],
@@ -87,244 +161,88 @@ export const experience: Job[] = [
   {
     company: "Numenta",
     location: "Redwood City, CA",
-    period: "2020 – 2025",
+    period: "2020–25",
     roles: [
       {
         title: "Marketing Manager",
         period: "Sep 2023 – Jun 2025",
         bullets: [
-          "Led commercialization of NuPIC 1.0/2.0, a CPU-based generative AI platform, through market research and a multi-channel strategy that landed three strategic partnerships in the first quarter after launch.",
-          "Created and ran dogfooding sessions that shaped three product iterations and sharpened go-to-market messaging; wrote the API documentation to speed up developer adoption.",
-          "Ran Numenta’s presence at 5+ industry conferences (1.5k+ attendees): booth, collateral, and on-site demos, driving a 110% increase in event-driven leads.",
-          "Wrote blogs and articles reaching 22k+ readers, including a front-page feature in Intel’s Parallel Universe Magazine (1M+ online reach) and posts that trended on Hacker News.",
+          "Led go-to-market for NuPIC, a CPU-based generative AI platform: 3 strategic partnerships in the launch quarter.",
+          "Ran dogfooding that shaped 3 product iterations; drove +110% event leads across 5+ conferences.",
         ],
       },
       {
         title: "Senior Marketing Specialist",
         period: "Sep 2021 – Aug 2023",
         bullets: [
-          "Organized and hosted Brains@Bay, a quarterly neuroscience + AI meetup (200+ attendees), raising Numenta’s visibility across both research communities.",
-          "Coordinated a full website and brand revamp aligned with product strategy, lifting traffic by up to 65% year over year; owned post-launch upkeep across domain, front end, and back end.",
+          "Coordinated a website and brand revamp that lifted traffic up to 65% year over year.",
+          "Hosted Brains@Bay, a quarterly neuroscience + AI meetup (200+ attendees).",
         ],
       },
       {
         title: "Marketing Associate",
         period: "Aug 2020 – Aug 2021",
         bullets: [
-          "Ran multi-channel marketing for Jeff Hawkins’ A Thousand Brains, including a companion podcast series and live events. Bill Gates picked it as one of his five favorite books of 2021.",
+          "Launched Jeff Hawkins’ A Thousand Brains with a podcast and live events. Bill Gates made it a top-5 book of 2021.",
         ],
       },
     ],
   },
 ];
 
-export const volunteering = [
+export const education = [
   {
-    org: "Tri-Valley Animal Rescue",
-    role: "Shelter Volunteer (2022 – 2024), now Administrative Volunteer",
+    school: "Northwestern University",
+    degree: "MBA + MS in Artificial Intelligence (MBAi) · Kellogg + McCormick",
+    period: "2026 – Mar 2028",
+    note: "",
   },
   {
-    org: "SuperTech FT",
-    role: "Digital & Public Communication Volunteer Lead (2023)",
-  },
-];
-
-export const skills = {
-  product: [
-    "Market research",
-    "Go-to-market strategy",
-    "Dogfooding & user feedback",
-    "Prioritizing product capabilities",
-    "API documentation",
-  ],
-  marketing: [
-    "Positioning & messaging",
-    "Multi-channel campaigns",
-    "Technical content & blogging",
-    "Events & community",
-    "Website & brand",
-  ],
-  tools: [
-    "Google Analytics",
-    "Jira · Shortcut",
-    "Zapier",
-    "WordPress (HTML/CSS)",
-    "Adobe Photoshop",
-    "Final Cut Pro",
-  ],
-  languages: ["English (native)", "Cantonese (native)", "Mandarin (fluent)"],
-  certifications: [
-    "Python for Everybody (University of Michigan)",
-    "IBM Data Science",
-    "Google Project Management",
-    "Writing in the Sciences (Stanford)",
-  ],
-};
-
-export type Link = { label: string; href: string };
-
-export type Project = {
-  slug: string;
-  title: string;
-  org: string;
-  period: string;
-  metric?: { value: string; label: string };
-  problem: string;
-  did: string;
-  result: string;
-  tags: string[];
-  links?: Link[];
-};
-
-/** Work case studies, framed problem → what I did → result. */
-export const projects: Project[] = [
-  {
-    slug: "nupic-launch",
-    title: "Launching NuPIC, generative AI on CPUs",
-    org: "Numenta",
-    period: "2023 – 2025",
-    metric: { value: "3", label: "strategic partnerships in the launch quarter" },
-    problem:
-      "Numenta was bringing a CPU-based generative AI platform to market and needed to know who would buy it, why, and how to reach them.",
-    did: "Ran the market research and multi-channel go-to-market, set up dogfooding sessions with the team, wrote the API docs, and took NuPIC to 5+ industry conferences with live demos.",
-    result:
-      "Three strategic partnerships in the first quarter, three product iterations shaped by dogfooding, and a 110% jump in event-driven leads.",
-    tags: ["Go-to-market", "AI platform", "Dogfooding"],
-  },
-  {
-    slug: "numenta-website",
-    title: "Rebuilding Numenta’s website and brand",
-    org: "Numenta",
-    period: "2021 – 2023",
-    metric: { value: "65%", label: "year-over-year traffic lift (up to)" },
-    problem:
-      "The website and brand no longer matched where the product strategy was heading.",
-    did: "Coordinated a full website and brand revamp around the product strategy, then owned the site after launch: domain, front-end, and back-end updates.",
-    result: "Website traffic up by as much as 65% year over year.",
-    tags: ["Brand", "Web", "Positioning"],
-  },
-  {
-    slug: "a-thousand-brains",
-    title: "Launching A Thousand Brains",
-    org: "Numenta",
-    period: "2020 – 2021",
-    metric: { value: "Top 5", label: "on Bill Gates’ favorite books of 2021" },
-    problem:
-      "Jeff Hawkins’ book on the brain and the future of AI needed a launch that reached past the neuroscience crowd.",
-    did: "Ran multi-channel marketing for the launch, created a companion podcast series, and hosted live events.",
-    result:
-      "Bill Gates named it one of his five favorite books of 2021.",
-    tags: ["Launch", "Podcast", "Events"],
-  },
-  {
-    slug: "brains-at-bay",
-    title: "Hosting Brains@Bay",
-    org: "Numenta",
-    period: "2021 – 2023",
-    metric: { value: "200+", label: "attendees at a quarterly meetup" },
-    problem:
-      "Numenta wanted a bigger voice in the conversation between neuroscience and AI research.",
-    did: "Organized and hosted Brains@Bay, a quarterly meetup where neuroscience and AI researchers present and trade ideas.",
-    result:
-      "200+ attendees and more visibility for Numenta in both research communities.",
-    tags: ["Community", "Events", "Research"],
-  },
-  {
-    slug: "railroad-product",
-    title: "Product strategy for China’s railroad sector",
-    org: "YES International",
-    period: "2025 – 2026",
-    metric: { value: "$7M", label: "in potential opportunities" },
-    problem:
-      "The client needed to know what railroad buyers in China actually require, and which product capabilities to lead with.",
-    did: "Analyzed market and procurement dynamics, translated buyer requirements into prioritized product capabilities, and wrote deployment recommendations.",
-    result: "Unlocked $7M in potential opportunities.",
-    tags: ["Product strategy", "B2B", "Market analysis"],
+    school: "UC Berkeley",
+    degree: "BS, Environmental Economics and Policy",
+    period: "2016–20",
+    note: "AFX Dance Executive Director · Asian American Association President · DeCal instructor · Humanity First co-founder",
   },
 ];
 
-export type SideProject = {
-  title: string;
-  period: string;
-  body: string;
-  tags: string[];
-  links?: Link[];
-  note?: string;
-};
-
-export const sideProjects: SideProject[] = [
+export const resumeExtras = [
+  { label: "Skills", value: "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events" },
+  { label: "Tools", value: "Google Analytics · Jira · Shortcut · Zapier · WordPress · Photoshop · Final Cut Pro" },
+  { label: "Languages", value: "English · Cantonese · Mandarin" },
   {
-    title: "Tabby: split the bar tab",
-    period: "2026",
-    body: "Whoever covers the happy-hour tab shouldn’t have to chase the whole cohort on Venmo. Tabby reads the receipt, makes one shareable link, and everyone taps what they actually had. No accounts, Venmo and Zelle built in.",
-    tags: ["Built it", "Mobile web", "AI receipt scan"],
-    links: [{ label: "Try Tabby", href: "https://tabby-wmtt.onrender.com" }],
+    label: "Certificates",
+    value: "Python for Everybody (UMich) · IBM Data Science · Google Project Management · Writing in the Sciences (Stanford)",
   },
-  {
-    title: "@litto_lychee, the cat account",
-    period: "Ongoing",
-    body: "I’m the Meowmager behind Lychee, a flame-point Siamese (with a side of Taro), followed by 450k+ people across TikTok and Instagram. Turns out audience instincts transfer.",
-    tags: ["Social", "Content", "Audience growth"],
-    links: [
-      { label: "TikTok", href: "https://www.tiktok.com/@litto_lychee" },
-      { label: "Instagram", href: "https://www.instagram.com/litto_lychee/" },
-    ],
-  },
-  {
-    title: "Dayline: my day on one screen",
-    period: "2026",
-    body: "A personal dashboard that pulls my Notion to-dos, every calendar, and my summer 2027 recruiting pipeline into one calm view, with a job kanban and keyboard shortcuts.",
-    tags: ["Built it", "Notion API", "Personal tool"],
-    note: "Private: it runs on my real data.",
-  },
+  { label: "Volunteer", value: "Tri-Valley Animal Rescue · SuperTech FT" },
 ];
 
-export type Article = {
-  title: string;
-  outlet: string;
-  date: string;
-  description: string;
-  href: string;
-  byline?: string;
-  hn?: { href: string; points: number };
-};
+export type Article = { title: string; outlet: string; date: string; href: string };
 
 /** Published writing, verified by byline. Numenta’s own blog is offline, so
  *  links point to Numenta’s Medium mirror or the Internet Archive. */
 export const articles: Article[] = [
   {
     title: "Usher in a New Era of Accelerated AI on Intel CPUs",
-    outlet: "Intel Developer · Parallel Universe Magazine",
-    date: "Feb 2024",
-    description:
-      "How NuPIC runs large language models at scale on Intel CPUs, up to 17x faster than an NVIDIA A100 on BERT-Large, no GPUs required.",
+    outlet: "Intel · Parallel Universe Magazine",
+    date: "2024",
     href: "https://www.intel.com/content/www/us/en/developer/articles/technical/usher-in-a-new-era-of-accelerated-ai-on-cpus.html",
   },
   {
     title: "AI is harming our planet: addressing AI’s staggering energy cost",
-    outlet: "Numenta blog (archived)",
-    date: "May 2022",
-    description:
-      "Why deep learning burns so much energy, and four brain-inspired fixes: sparsity, structured data, continual learning, and better hardware.",
+    outlet: "Numenta (co-written, archived)",
+    date: "2022",
     href: "https://web.archive.org/web/2023/https://www.numenta.com/blog/2022/05/24/ai-is-harming-our-planet/",
-    byline: "with Subutai Ahmad, Donna Dubinsky, and Christy Maver",
-    hn: { href: "https://news.ycombinator.com/item?id=31662560", points: 93 },
   },
   {
     title: "How do I Pursue a Career in Brain-Based AI?",
     outlet: "Numenta on Medium",
-    date: "Apr 2022",
-    description:
-      "Practical advice I gathered from Numenta’s research team for students who want to work on brain-based AI.",
+    date: "2022",
     href: "https://medium.com/@Numenta/how-do-i-pursue-a-career-in-brain-based-ai-2014d0ecfe",
-    hn: { href: "https://news.ycombinator.com/item?id=30993653", points: 34 },
   },
   {
     title: "Comparing Hinton’s GLOM Model to Numenta’s Thousand Brains Theory",
     outlet: "Numenta on Medium",
-    date: "Apr 2021",
-    description:
-      "Where Geoffrey Hinton’s GLOM and the Thousand Brains Theory agree, and where they split: movement, hierarchy, and biology.",
+    date: "2021",
     href: "https://medium.com/@Numenta/comparing-hintons-glom-model-to-numenta-s-thousand-brains-theory-88ed999ab13d",
   },
 ];

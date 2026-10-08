@@ -1,26 +1,16 @@
 type Props = {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
-  description?: string;
+  intro?: string;
 };
 
-export default function PageHeader({
-  eyebrow,
-  title,
-  description,
-}: Props) {
+export default function PageHeader({ eyebrow, title, intro }: Props) {
   return (
-    <header className="mb-10">
-      {eyebrow && (
-        <p className="mb-3 font-mono text-sm font-medium text-peri-deep">{eyebrow}</p>
-      )}
-      <h1 className="font-display text-[2.75rem] font-bold leading-none tracking-tight text-ink sm:text-[3.5rem]">
-        {title}
-      </h1>
-      {description && (
-        <p className="mt-4 max-w-[65ch] text-lg leading-relaxed text-ink-soft">
-          {description}
-        </p>
+    <header className="pb-12 pt-14 sm:pb-16 sm:pt-20">
+      <p className="label fade-up">{eyebrow}</p>
+      <h1 className="display fade-up fade-up-1 mt-4 text-[4.5rem] sm:text-[8rem]">{title}</h1>
+      {intro && (
+        <p className="fade-up fade-up-2 mt-6 max-w-xl text-lg text-muted sm:text-xl">{intro}</p>
       )}
     </header>
   );

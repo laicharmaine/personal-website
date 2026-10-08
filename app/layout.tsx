@@ -1,29 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import {
-  IBM_Plex_Mono,
-  IBM_Plex_Sans,
-  Pixelify_Sans,
-} from "next/font/google";
+import { Bricolage_Grotesque, DM_Mono, Hanken_Grotesk } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const pixelify = Pixelify_Sans({
-  variable: "--font-pixelify",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+  display: "swap",
+});
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
   display: "swap",
 });
 
-const plexSans = IBM_Plex_Sans({
-  variable: "--font-plex-sans",
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
   weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
@@ -38,13 +34,13 @@ export const metadata: Metadata = {
     "Charmaine Lai: marketer turned product builder. Almost five years in AI marketing at Numenta, now a joint MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
   openGraph: {
     title: `${site.name} — personal site`,
-    description: site.headline,
+    description: site.description,
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#dedbff",
+  themeColor: "#f3f1ec",
 };
 
 export default function RootLayout({
@@ -55,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pixelify.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${hanken.variable} ${dmMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <Nav />
