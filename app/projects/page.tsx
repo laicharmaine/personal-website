@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Window from "@/components/Window";
 import { projects, sideProjects } from "@/lib/content";
@@ -78,6 +79,16 @@ export default function ProjectsPage() {
               </p>
             </li>
           ))}
+          <li className="border-t border-ink pt-5">
+            <h3 className="flex items-center gap-2.5 text-xl font-semibold">
+              <span aria-hidden className="holo h-4 w-4 rounded-[3px] border-[1.5px] border-ink" />
+              Off the clock
+            </h3>
+            <p className="mt-2 text-ink-soft">Photos, dance, crafts and a famous cat.</p>
+            <p className="mt-3 text-sm font-semibold">
+              <Link href="/fun" className="ulink">For fun →</Link>
+            </p>
+          </li>
         </ul>
       </section>
     </div>

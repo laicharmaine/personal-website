@@ -23,6 +23,7 @@ export const nav = [
   { href: "/projects", label: "Projects" },
   { href: "/experience", label: "Experience" },
   { href: "/writing", label: "Writing" },
+  { href: "/fun", label: "For fun" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -126,17 +127,80 @@ export const sideProjects: SideProject[] = [
     links: [{ label: "Try it", href: "https://tabby-wmtt.onrender.com" }],
   },
   {
+    title: "Dayline",
+    line: "My to-dos, calendars, and recruiting pipeline on one screen.",
+    note: "Private",
+  },
+];
+
+/**
+ * For fun (/fun).
+ *
+ * How to fill a placeholder:
+ *  - Photo: drop the file in /public/fun/ (e.g. /public/fun/dance-1.jpg) and set
+ *    `src: "/fun/dance-1.jpg"` plus a short `alt` describing the picture.
+ *  - Video or post: set `href` to the YouTube / Instagram / TikTok link. The frame
+ *    becomes a link (you can set `src` too, to use a photo as its cover).
+ *  - Leave both empty and the frame shows a dashed "coming soon" placeholder
+ *    with `caption` as its label.
+ */
+export type FunMedia = { src?: string; alt?: string; href?: string; caption?: string };
+
+export type FunItem = {
+  slug: string;
+  title: string;
+  /** Playful window title, flavor only. */
+  file: string;
+  line: string;
+  links?: Link[];
+  /** Media frames. Use "portrait" (3:4), "wide" (16:9) or "square" (1:1). */
+  shape: "portrait" | "wide" | "square";
+  media: FunMedia[];
+  /** Big pixel stat instead of media (used for the cat). */
+  stat?: { value: string; label: string };
+};
+
+export const fun: FunItem[] = [
+  {
+    slug: "photography",
+    title: "Photography",
+    file: "my_photos/",
+    line: "Portraits, mostly. The full portfolio lives on my Wix site.",
+    links: [{ label: "See the portfolio", href: "https://laicharmaine.wixsite.com/portfolio" }],
+    shape: "portrait",
+    media: [
+      { src: "/fun/portrait-1.jpg", alt: "Portrait by Charmaine: a laughing subject against a wall of red flowers" },
+      { src: "/fun/portrait-2.jpg", alt: "Portrait by Charmaine: a subject with pink hair against a lavender wall" },
+    ],
+  },
+  {
+    slug: "dance",
+    title: "Dance & choreography",
+    file: "afx_dance.mov",
+    line: "I was Executive Director of AFX Dance at UC Berkeley, and I choreograph.",
+    shape: "wide",
+    media: [{ caption: "Choreography video coming soon" }],
+  },
+  {
+    slug: "crafts",
+    title: "Arts & crafts",
+    file: "crafts.zip",
+    line: "Things I make with my hands instead of a keyboard.",
+    shape: "portrait",
+    media: [{ caption: "Coming soon" }, { caption: "Coming soon" }, { caption: "Coming soon" }],
+  },
+  {
+    slug: "litto-lychee",
     title: "@litto_lychee",
-    line: "I’m the Meowmager behind a flame-point Siamese with 450k+ followers.",
+    file: "cat.gif",
+    line: "I’m the Meowmager behind a flame-point Siamese who is more famous than me.",
     links: [
       { label: "TikTok", href: "https://www.tiktok.com/@litto_lychee" },
       { label: "Instagram", href: "https://www.instagram.com/litto_lychee/" },
     ],
-  },
-  {
-    title: "Dayline",
-    line: "My to-dos, calendars, and recruiting pipeline on one screen.",
-    note: "Private",
+    shape: "square",
+    media: [],
+    stat: { value: "450k+", label: "followers" },
   },
 ];
 

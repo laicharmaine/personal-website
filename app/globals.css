@@ -379,3 +379,19 @@ input:focus-visible:not(.bare) {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* For fun: photo prints + placeholder frames */
+.photo-frame {
+  border: 1.5px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--peri);
+  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+a:hover > .photo-frame,
+.photo-frame:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame {
+    transition: none;
+  }
+}

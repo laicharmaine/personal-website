@@ -109,6 +109,15 @@ export default function HomePage() {
             ))}
           </ol>
         </Window>
+        <Link
+          href="/fun"
+          className="group mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg"
+        >
+          <span aria-hidden className="holo h-5 w-5 rounded-[4px] border-[1.5px] border-ink transition-transform duration-300 group-hover:rotate-12" />
+          <span className="font-semibold">Off the clock:</span>
+          <span className="text-ink-soft group-hover:text-ink">photos, dance, crafts and a famous cat</span>
+          <span aria-hidden className="arrow">→</span>
+        </Link>
       </section>
 
       {/* Contact CTA */}
