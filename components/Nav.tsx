@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { nav, site } from "@/lib/content";
+import { nav } from "@/lib/content";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -14,21 +14,29 @@ export default function Nav() {
   const isActive = (href: string) => pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bone/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-desk/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link href="/" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span aria-hidden className="irid h-3.5 w-3.5 rounded-full ring-1 ring-ink/20 transition-transform duration-300 group-hover:scale-125" />
-          <span className="display-wide text-lg">{site.name}</span>
+          <span
+            aria-hidden
+            className="holo h-5 w-5 rounded-[4px] border-[1.5px] border-ink transition-transform duration-300 group-hover:rotate-12"
+          />
+          <span className="pixel text-[1.75rem] leading-none">
+            Charmaine<span className="text-peri-deep">.OS</span>
+          </span>
+          <span className="sr-only"> (Charmaine Lai, home)</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`text-[0.95rem] font-medium transition-colors hover:text-accent ${
-                isActive(item.href) ? "text-ink underline decoration-accent decoration-2 underline-offset-[6px]" : "text-muted"
+              className={`rounded-full px-3.5 py-1.5 text-[0.95rem] font-medium transition-colors ${
+                isActive(item.href)
+                  ? "bg-lime text-ink ring-[1.5px] ring-ink"
+                  : "text-ink-soft hover:bg-paper hover:text-ink"
               }`}
             >
               {item.label}
@@ -38,7 +46,7 @@ export default function Nav() {
 
         <button
           type="button"
-          className="rounded-full px-4 py-1.5 text-sm font-medium ring-1 ring-ink md:hidden"
+          className="rounded-full border-[1.5px] border-ink bg-paper px-4 py-1.5 text-sm font-semibold md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
@@ -56,9 +64,10 @@ export default function Nav() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`display block py-3 text-4xl ${isActive(item.href) ? "text-accent" : ""}`}
+                  className="flex items-center justify-between py-3"
                 >
-                  {item.label}
+                  <span className={`pixel text-5xl ${isActive(item.href) ? "hl" : ""}`}>{item.label}</span>
+                  <span aria-hidden>→</span>
                 </Link>
               </li>
             ))}

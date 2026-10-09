@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import Window from "@/components/Window";
 import { projects, sideProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -16,59 +17,64 @@ const steps = [
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-5 sm:px-8">
-      <PageHeader eyebrow="Projects" title="Selected work" intro="Five launches and bets. Tap one for the story." />
+    <div className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+      <PageHeader path="C:\Charmaine\case_studies" title="Projects" intro="Five launches and bets. Tap one for the story." />
 
-      <ol className="border-t border-ink">
-        {projects.map((p, i) => (
-          <li key={p.slug} id={p.slug} className="scroll-mt-24 border-b border-line">
-            <details className="group">
-              <summary className="row-hover grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-1 py-7 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 sm:px-3">
-                <span className="col-span-2 flex items-baseline gap-3 sm:col-span-1 sm:block">
-                  <span className="display block text-6xl text-accent sm:text-7xl">{p.metric.value}</span>
-                  <span className="font-mono text-xs text-muted sm:mt-2 sm:block">{p.metric.label}</span>
-                </span>
-                <span>
-                  <span className="font-mono text-xs text-muted">
-                    0{i + 1} · {p.org} · {p.year}
+      <Window title="case_studies/" className="win-open" bodyClassName="p-0">
+        <ol className="divide-y divide-line">
+          {projects.map((p, i) => (
+            <li key={p.slug} id={p.slug} className="scroll-mt-24">
+              <details className="group">
+                <summary className="file-row grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-2 px-4 py-6 sm:grid-cols-[10rem_1fr_auto] sm:gap-x-8 sm:px-7">
+                  <span className="col-span-2 flex items-baseline gap-3 sm:col-span-1 sm:block">
+                    <span className="pixel pixel-shadow block text-[3.75rem] sm:text-[4.5rem]">{p.metric.value}</span>
+                    <span className="text-sm font-medium text-ink-soft sm:mt-1 sm:block">{p.metric.label}</span>
                   </span>
-                  <span className="display-wide mt-1 block text-2xl sm:text-4xl">{p.title}</span>
-                  <span className="mt-1 block text-muted">{p.line}</span>
-                </span>
-                <span
-                  aria-hidden
-                  className="plus grid h-10 w-10 place-items-center rounded-full text-2xl font-light ring-1 ring-ink/30 group-open:bg-ink group-open:text-bone"
-                >
-                  +
-                </span>
-              </summary>
-              <dl className="details-body grid gap-3 px-1 pb-8 sm:ml-[13.5rem] sm:px-3">
-                {steps.map((s) => (
-                  <div key={s.key} className="grid gap-1 sm:grid-cols-[7rem_1fr] sm:gap-6">
-                    <dt className="label pt-0.5">{s.label}</dt>
-                    <dd className="max-w-xl">{p[s.key]}</dd>
-                  </div>
-                ))}
-              </dl>
-            </details>
-          </li>
-        ))}
-      </ol>
+                  <span>
+                    <span className="font-mono text-xs text-ink-soft">
+                      {`0${i + 1}`} · {p.org} · {p.year}
+                    </span>
+                    <span className="mt-0.5 block text-xl font-semibold sm:text-2xl">{p.title}</span>
+                    <span className="muted-on-hover mt-0.5 block text-ink-soft">{p.line}</span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="toggle grid h-9 w-9 place-items-center rounded-full border-[1.5px] border-ink bg-paper text-xl leading-none"
+                  >
+                    +
+                  </span>
+                </summary>
+                <dl className="details-body grid gap-3 border-t border-dashed border-line bg-desk/40 px-4 py-6 sm:pl-[13rem] sm:pr-7">
+                  {steps.map((s) => (
+                    <div key={s.key} className="grid gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                      <dt className="label pt-0.5">{s.label}</dt>
+                      <dd className="max-w-xl">{p[s.key]}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </details>
+            </li>
+          ))}
+        </ol>
+      </Window>
 
-      <section className="py-20 sm:py-28" aria-labelledby="side-title">
-        <h2 id="side-title" className="label">Built for fun</h2>
-        <ul className="mt-6 grid gap-10 border-t border-ink pt-8 md:grid-cols-3 md:gap-12">
+      <section className="pt-20 sm:pt-28" aria-labelledby="side-title">
+        <h2 id="side-title" className="pixel text-5xl sm:text-6xl">Side quests</h2>
+        <ul className="mt-8 grid gap-10 md:grid-cols-3 md:gap-12">
           {sideProjects.map((sp) => (
-            <li key={sp.title}>
-              <h3 className="display-wide text-2xl">{sp.title}</h3>
-              <p className="mt-2 text-muted">{sp.line}</p>
-              <p className="mt-3 flex flex-wrap gap-x-5 font-mono text-sm">
+            <li key={sp.title} className="border-t border-ink pt-5">
+              <h3 className="flex items-center gap-2.5 text-xl font-semibold">
+                <span aria-hidden className="holo h-4 w-4 rounded-[3px] border-[1.5px] border-ink" />
+                {sp.title}
+              </h3>
+              <p className="mt-2 text-ink-soft">{sp.line}</p>
+              <p className="mt-3 flex flex-wrap gap-x-5 text-sm font-semibold">
                 {sp.links?.map((l) => (
                   <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="ulink">
                     {l.label} ↗
                   </a>
                 ))}
-                {sp.note && <span className="text-muted">{sp.note}</span>}
+                {sp.note && <span className="font-mono font-normal text-ink-soft">{sp.note}</span>}
               </p>
             </li>
           ))}

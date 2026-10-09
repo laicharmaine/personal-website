@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Mono, Hanken_Grotesk } from "next/font/google";
+import { DM_Mono, Hanken_Grotesk, Jersey_10 } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const jersey = Jersey_10({
+  variable: "--font-jersey",
+  weight: "400",
   subsets: ["latin"],
-  axes: ["opsz", "wdth"],
   display: "swap",
 });
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description:
-    "Charmaine Lai: marketer turned product builder. Almost five years in AI marketing at Numenta, now a joint MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
+    site.description,
   openGraph: {
     title: `${site.name} — personal site`,
     description: site.description,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f3f1ec",
+  themeColor: "#e7e5ff",
 };
 
 export default function RootLayout({
@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${hanken.variable} ${dmMono.variable} h-full`}
+      className={`${jersey.variable} ${hanken.variable} ${dmMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <Nav />
