@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { DM_Mono, Hanken_Grotesk, Jersey_10 } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { site } from "@/lib/content";
+import { defaultContent } from "@/lib/content";
+import { getContent } from "@/lib/content-store";
+import EditProvider from "@/components/edit/EditProvider";
+import Toolbar from "@/components/edit/Toolbar";
 import "./globals.css";
 
 const jersey = Jersey_10({
@@ -27,14 +30,14 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — PM / PMM · Northwestern MBAi ’28`,
-    template: `%s · ${site.name}`,
+    default: `${defaultContent.site.name} — PM / PMM · Northwestern MBAi ’28`,
+    template: `%s · ${defaultContent.site.name}`,
   },
   description:
-    site.description,
+    defaultContent.site.description,
   openGraph: {
-    title: `${site.name} — personal site`,
-    description: site.description,
+    title: `${defaultContent.site.name} — personal site`,
+    description: defaultContent.site.description,
     type: "website",
   },
 };
@@ -43,20 +46,24 @@ export const viewport: Viewport = {
   themeColor: "#e7e5ff",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const content = await getContent();
   return (
     <html
       lang="en"
       className={`${jersey.variable} ${hanken.variable} ${dmMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <EditProvider initial={content}>
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <Toolbar />
+        </EditProvider>
       </body>
     </html>
   );

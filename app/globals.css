@@ -395,3 +395,41 @@ a:hover > .photo-frame,
     transition: none;
   }
 }
+
+/* ---------- In-browser editor ---------- */
+.editable {
+  outline: 1.5px dashed rgb(58 50 176 / 0.55);
+  outline-offset: 2px;
+  border-radius: 3px;
+  cursor: text;
+  min-width: 1.5ch;
+  display: inline-block;
+  transition: background 0.12s;
+}
+.editable:hover {
+  background: rgb(200 255 60 / 0.35);
+}
+.editable:focus {
+  outline: 2px solid var(--peri-deep);
+  background: rgb(200 255 60 / 0.45);
+}
+.editable:empty::before {
+  content: attr(data-placeholder);
+  color: var(--ink-soft);
+  opacity: 0.6;
+}
+.chrome-text .editable,
+.chrome-text.editable {
+  -webkit-text-fill-color: var(--ink);
+}
+.is-editing main {
+  padding-bottom: 9rem;
+}
+.is-editing .marquee-track {
+  animation: none;
+}
+@media (pointer: fine) {
+  .editable {
+    cursor: text;
+  }
+}

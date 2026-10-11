@@ -1,9 +1,14 @@
 /**
  * Site content for Charmaine Lai. Facts and numbers come from her résumé
  * or from verified public sources (links checked Oct 2026).
+ *
+ * This file is the DEFAULT content (the seed). Once Charmaine edits the site
+ * in the browser (/admin → Edit), the live copy is stored in Vercel Blob and
+ * this file is only used as a fallback and for "Reset to original".
+ * Edits made in the browser are NOT written back here.
  */
 
-export const site = {
+const site = {
   name: "Charmaine Lai",
   tagline: "Marketer by craft. Product by curiosity.",
   email: "charmaine.lai@kellogg.northwestern.edu",
@@ -13,7 +18,7 @@ export const site = {
     "Charmaine Lai: ex-Numenta AI marketer, now an MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
 };
 
-export const cat = {
+const cat = {
   handle: "@litto_lychee",
   tiktok: "https://www.tiktok.com/@litto_lychee",
   instagram: "https://www.instagram.com/litto_lychee/",
@@ -28,14 +33,16 @@ export const nav = [
 ] as const;
 
 /** Home proof points: big number + 2–4 word label. */
-export const proof = [
+export type Stat = { value: string; label: string };
+
+const proof: Stat[] = [
   { value: "3", label: "launch-quarter partnerships" },
   { value: "65%", label: "peak YoY traffic lift" },
   { value: "Top 5", label: "Bill Gates’ 2021 books" },
   { value: "450k+", label: "followers (it’s a cat)" },
 ];
 
-export const strengths = [
+const strengths: string[] = [
   "Go-to-market",
   "Positioning",
   "Product launches",
@@ -60,7 +67,7 @@ export type Project = {
   result: string;
 };
 
-export const projects: Project[] = [
+const projects: Project[] = [
   {
     slug: "nupic-launch",
     title: "Launching NuPIC",
@@ -120,7 +127,7 @@ export const projects: Project[] = [
 
 export type SideProject = { title: string; line: string; links?: Link[]; note?: string };
 
-export const sideProjects: SideProject[] = [
+const sideProjects: SideProject[] = [
   {
     title: "Tabby",
     line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
@@ -143,6 +150,7 @@ export const sideProjects: SideProject[] = [
  *    becomes a link (you can set `src` too, to use a photo as its cover).
  *  - Leave both empty and the frame shows a dashed "coming soon" placeholder
  *    with `caption` as its label.
+ *  - Easiest: use the in-browser editor (/admin) and click the frame to upload.
  */
 export type FunMedia = { src?: string; alt?: string; href?: string; caption?: string };
 
@@ -160,7 +168,7 @@ export type FunItem = {
   stat?: { value: string; label: string };
 };
 
-export const fun: FunItem[] = [
+const fun: FunItem[] = [
   {
     slug: "photography",
     title: "Photography",
@@ -207,7 +215,7 @@ export const fun: FunItem[] = [
 export type Role = { title: string; period: string; bullets: string[] };
 export type Job = { company: string; location: string; period: string; roles: Role[] };
 
-export const experience: Job[] = [
+const experience: Job[] = [
   {
     company: "YES International",
     location: "Hong Kong",
@@ -254,7 +262,9 @@ export const experience: Job[] = [
   },
 ];
 
-export const education = [
+export type Education = { school: string; degree: string; period: string; note: string };
+
+const education: Education[] = [
   {
     school: "Northwestern University",
     degree: "MBA + MS in Artificial Intelligence (MBAi) · Kellogg + McCormick",
@@ -269,7 +279,9 @@ export const education = [
   },
 ];
 
-export const resumeExtras = [
+export type Extra = { label: string; value: string };
+
+const resumeExtras: Extra[] = [
   { label: "Skills", value: "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events" },
   { label: "Tools", value: "Google Analytics · Jira · Shortcut · Zapier · WordPress · Photoshop · Final Cut Pro" },
   { label: "Languages", value: "English · Cantonese · Mandarin" },
@@ -284,7 +296,7 @@ export type Article = { title: string; outlet: string; date: string; href: strin
 
 /** Published writing, verified by byline. Numenta’s own blog is offline, so
  *  links point to Numenta’s Medium mirror or the Internet Archive. */
-export const articles: Article[] = [
+const articles: Article[] = [
   {
     title: "Usher in a New Era of Accelerated AI on Intel CPUs",
     outlet: "Intel · Parallel Universe Magazine",
@@ -310,3 +322,125 @@ export const articles: Article[] = [
     href: "https://medium.com/@Numenta/comparing-hintons-glom-model-to-numenta-s-thousand-brains-theory-88ed999ab13d",
   },
 ];
+
+/* ------------------------------------------------------------------------ */
+/* Page copy + the full editable content object                              */
+/* ------------------------------------------------------------------------ */
+
+const contactLinks: Link[] = [
+  { label: "LinkedIn", href: site.linkedin },
+  { label: "GitHub", href: site.github },
+  { label: "TikTok (the cat)", href: cat.tiktok },
+  { label: "Instagram (also the cat)", href: cat.instagram },
+];
+
+export const defaultContent = {
+  site,
+  home: {
+    windowTitle: "about_charmaine.exe",
+    sticker: "Open for\nSummer\n’27!",
+    hookA: "Marketer by craft.",
+    hookB: "Product by curiosity.",
+    intro:
+      "Ex-Numenta AI marketer, now MBA + MS in AI at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
+    ctaWork: "See my work",
+    ctaEmail: "Email me",
+    proof,
+    strengths,
+    workHeading: "Selected work",
+    workAll: "All projects",
+    workWindow: "selected_work/",
+    funLead: "Off the clock:",
+    funText: "photos, dance, crafts and a famous cat",
+    ctaHeading: "Let’s talk.",
+    resume: "Résumé",
+  },
+  projectsPage: {
+    path: "C:\\Charmaine\\case_studies",
+    title: "Projects",
+    intro: "Five launches and bets. Tap one for the story.",
+    window: "case_studies/",
+    problemLabel: "Problem",
+    didLabel: "What I did",
+    resultLabel: "Result",
+    sideHeading: "Side quests",
+    offTitle: "Off the clock",
+    offLine: "Photos, dance, crafts and a famous cat.",
+    offLink: "For fun",
+  },
+  projects,
+  sideProjects,
+  experiencePage: {
+    path: "C:\\Charmaine\\resume.doc",
+    title: "Experience",
+    intro: "AI marketing, then product. Now an MBA + MS in AI.",
+    window: "work_history.doc",
+    educationHeading: "Education",
+    alsoHeading: "Also",
+  },
+  experience,
+  education,
+  resumeExtras,
+  writingPage: {
+    path: "C:\\Charmaine\\posts.txt",
+    title: "Writing",
+    intro: "22k+ readers, an Intel feature, a few Hacker News hits.",
+    window: "posts.txt",
+  },
+  articles,
+  funPage: {
+    path: "C:\\Charmaine\\extracurriculars.zip",
+    title: "For fun",
+    intro: "What I’m up to when the laptop’s closed.",
+  },
+  fun,
+  contactPage: {
+    path: "C:\\Charmaine\\say_hi.exe",
+    title: "Say hi",
+    intro: "Hiring for summer 2027? Email is fastest.",
+    window: "new_message.eml",
+    emailLabel: "Email",
+    button: "Write me",
+    links: contactLinks,
+  },
+  footer: {
+    tagline: "running Charmaine.OS",
+  },
+};
+
+export type SiteContent = typeof defaultContent;
+
+/** Blank items used by the editor's "+ Add" buttons. */
+export const templates = {
+  stat: { value: "0", label: "new stat" } as Stat,
+  strength: "New skill",
+  project: (): Project => ({
+    slug: `project-${Math.random().toString(36).slice(2, 8)}`,
+    title: "New project",
+    org: "Company",
+    year: "2026",
+    line: "One line about it.",
+    metric: { value: "1", label: "headline number" },
+    problem: "The problem.",
+    did: "What I did.",
+    result: "The result.",
+  }),
+  sideProject: { title: "New side project", line: "One line about it.", links: [], note: "" } as SideProject,
+  link: { label: "Link", href: "https://" } as Link,
+  job: { company: "Company", location: "City", period: "2026", roles: [] } as Job,
+  role: { title: "Role", period: "2026", bullets: ["What I did."] } as Role,
+  bullet: "New bullet.",
+  education: { school: "School", degree: "Degree", period: "Years", note: "" } as Education,
+  extra: { label: "Label", value: "Value" } as Extra,
+  article: { title: "New article", outlet: "Outlet", date: "2026", href: "https://" } as Article,
+  media: { caption: "Coming soon" } as FunMedia,
+  funItem: (): FunItem => ({
+    slug: `fun-${Math.random().toString(36).slice(2, 8)}`,
+    title: "New thing",
+    file: "new_folder/",
+    line: "One line about it.",
+    links: [],
+    shape: "portrait",
+    media: [{ caption: "Coming soon" }],
+  }),
+};
