@@ -76,8 +76,8 @@ const projects: Project[] = [
     line: "Took a CPU-based generative AI platform to market.",
     metric: { value: "3", label: "partnerships in quarter one" },
     problem: "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
-    did: "Market research, multi-channel GTM, dogfooding sessions, API docs, 5+ conferences.",
-    result: "3 strategic partnerships in the launch quarter, 3 product iterations, +110% event leads.",
+    did: "Market research, multi-channel GTM, dogfooding sessions, Numenta’s first API docs, 5+ conferences.",
+    result: "3 strategic partnerships in the launch quarter, 3 product iterations, +110% event leads, dev setup cut from days to hours.",
   },
   {
     slug: "numenta-website",
@@ -95,22 +95,22 @@ const projects: Project[] = [
     title: "A Thousand Brains launch",
     org: "Numenta",
     year: "2020–21",
-    line: "Launched Jeff Hawkins’ book with a podcast and live events.",
+    line: "Launched Jeff Hawkins’ book with a video + podcast series and live events.",
     metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
     problem: "A book about the brain and AI had to reach past the neuroscience crowd.",
-    did: "Multi-channel launch, a companion podcast series, and live events.",
-    result: "Bill Gates named it one of his five favorite books of 2021.",
+    did: "Multi-channel launch, a four-part companion video + podcast series, and live events.",
+    result: "30K+ YouTube views on the series. Bill Gates named it one of his five favorite books of 2021.",
   },
   {
     slug: "brains-at-bay",
     title: "Brains@Bay",
     org: "Numenta",
     year: "2021–23",
-    line: "Hosted a quarterly neuroscience + AI meetup.",
-    metric: { value: "200+", label: "attendees" },
+    line: "Grew a quarterly neuroscience + AI meetup.",
+    metric: { value: "1.2K+", label: "members" },
     problem: "Numenta wanted a bigger voice where neuroscience meets AI.",
-    did: "Organized and hosted a quarterly meetup for both research crowds.",
-    result: "200+ attendees and more visibility for Numenta.",
+    did: "Organized and hosted a quarterly meetup, recruiting speakers from AI research and startups.",
+    result: "1.2K+ members, 200+ attendees per event, and Numenta as a hub for brain-inspired AI.",
   },
   {
     slug: "railroad-product",
@@ -193,7 +193,7 @@ const fun: FunItem[] = [
     slug: "crafts",
     title: "Arts & crafts",
     file: "crafts.zip",
-    line: "Things I make with my hands instead of a keyboard.",
+    line: "Junk journaling and other things I make with my hands instead of a keyboard.",
     shape: "portrait",
     media: [{ caption: "Coming soon" }, { caption: "Coming soon" }, { caption: "Coming soon" }],
   },
@@ -241,6 +241,7 @@ const experience: Job[] = [
         bullets: [
           "Led go-to-market for NuPIC, a CPU-based generative AI platform: 3 strategic partnerships in the launch quarter.",
           "Ran dogfooding that shaped 3 product iterations; drove +110% event leads across 5+ conferences.",
+          "Turned undocumented setup know-how into Numenta’s first API docs: developer setup went from days to hours.",
         ],
       },
       {
@@ -248,14 +249,16 @@ const experience: Job[] = [
         period: "Sep 2021 – Aug 2023",
         bullets: [
           "Coordinated a website and brand revamp that lifted traffic up to 65% year over year.",
-          "Hosted Brains@Bay, a quarterly neuroscience + AI meetup (200+ attendees).",
+          "Grew Brains@Bay, a quarterly neuroscience + AI meetup, to 1.2K+ members (200+ attendees per event).",
+          "A/B-tested Google Ads: +30% click-through rate, −20% cost per lead.",
         ],
       },
       {
         title: "Marketing Associate",
         period: "Aug 2020 – Aug 2021",
         bullets: [
-          "Launched Jeff Hawkins’ A Thousand Brains with a podcast and live events. Bill Gates made it a top-5 book of 2021.",
+          "Launched Jeff Hawkins’ A Thousand Brains with a four-part video + podcast series (30K+ views). Bill Gates made it a top-5 book of 2021.",
+          "Led an animated Thousand Brains explainer (25K+ views) and wrote the Numenta News Digest (40+ issues, 800+ subscribers).",
         ],
       },
     ],
@@ -269,7 +272,7 @@ const education: Education[] = [
     school: "Northwestern University",
     degree: "MBA + MS in Artificial Intelligence (MBAi) · Kellogg + McCormick",
     period: "2026 – Mar 2028",
-    note: "",
+    note: "Kellogg Tech Club Marketing Director · Charity Auction Ball Auction Director · MBAi Social Chair · 2nd place, MBAi Hackathon · Kellogg Scholarship",
   },
   {
     school: "UC Berkeley",
@@ -283,13 +286,15 @@ export type Extra = { label: string; value: string };
 
 const resumeExtras: Extra[] = [
   { label: "Skills", value: "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events" },
-  { label: "Tools", value: "Google Analytics · Jira · Shortcut · Zapier · WordPress · Photoshop · Final Cut Pro" },
+  { label: "Coursework", value: "Tech Product Management · Applied AI for Business · Computational Thinking · Marketing" },
+  { label: "Internships", value: "YINA.CO · Lane Crawford · Marco Polo Hotels · PwC · ChongBang" },
+  { label: "Tools", value: "Figma · Google Analytics · Jira · Zapier · WordPress · HTML/CSS · Photoshop · Final Cut Pro" },
   { label: "Languages", value: "English · Cantonese · Mandarin" },
   {
     label: "Certificates",
     value: "Python for Everybody (UMich) · IBM Data Science · Google Project Management · Writing in the Sciences (Stanford)",
   },
-  { label: "Volunteer", value: "Tri-Valley Animal Rescue · SuperTech FT" },
+  { label: "Volunteer", value: "Tri-Valley Animal Rescue · SRL Alumni Association (web developer) · SuperTech FT" },
 ];
 
 export type Article = { title: string; outlet: string; date: string; href: string };
@@ -342,7 +347,7 @@ export const defaultContent = {
     hookA: "Marketer by craft.",
     hookB: "Product by curiosity.",
     intro:
-      "Ex-Numenta AI marketer, now MBA + MS in AI at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
+      "Ex-Numenta AI marketer, now MBA in AI at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
     ctaWork: "See my work",
     ctaEmail: "Email me",
     proof,
