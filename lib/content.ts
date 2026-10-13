@@ -15,7 +15,7 @@ const site = {
   linkedin: "https://www.linkedin.com/in/charmaine-lai",
   github: "https://github.com/laicharmaine",
   description:
-    "Charmaine Lai: ex-Numenta AI marketer, now an MBA + MS in AI at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
+    "Charmaine Lai: ex-Numenta AI marketer, now an MBA in Artificial Intelligence student at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
 };
 
 const cat = {
@@ -270,7 +270,7 @@ export type Education = { school: string; degree: string; period: string; note: 
 const education: Education[] = [
   {
     school: "Northwestern University",
-    degree: "MBA + MS in Artificial Intelligence (MBAi) · Kellogg + McCormick",
+    degree: "MBA in Artificial Intelligence (MBAi) · Kellogg + McCormick",
     period: "2026 – Mar 2028",
     note: "Kellogg Tech Club Marketing Director · Charity Auction Ball Auction Director · MBAi Social Chair · 2nd place, MBAi Hackathon · Kellogg Scholarship",
   },
@@ -347,7 +347,7 @@ export const defaultContent = {
     hookA: "Marketer by craft.",
     hookB: "Product by curiosity.",
     intro:
-      "Ex-Numenta AI marketer, now MBA in AI at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
+      "Ex-Numenta AI marketer, now MBA in Artificial Intelligence at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
     // Small polaroid next to the intro. Swap it in the editor (click the photo) or
     // point src at another file in /public/fun/.
     photo: {
@@ -384,7 +384,7 @@ export const defaultContent = {
   experiencePage: {
     path: "C:\\Charmaine\\resume.doc",
     title: "Experience",
-    intro: "AI marketing, then product. Now an MBA + MS in AI.",
+    intro: "AI marketing, then product. Now an MBA in Artificial Intelligence.",
     window: "work_history.doc",
     educationHeading: "Education",
     alsoHeading: "Also",
