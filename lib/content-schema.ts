@@ -23,6 +23,7 @@ const schema: Schema = obj({
     hookA: "str",
     hookB: "str",
     intro: "text",
+    photo: obj({ src: "img", alt: "text", caption: "str" }, ["src", "alt", "caption"]),
     ctaWork: "str",
     ctaEmail: "str",
     proof: arr(stat, 12),

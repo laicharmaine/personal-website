@@ -348,6 +348,12 @@ export const defaultContent = {
     hookB: "Product by curiosity.",
     intro:
       "Ex-Numenta AI marketer, now MBA in AI at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
+    // Small polaroid next to the intro. Swap it in the editor (click the photo) or
+    // point src at another file in /public/fun/.
+    photo: {
+      src: "/fun/charmaine.webp",
+      alt: "Charmaine in a leather jacket and sunglasses, holding a coffee in front of a red wall",
+    } as FunMedia,
     ctaWork: "See my work",
     ctaEmail: "Email me",
     proof,
