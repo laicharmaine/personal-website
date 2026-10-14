@@ -390,6 +390,20 @@ const contactLinks: Link[] = [
   { label: "Instagram (also the cat)", href: cat.instagram },
 ];
 
+/**
+ * Layout settings from the editor, per block id (e.g. "home.intro").
+ * Missing = the normal design.
+ */
+export type BlockLayout = {
+  w?: "s" | "m" | "l" | "full";
+  size?: "sm" | "lg";
+  align?: "left" | "center";
+  img?: "s" | "l";
+  hidden?: boolean;
+  /** Section order for a page, stored under "<page>:order". */
+  order?: string[];
+};
+
 export const defaultContent = {
   site,
   home: {
@@ -468,6 +482,7 @@ export const defaultContent = {
   footer: {
     tagline: "running Charmaine.OS",
   },
+  layout: {} as Record<string, BlockLayout>,
 };
 
 export type SiteContent = typeof defaultContent;

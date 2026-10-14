@@ -45,7 +45,7 @@ export default function Thumb({
     </span>
   );
   return (
-    <span className="thumb-win relative block w-full max-w-[13rem] overflow-hidden rounded-[6px] border border-ink bg-paper shadow-[3px_3px_0_var(--peri)]">
+    <span className="thumb-win relative block w-full overflow-hidden rounded-[6px] border border-ink bg-paper shadow-[3px_3px_0_var(--peri)]">
       <span
         aria-hidden
         className="flex h-4 items-center gap-1 border-b border-ink bg-peri/60 px-1.5"

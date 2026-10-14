@@ -47,9 +47,16 @@ export function useContent(): SiteContent {
 }
 
 const noopSubscribe = () => () => {};
-const readAdminHint = () => document.cookie.split("; ").includes("site_admin_ui=1");
+const readAdminHint = () =>
+  document.cookie.split("; ").includes("site_admin_ui=1");
 
-export default function EditProvider({ initial, children }: { initial: SiteContent; children: ReactNode }) {
+export default function EditProvider({
+  initial,
+  children,
+}: {
+  initial: SiteContent;
+  children: ReactNode;
+}) {
   const [published, setPublished] = useState(initial);
   const [lastInitial, setLastInitial] = useState(initial);
   const [draft, setDraft] = useState<SiteContent | null>(null);
@@ -99,16 +106,25 @@ export default function EditProvider({ initial, children }: { initial: SiteConte
         body: JSON.stringify({ content: draft }),
       });
       const data = await res.json().catch(() => ({}));
-      if (res.status === 401) throw new Error("Your editor login expired. Log in again at /admin (your changes are still here).");
+      if (res.status === 401)
+        throw new Error(
+          "Your editor login expired. Log in again at /admin (your changes are still here).",
+        );
       if (!res.ok) throw new Error(data.error ?? "Could not save.");
       setPublished(data.content);
       setDraft(null);
       setStatus({
         kind: "saved",
-        message: new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+        message: new Date().toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        }),
       });
     } catch (err) {
-      setStatus({ kind: "error", message: err instanceof Error ? err.message : "Could not save." });
+      setStatus({
+        kind: "error",
+        message: err instanceof Error ? err.message : "Could not save.",
+      });
     }
   }, [draft]);
 
@@ -144,7 +160,10 @@ export default function EditProvider({ initial, children }: { initial: SiteConte
             return copy;
           }),
         ),
-      remove: (path, index) => mutate((d) => updateList(d, path, (l) => l.filter((_, i) => i !== index))),
+      remove: (path, index) =>
+        mutate((d) =>
+          updateList(d, path, (l) => l.filter((_, i) => i !== index)),
+        ),
       move: (path, index, dir) =>
         mutate((d) =>
           updateList(d, path, (l) => {
@@ -156,7 +175,19 @@ export default function EditProvider({ initial, children }: { initial: SiteConte
           }),
         ),
     }),
-    [draft, published, editing, admin, dirty, status, startEditing, cancel, save, replacePublished, mutate],
+    [
+      draft,
+      published,
+      editing,
+      admin,
+      dirty,
+      status,
+      startEditing,
+      cancel,
+      save,
+      replacePublished,
+      mutate,
+    ],
   );
 
   // Warn before leaving with unsaved edits.
@@ -182,7 +213,11 @@ export default function EditProvider({ initial, children }: { initial: SiteConte
     };
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as Element | null;
-      if ((e.key === " " || e.key === "Enter") && t?.closest("summary") && t.closest("[data-editable]")) {
+      if (
+        (e.key === " " || e.key === "Enter") &&
+        t?.closest("summary") &&
+        t.closest("[data-editable]")
+      ) {
         e.stopPropagation();
       }
     };

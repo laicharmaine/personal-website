@@ -16,7 +16,11 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-desk/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link href="/" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="group flex items-center gap-2.5"
+          onClick={() => setOpen(false)}
+        >
           <span
             aria-hidden
             className="holo h-5 w-5 rounded-[4px] border-[1.5px] border-ink transition-transform duration-300 group-hover:rotate-12"
@@ -56,7 +60,11 @@ export default function Nav() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-line px-5 pb-6 pt-2 md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="border-t border-line px-5 pb-6 pt-2 md:hidden"
+        >
           <ul>
             {nav.map((item) => (
               <li key={item.href} className="border-b border-line">
@@ -66,7 +74,11 @@ export default function Nav() {
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className="flex items-center justify-between py-3"
                 >
-                  <span className={`pixel text-5xl ${isActive(item.href) ? "hl" : ""}`}>{item.label}</span>
+                  <span
+                    className={`pixel text-5xl ${isActive(item.href) ? "hl" : ""}`}
+                  >
+                    {item.label}
+                  </span>
                   <span aria-hidden>→</span>
                 </Link>
               </li>

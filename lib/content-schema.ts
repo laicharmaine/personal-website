@@ -6,7 +6,7 @@ import { defaultContent, type SiteContent } from "./content";
  * back to the default, strings are length-limited, and links/images must use
  * safe URL schemes.
  */
-type Leaf = "str" | "text" | "url" | "img" | "shape" | "email";
+type Leaf = "str" | "text" | "url" | "img" | "shape" | "email" | "layout";
 type Schema =
   | Leaf
   | { obj: Record<string, Schema>; optional?: string[] }
@@ -186,6 +186,7 @@ const schema: Schema = obj({
     links: arr(link, 12),
   }),
   footer: obj({ tagline: "str" }),
+  layout: "layout",
 });
 
 const CONTROL = /[\u0000-\u0009\u000B-\u001F\u007F]/g;
@@ -209,7 +210,50 @@ export function isAllowedImage(v: string) {
   );
 }
 
+const LAYOUT_ID = /^[a-z0-9][\w.:-]{0,79}$/i;
+const pick = <T extends string>(v: unknown, ok: readonly T[]) =>
+  ok.includes(v as T) ? (v as T) : undefined;
+
+/** Editor layout settings: { [blockId]: { w, size, align, img, hidden, order } }. Unknown keys/values are dropped. */
+function sanitizeLayout(value: unknown): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  if (!value || typeof value !== "object" || Array.isArray(value)) return out;
+  for (const [id, raw] of Object.entries(
+    value as Record<string, unknown>,
+  ).slice(0, 400)) {
+    if (
+      !LAYOUT_ID.test(id) ||
+      !raw ||
+      typeof raw !== "object" ||
+      Array.isArray(raw)
+    )
+      continue;
+    const r = raw as Record<string, unknown>;
+    const l: Record<string, unknown> = {};
+    const w = pick(r.w, ["s", "m", "l", "full"] as const);
+    const size = pick(r.size, ["sm", "lg"] as const);
+    const align = pick(r.align, ["center"] as const);
+    const img = pick(r.img, ["s", "l"] as const);
+    if (w) l.w = w;
+    if (size) l.size = size;
+    if (align) l.align = align;
+    if (img) l.img = img;
+    if (r.hidden === true) l.hidden = true;
+    if (Array.isArray(r.order)) {
+      const order = r.order
+        .filter(
+          (x): x is string => typeof x === "string" && /^[\w.-]{1,60}$/.test(x),
+        )
+        .slice(0, 20);
+      if (order.length) l.order = order;
+    }
+    if (Object.keys(l).length) out[id] = l;
+  }
+  return out;
+}
+
 function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
+  if (s === "layout") return sanitizeLayout(value);
   if (typeof s === "string") {
     const fb = typeof fallback === "string" ? fallback : "";
     if (typeof value !== "string") return fb;

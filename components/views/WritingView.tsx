@@ -12,11 +12,22 @@ export default function WritingView() {
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
       <PageHeader at="writingPage" />
-      <Window title={<T path={["writingPage", "window"]} />} className="win-open" bodyClassName="p-0">
+      <Window
+        title={<T path={["writingPage", "window"]} />}
+        className="win-open"
+        bodyClassName="p-0"
+      >
         <ul className="divide-y divide-line">
           {c.articles.map((a, i) => (
             <li key={i} className="relative">
-              <ItemTools path={["articles"]} index={i} length={c.articles.length} noun="article" confirmRemove className="right-12 top-1" />
+              <ItemTools
+                path={["articles"]}
+                index={i}
+                length={c.articles.length}
+                noun="article"
+                confirmRemove
+                className="right-12 top-1"
+              />
               <a
                 href={a.href}
                 target="_blank"
@@ -33,14 +44,23 @@ export default function WritingView() {
                 <span className="muted-on-hover text-sm text-ink-soft">
                   <T path={["articles", i, "outlet"]} />
                 </span>
-                <span aria-hidden className="col-start-2 row-start-1 sm:col-start-4">↗</span>
+                <span
+                  aria-hidden
+                  className="col-start-2 row-start-1 sm:col-start-4"
+                >
+                  ↗
+                </span>
               </a>
             </li>
           ))}
         </ul>
         {editing && (
           <div className="border-t border-line px-4 py-3 sm:px-7">
-            <AddButton path={["articles"]} make={() => ({ ...templates.article })} label="Add article" />
+            <AddButton
+              path={["articles"]}
+              make={() => ({ ...templates.article })}
+              label="Add article"
+            />
           </div>
         )}
       </Window>

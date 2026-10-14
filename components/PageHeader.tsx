@@ -1,10 +1,16 @@
 "use client";
 
 import { T } from "@/components/edit/Editable";
+import Block from "@/components/edit/Block";
 
 type Props = {
   /** Content key of the page copy, e.g. "projectsPage" (has path, title, intro). */
-  at: "projectsPage" | "experiencePage" | "writingPage" | "funPage" | "contactPage";
+  at:
+    | "projectsPage"
+    | "experiencePage"
+    | "writingPage"
+    | "funPage"
+    | "contactPage";
 };
 
 export default function PageHeader({ at }: Props) {
@@ -13,12 +19,22 @@ export default function PageHeader({ at }: Props) {
       <p className="label">
         <T path={[at, "path"]} />
       </p>
-      <h1 className="pixel pixel-shadow mt-3 text-[5rem] sm:text-[8.5rem]">
+      <Block
+        id={`${at}.title`}
+        label="Page title"
+        as="h1"
+        className="pixel pixel-shadow mt-3 text-[5rem] sm:text-[8.5rem]"
+      >
         <T path={[at, "title"]} />
-      </h1>
-      <p className="mt-5 max-w-xl text-lg text-ink-soft sm:text-xl">
+      </Block>
+      <Block
+        id={`${at}.intro`}
+        label="Page intro"
+        as="p"
+        className="mt-5 max-w-xl text-lg text-ink-soft sm:text-xl"
+      >
         <T path={[at, "intro"]} multiline />
-      </p>
+      </Block>
     </header>
   );
 }

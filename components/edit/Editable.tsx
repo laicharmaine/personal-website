@@ -8,14 +8,24 @@ import { EDITOR_HEADERS, useEdit } from "./EditProvider";
 /* Text                                                                 */
 /* ------------------------------------------------------------------ */
 
-type TProps = { path: Path; multiline?: boolean; className?: string; placeholder?: string };
+type TProps = {
+  path: Path;
+  multiline?: boolean;
+  className?: string;
+  placeholder?: string;
+};
 
 /**
  * Editable text. Outside edit mode it renders the plain string (no extra
  * markup, so the design is unchanged). In edit mode it becomes a
  * click-to-type field.
  */
-export function T({ path, multiline = false, className, placeholder = "Type here" }: TProps) {
+export function T({
+  path,
+  multiline = false,
+  className,
+  placeholder = "Type here",
+}: TProps) {
   const { content, editing, setAt } = useEdit();
   const value = String(getIn(content, path) ?? "");
   if (!editing) return <>{value}</>;
@@ -98,7 +108,13 @@ const chip =
   "inline-flex items-center gap-1 rounded-full border-[1.5px] border-ink bg-paper px-2 py-0.5 font-mono text-[0.72rem] font-medium leading-5 text-ink shadow-[2px_2px_0_var(--peri)] hover:bg-lime";
 
 /** "Link" chip: edit the address a link points to. */
-export function Href({ path, label = "Edit link" }: { path: Path; label?: string }) {
+export function Href({
+  path,
+  label = "Edit link",
+}: {
+  path: Path;
+  label?: string;
+}) {
   const { content, editing, setAt } = useEdit();
   if (!editing) return null;
   const current = String(getIn(content, path) ?? "");
@@ -154,12 +170,22 @@ export function ItemTools({
   return (
     <span data-editor-ui="" className={`absolute z-20 flex gap-1 ${className}`}>
       {index > 0 && (
-        <button type="button" className={chip} title={`Move ${noun} up`} onClick={(e) => (stop(e), move(path, index, -1))}>
+        <button
+          type="button"
+          className={chip}
+          title={`Move ${noun} up`}
+          onClick={(e) => (stop(e), move(path, index, -1))}
+        >
           ↑
         </button>
       )}
       {index < length - 1 && (
-        <button type="button" className={chip} title={`Move ${noun} down`} onClick={(e) => (stop(e), move(path, index, 1))}>
+        <button
+          type="button"
+          className={chip}
+          title={`Move ${noun} down`}
+          onClick={(e) => (stop(e), move(path, index, 1))}
+        >
           ↓
         </button>
       )}
@@ -218,13 +244,17 @@ const MAX_UPLOAD = 4 * 1024 * 1024;
 
 /** Resize to max 1800px and re-encode as WebP (GIFs are kept as-is to keep animation). */
 async function prepareImage(file: File): Promise<Blob> {
-  if (!ACCEPT.includes(file.type)) throw new Error("Please choose a JPG, PNG, WebP or GIF image.");
-  if (file.size > 30 * 1024 * 1024) throw new Error("That image is over 30 MB. Try a smaller one.");
+  if (!ACCEPT.includes(file.type))
+    throw new Error("Please choose a JPG, PNG, WebP or GIF image.");
+  if (file.size > 30 * 1024 * 1024)
+    throw new Error("That image is over 30 MB. Try a smaller one.");
   if (file.type === "image/gif") {
     if (file.size > MAX_UPLOAD) throw new Error("GIFs need to be under 4 MB.");
     return file;
   }
-  const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+  const bitmap = await createImageBitmap(file, {
+    imageOrientation: "from-image",
+  });
   const scale = Math.min(1, 1800 / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(bitmap.width * scale);
@@ -232,7 +262,9 @@ async function prepareImage(file: File): Promise<Blob> {
   canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
   bitmap.close();
   for (const quality of [0.85, 0.72, 0.6]) {
-    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/webp", quality));
+    const blob = await new Promise<Blob | null>((r) =>
+      canvas.toBlob(r, "image/webp", quality),
+    );
     if (blob && blob.size <= MAX_UPLOAD) return blob;
   }
   throw new Error("Couldn’t shrink that image enough. Try a smaller one.");
@@ -246,7 +278,8 @@ async function uploadImage(file: File): Promise<string> {
     body: blob,
   });
   const data = await res.json().catch(() => ({}));
-  if (res.status === 401) throw new Error("Your editor login expired. Log in again at /admin.");
+  if (res.status === 401)
+    throw new Error("Your editor login expired. Log in again at /admin.");
   if (!res.ok || !data.url) throw new Error(data.error ?? "Upload failed.");
   return data.url as string;
 }
@@ -260,7 +293,12 @@ export function MediaTools({ path }: { path: Path }) {
   const [busy, setBusy] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   if (!editing) return null;
-  const media = (getIn(content, path) ?? {}) as { src?: string; alt?: string; href?: string; caption?: string };
+  const media = (getIn(content, path) ?? {}) as {
+    src?: string;
+    alt?: string;
+    href?: string;
+    caption?: string;
+  };
   const hasImage = Boolean(media.src);
 
   const stop = (e: React.SyntheticEvent) => {
@@ -269,7 +307,10 @@ export function MediaTools({ path }: { path: Path }) {
   };
 
   return (
-    <span data-editor-ui="" className="media-tools absolute inset-x-1 bottom-1 z-20 flex flex-wrap justify-center gap-1">
+    <span
+      data-editor-ui=""
+      className="media-tools absolute inset-x-1 bottom-1 z-20 flex flex-wrap justify-center gap-1"
+    >
       <input
         ref={inputRef}
         type="file"
@@ -290,7 +331,12 @@ export function MediaTools({ path }: { path: Path }) {
           }
         }}
       />
-      <button type="button" className={chip} disabled={busy} onClick={(e) => (stop(e), inputRef.current?.click())}>
+      <button
+        type="button"
+        className={chip}
+        disabled={busy}
+        onClick={(e) => (stop(e), inputRef.current?.click())}
+      >
         {busy ? "Uploading…" : hasImage ? "↺ Replace photo" : "⬆ Upload photo"}
       </button>
       {hasImage && (
@@ -299,7 +345,10 @@ export function MediaTools({ path }: { path: Path }) {
           className={chip}
           onClick={(e) => {
             stop(e);
-            const alt = window.prompt("Describe the photo for screen readers (alt text):", media.alt ?? "");
+            const alt = window.prompt(
+              "Describe the photo for screen readers (alt text):",
+              media.alt ?? "",
+            );
             if (alt !== null) setAt(path, { ...media, alt: alt.trim() });
           }}
         >
@@ -312,7 +361,12 @@ export function MediaTools({ path }: { path: Path }) {
           className={`${chip} hover:!bg-pink`}
           onClick={(e) => {
             stop(e);
-            if (!window.confirm("Remove this photo? The frame goes back to a placeholder.")) return;
+            if (
+              !window.confirm(
+                "Remove this photo? The frame goes back to a placeholder.",
+              )
+            )
+              return;
             const next = { ...media };
             delete next.src;
             delete next.alt;
@@ -329,7 +383,10 @@ export function MediaTools({ path }: { path: Path }) {
         title={media.href || "No link"}
         onClick={(e) => {
           stop(e);
-          const v = window.prompt("Video or post link (YouTube, Instagram, TikTok…). Leave empty for none.", media.href ?? "");
+          const v = window.prompt(
+            "Video or post link (YouTube, Instagram, TikTok…). Leave empty for none.",
+            media.href ?? "",
+          );
           if (v === null) return;
           const t = v.trim();
           if (t && !/^https?:\/\//i.test(t)) {

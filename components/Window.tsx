@@ -20,9 +20,13 @@ export default function Window({
   bodyClassName = "",
   labelledBy,
 }: Props) {
-  const toneClass = tone === "lime" ? "win-lime" : tone === "ink" ? "win-ink" : "";
+  const toneClass =
+    tone === "lime" ? "win-lime" : tone === "ink" ? "win-ink" : "";
   return (
-    <Tag className={`win ${toneClass} ${className}`} aria-labelledby={labelledBy}>
+    <Tag
+      className={`win ${toneClass} ${className}`}
+      aria-labelledby={labelledBy}
+    >
       <div className="win-titlebar" aria-hidden>
         <span className="win-box win-box-close" />
         <span className="win-title">{title}</span>

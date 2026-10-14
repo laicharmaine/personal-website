@@ -433,3 +433,36 @@ a:hover > .photo-frame,
     cursor: text;
   }
 }
+
+/* ---- Layout tools (edit mode only) ---- */
+.lb > .lb-tab {
+  position: absolute;
+  left: 0.25rem;
+  top: -0.7rem;
+  z-index: 30;
+  opacity: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  padding: 0 0.4rem;
+  font-family: var(--font-dm-mono, ui-monospace), monospace;
+  font-size: 0.65rem;
+  line-height: 1.1rem;
+  color: var(--ink);
+  transition: opacity 120ms;
+}
+.lb:hover > .lb-tab,
+.lb > .lb-tab:focus-visible,
+.lb-selected > .lb-tab,
+.lb-hidden > .lb-tab {
+  opacity: 1;
+}
+.lb-selected {
+  outline: 2px solid var(--lime);
+  outline-offset: 4px;
+}
+.lb-hidden {
+  opacity: 0.38;
+  outline: 1.5px dashed var(--ink);
+  outline-offset: 3px;
+}

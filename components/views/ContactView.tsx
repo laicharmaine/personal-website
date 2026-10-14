@@ -23,11 +23,21 @@ export default function ContactView() {
           <p className="label">
             <T path={["contactPage", "emailLabel"]} />
           </p>
-          <a href={`mailto:${c.site.email}`} className="ulink mt-2 inline-block text-xl font-semibold sm:text-[1.65rem]">
-            {editing ? <T path={["site", "email"]} placeholder="Email address" /> : <Email email={c.site.email} />}
+          <a
+            href={`mailto:${c.site.email}`}
+            className="ulink mt-2 inline-block text-xl font-semibold sm:text-[1.65rem]"
+          >
+            {editing ? (
+              <T path={["site", "email"]} placeholder="Email address" />
+            ) : (
+              <Email email={c.site.email} />
+            )}
           </a>
           <a href={`mailto:${c.site.email}`} className="btn btn-lime mt-8">
-            <T path={["contactPage", "button"]} /> <span aria-hidden className="arrow">→</span>
+            <T path={["contactPage", "button"]} />{" "}
+            <span aria-hidden className="arrow">
+              →
+            </span>
           </a>
         </Window>
         <div className="md:col-span-5">
@@ -46,11 +56,22 @@ export default function ContactView() {
                   </span>
                   <span aria-hidden>↗</span>
                 </a>
-                <ItemTools path={["contactPage", "links"]} index={i} length={c.contactPage.links.length} noun="link" className="right-8 top-1" />
+                <ItemTools
+                  path={["contactPage", "links"]}
+                  index={i}
+                  length={c.contactPage.links.length}
+                  noun="link"
+                  className="right-8 top-1"
+                />
               </li>
             ))}
           </ul>
-          <AddButton path={["contactPage", "links"]} make={() => ({ ...templates.link })} label="Add link" className="mt-4" />
+          <AddButton
+            path={["contactPage", "links"]}
+            make={() => ({ ...templates.link })}
+            label="Add link"
+            className="mt-4"
+          />
         </div>
       </div>
     </div>
