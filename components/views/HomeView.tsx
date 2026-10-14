@@ -59,7 +59,7 @@ export default function HomeView() {
               id="home.hook"
               label="Tagline"
               as="p"
-              className="text-2xl font-semibold leading-snug sm:text-[2rem] md:min-w-0 md:flex-1"
+              className="text-2xl font-semibold leading-snug sm:text-[2rem] md:min-w-[15rem] md:flex-1"
             >
               <T path={["home", "hookA"]} />{" "}
               <span className="hl">

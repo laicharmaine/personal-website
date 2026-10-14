@@ -649,9 +649,9 @@ a:hover > .photo-frame,
 }
 @media (min-width: 768px) {
   .lb-wpw {
-    width: var(--lb-wp) !important;
-    max-width: 100%;
-    flex: none;
+    width: auto !important;
+    flex: 0 1 var(--lb-wp) !important;
+    min-width: 0;
   }
 }
 .lb-h-l {
