@@ -65,6 +65,12 @@ export type Project = {
   problem: string;
   did: string;
   result: string;
+  /** One small thumbnail (optional). Local files live in /public/fun/. */
+  media?: FunMedia;
+  /** A small "featured" badge link (optional). */
+  badge?: Link;
+  /** Text links (optional). */
+  links?: Link[];
 };
 
 const projects: Project[] = [
@@ -78,6 +84,10 @@ const projects: Project[] = [
     problem: "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
     did: "Go-to-market, market research, multi-channel marketing, dogfooding + user feedback across major releases, Numenta’s first API docs, 5+ conferences.",
     result: "A $5M partner pipeline incl. Intel and F5, +110% event leads, dev setup cut from days to hours.",
+    badge: {
+      label: "Featured in Intel Parallel Universe",
+      href: "https://www.intel.com/content/www/us/en/developer/articles/technical/usher-in-a-new-era-of-accelerated-ai-on-cpus.html",
+    },
   },
   {
     slug: "numenta-website",
@@ -89,6 +99,10 @@ const projects: Project[] = [
     problem: "The site and brand lagged behind where the product was going.",
     did: "Coordinated the full revamp, then owned the site: domain, front end, back end.",
     result: "Traffic up as much as 65% year over year.",
+    links: [
+      { label: "Before (2020, Wayback)", href: "https://web.archive.org/web/20201218073306/https://numenta.com/" },
+      { label: "After (2023, Wayback)", href: "https://web.archive.org/web/2023/https://www.numenta.com/" },
+    ],
   },
   {
     slug: "a-thousand-brains",
@@ -100,6 +114,16 @@ const projects: Project[] = [
     problem: "A book about the brain and AI had to reach past the neuroscience crowd.",
     did: "Multi-channel launch, a four-part companion video + podcast series, and live events.",
     result: "30K+ YouTube views on the series. Bill Gates named it one of his five favorite books of 2021.",
+    media: {
+      src: "/fun/proj-thousand-brains.webp",
+      alt: "A Thousand Brains book cover, from the series introduction video",
+      href: "https://www.youtube.com/watch?v=3kbveUiFVdM",
+      caption: "Watch the series intro",
+    },
+    links: [
+      { label: "Podcast", href: "https://numenta.buzzsprout.com/188368/episodes/7929319-a-thousand-brains-by-jeff-hawkins-introduction" },
+      { label: "Animated explainer", href: "https://www.youtube.com/watch?v=LaAYuygr7_8" },
+    ],
   },
   {
     slug: "brains-at-bay",
@@ -111,6 +135,13 @@ const projects: Project[] = [
     problem: "Numenta wanted a bigger voice where neuroscience meets AI.",
     did: "Organized and hosted a quarterly meetup, recruiting speakers from AI research and startups.",
     result: "1.2K+ members, 200+ attendees per event, and Numenta as a hub for brain-inspired AI.",
+    media: {
+      src: "/fun/proj-brainsbay.webp",
+      alt: "Brains@Bay title card: a fireside chat with Jeff Hawkins",
+      href: "https://www.youtube.com/playlist?list=PL3yXMgtrZmDqWkN_8VxStZjzbRKarAn6b",
+      caption: "Watch the recordings",
+    },
+    links: [{ label: "Meetup", href: "https://www.meetup.com/brains-bay/" }],
   },
   {
     slug: "railroad-product",
@@ -122,16 +153,18 @@ const projects: Project[] = [
     problem: "What do railroad buyers in China actually need, and what should the product lead with?",
     did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations; built bilingual sales collateral.",
     result: "$7M in potential opportunities; bids to 10+ China Railway bureaus across 8 provinces.",
+    links: [{ label: "Schlatter rail welding", href: "https://www.schlattergroup.com/en/welding-machines/flash-butt-welding-machines-for-rails" }],
   },
 ];
 
-export type SideProject = { title: string; line: string; links?: Link[]; note?: string };
+export type SideProject = { title: string; line: string; links?: Link[]; note?: string; media?: FunMedia };
 
 const sideProjects: SideProject[] = [
   {
     title: "Tabby",
     line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
     links: [{ label: "Try it", href: "https://tabby-wmtt.onrender.com" }],
+    media: { src: "/fun/proj-tabby.webp", alt: "Tabby’s start screen: You covered the tab. Let everyone claim their own.", href: "https://tabby-wmtt.onrender.com" },
   },
   {
     title: "Dayline",

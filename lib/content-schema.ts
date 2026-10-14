@@ -7,23 +7,40 @@ import { defaultContent, type SiteContent } from "./content";
  * safe URL schemes.
  */
 type Leaf = "str" | "text" | "url" | "img" | "shape" | "email";
-type Schema = Leaf | { obj: Record<string, Schema>; optional?: string[] } | { arr: Schema; max: number };
+type Schema =
+  | Leaf
+  | { obj: Record<string, Schema>; optional?: string[] }
+  | { arr: Schema; max: number };
 
-const obj = (o: Record<string, Schema>, optional: string[] = []): Schema => ({ obj: o, optional });
+const obj = (o: Record<string, Schema>, optional: string[] = []): Schema => ({
+  obj: o,
+  optional,
+});
 const arr = (a: Schema, max = 60): Schema => ({ arr: a, max });
 
 const stat = obj({ value: "str", label: "str" });
 const link = obj({ label: "str", href: "url" });
 
 const schema: Schema = obj({
-  site: obj({ name: "str", tagline: "str", email: "email", linkedin: "url", github: "url", description: "text" }),
+  site: obj({
+    name: "str",
+    tagline: "str",
+    email: "email",
+    linkedin: "url",
+    github: "url",
+    description: "text",
+  }),
   home: obj({
     windowTitle: "str",
     sticker: "str",
     hookA: "str",
     hookB: "str",
     intro: "text",
-    photo: obj({ src: "img", alt: "text", caption: "str" }, ["src", "alt", "caption"]),
+    photo: obj({ src: "img", alt: "text", caption: "str" }, [
+      "src",
+      "alt",
+      "caption",
+    ]),
     ctaWork: "str",
     ctaEmail: "str",
     proof: arr(stat, 12),
@@ -50,35 +67,82 @@ const schema: Schema = obj({
     offLink: "str",
   }),
   projects: arr(
-    obj({
-      slug: "str",
-      title: "str",
-      org: "str",
-      year: "str",
-      line: "text",
-      metric: stat,
-      problem: "text",
-      did: "text",
-      result: "text",
-    }),
+    obj(
+      {
+        slug: "str",
+        title: "str",
+        org: "str",
+        year: "str",
+        line: "text",
+        metric: stat,
+        problem: "text",
+        did: "text",
+        result: "text",
+        media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+          "src",
+          "alt",
+          "href",
+          "caption",
+        ]),
+        badge: link,
+        links: arr(link, 6),
+      },
+      ["media", "badge", "links"],
+    ),
     30,
   ),
-  sideProjects: arr(obj({ title: "str", line: "text", links: arr(link, 6), note: "str" }, ["links", "note"]), 20),
-  experiencePage: obj({ path: "str", title: "str", intro: "text", window: "str", educationHeading: "str", alsoHeading: "str" }),
-  experience: arr(
-    obj({
-      company: "str",
-      about: "text",
-      location: "str",
-      period: "str",
-      roles: arr(obj({ title: "str", period: "str", bullets: arr("text", 12) }), 12),
-    }, ["about"]),
+  sideProjects: arr(
+    obj(
+      {
+        title: "str",
+        line: "text",
+        links: arr(link, 6),
+        note: "str",
+        media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+          "src",
+          "alt",
+          "href",
+          "caption",
+        ]),
+      },
+      ["links", "note", "media"],
+    ),
     20,
   ),
-  education: arr(obj({ school: "str", degree: "text", period: "str", note: "text" }), 10),
+  experiencePage: obj({
+    path: "str",
+    title: "str",
+    intro: "text",
+    window: "str",
+    educationHeading: "str",
+    alsoHeading: "str",
+  }),
+  experience: arr(
+    obj(
+      {
+        company: "str",
+        about: "text",
+        location: "str",
+        period: "str",
+        roles: arr(
+          obj({ title: "str", period: "str", bullets: arr("text", 12) }),
+          12,
+        ),
+      },
+      ["about"],
+    ),
+    20,
+  ),
+  education: arr(
+    obj({ school: "str", degree: "text", period: "str", note: "text" }),
+    10,
+  ),
   resumeExtras: arr(obj({ label: "str", value: "text" }), 15),
   writingPage: obj({ path: "str", title: "str", intro: "text", window: "str" }),
-  articles: arr(obj({ title: "text", outlet: "str", date: "str", href: "url" }), 40),
+  articles: arr(
+    obj({ title: "text", outlet: "str", date: "str", href: "url" }),
+    40,
+  ),
   funPage: obj({ path: "str", title: "str", intro: "text" }),
   fun: arr(
     obj(
@@ -89,7 +153,15 @@ const schema: Schema = obj({
         line: "text",
         links: arr(link, 6),
         shape: "shape",
-        media: arr(obj({ src: "img", alt: "text", href: "url", caption: "str" }, ["src", "alt", "href", "caption"]), 24),
+        media: arr(
+          obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+            "src",
+            "alt",
+            "href",
+            "caption",
+          ]),
+          24,
+        ),
         stat,
       },
       ["links", "stat"],
@@ -116,14 +188,17 @@ function cleanString(v: string, max: number) {
 
 function isSafeUrl(v: string) {
   const s = v.trim();
-  if (s === "" || s.startsWith("/") || s.startsWith("#")) return !s.startsWith("//");
+  if (s === "" || s.startsWith("/") || s.startsWith("#"))
+    return !s.startsWith("//");
   return /^(https?:\/\/|mailto:)/i.test(s);
 }
 
 export function isAllowedImage(v: string) {
   if (v === "") return true;
   if (/^\/fun\/[\w.-]+$/.test(v)) return true;
-  return /^https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\/[\w./%-]+$/i.test(v);
+  return /^https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\/[\w./%-]+$/i.test(
+    v,
+  );
 }
 
 function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
@@ -136,21 +211,31 @@ function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
       case "text":
         return cleanString(value, 3000);
       case "email":
-        return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(value.trim()) ? value.trim().slice(0, 200) : fb;
+        return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(value.trim())
+          ? value.trim().slice(0, 200)
+          : fb;
       case "url":
         return isSafeUrl(value) ? value.trim().slice(0, 2000) : fb;
       case "img":
         return isAllowedImage(value.trim()) ? value.trim() : fb;
       case "shape":
-        return ["portrait", "wide", "square"].includes(value) ? value : fb || "portrait";
+        return ["portrait", "wide", "square"].includes(value)
+          ? value
+          : fb || "portrait";
     }
   }
   if ("arr" in s) {
     if (!Array.isArray(value)) return Array.isArray(fallback) ? fallback : [];
     return value.slice(0, s.max).map((v) => sanitize(v, s.arr, undefined));
   }
-  const src = value && typeof value === "object" && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
-  const fb = fallback && typeof fallback === "object" ? (fallback as Record<string, unknown>) : {};
+  const src =
+    value && typeof value === "object" && !Array.isArray(value)
+      ? (value as Record<string, unknown>)
+      : {};
+  const fb =
+    fallback && typeof fallback === "object"
+      ? (fallback as Record<string, unknown>)
+      : {};
   const out: Record<string, unknown> = {};
   for (const [key, sub] of Object.entries(s.obj)) {
     const optional = s.optional?.includes(key);
