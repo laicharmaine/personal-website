@@ -96,7 +96,7 @@ export default function ProjectsView() {
                               href={p.badge.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 rounded-full border border-ink bg-lime px-2.5 py-0.5 font-mono text-[0.7rem] font-medium leading-5 text-ink shadow-[2px_2px_0_var(--ink)]"
+                              className="inline-flex items-start gap-1.5 rounded-md border border-ink bg-lime px-2 py-1 font-mono text-[0.7rem] font-medium leading-5 text-ink shadow-[2px_2px_0_var(--ink)]"
                             >
                               ★ <T path={["projects", i, "badge", "label"]} /> ↗
                             </a>
