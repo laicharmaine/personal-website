@@ -1,5 +1,7 @@
 "use client";
 
+import { DragHint } from "@/components/edit/Block";
+
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { SiteContent } from "@/lib/content";
@@ -118,12 +120,13 @@ export default function Toolbar() {
           </div>
           {editing && (
             <p className="border-t border-line px-3 py-1.5 text-xs text-ink-soft">
-              Click any text to type. Click a photo frame to upload. Use the top
-              menu to switch pages; your edits are kept until you publish.
+              Drag edges to resize · drag ⠿ to move · click text to type · ⚙ for
+              size, align, hide. Edits are kept until you publish.
             </p>
           )}
         </div>
       </div>
+      <DragHint />
       {historyOpen && <HistoryPanel onClose={() => setHistoryOpen(false)} />}
     </>
   );

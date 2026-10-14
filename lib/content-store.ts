@@ -30,7 +30,12 @@ function noteFrom(pathname: string): string {
   return m ? m[1] : "edit";
 }
 
-export type VersionInfo = { pathname: string; uploadedAt: string; size: number; note: string };
+export type VersionInfo = {
+  pathname: string;
+  uploadedAt: string;
+  size: number;
+  note: string;
+};
 
 async function readJson(url: string) {
   const res = await fetch(url, { cache: "no-store" });
@@ -57,10 +62,17 @@ export const getContent = unstable_cache(readLatest, ["site-content-v1"], {
   revalidate: 86400,
 });
 
-export async function saveContent(raw: unknown, note: Note = "edit"): Promise<SiteContent> {
+export async function saveContent(
+  raw: unknown,
+  note: Note = "edit",
+): Promise<SiteContent> {
   if (!blobConfigured()) throw new Error("Blob storage is not configured");
   const content = sanitizeContent(raw);
-  const body = JSON.stringify({ savedAt: new Date().toISOString(), note, content });
+  const body = JSON.stringify({
+    savedAt: new Date().toISOString(),
+    note,
+    content,
+  });
   if (body.length > 400_000) throw new Error("Content is too large");
   await put(newVersionPath(note), body, {
     access: "public",
@@ -85,7 +97,8 @@ export async function listVersions(limit = 30): Promise<VersionInfo[]> {
 }
 
 export async function readVersion(pathname: string): Promise<SiteContent> {
-  if (!pathname.startsWith(PREFIX) || pathname.includes("..")) throw new Error("Bad version");
+  if (!pathname.startsWith(PREFIX) || pathname.includes(".."))
+    throw new Error("Bad version");
   const meta = await head(pathname);
   const data = await readJson(meta.url);
   return sanitizeContent(data?.content ?? data);

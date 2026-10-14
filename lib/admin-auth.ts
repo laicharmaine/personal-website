@@ -44,7 +44,9 @@ export function verifyAdminToken(token: string | undefined | null): boolean {
 export function verifyAdminPassword(submitted: string): boolean {
   const key = secret();
   if (!key) return false;
-  const a = createHmac("sha256", "admin-pw-check").update(submitted.trim()).digest();
+  const a = createHmac("sha256", "admin-pw-check")
+    .update(submitted.trim())
+    .digest();
   const b = createHmac("sha256", "admin-pw-check").update(key).digest();
   return timingSafeEqual(a, b);
 }

@@ -54,25 +54,34 @@ export default function HomeView() {
               className="blink ml-[0.08em] inline-block h-[0.55em] w-[0.2em] bg-lime align-baseline outline outline-[1.5px] outline-ink"
             />
           </h1>
-          <div className="mt-8 grid gap-6 md:grid-cols-12 md:items-end md:gap-10">
+          <div className="mt-8 grid gap-6 md:flex md:items-end md:gap-10">
             <Block
               id="home.hook"
               label="Tagline"
               as="p"
-              className="text-2xl font-semibold leading-snug sm:text-[2rem] md:col-span-6"
+              className="text-2xl font-semibold leading-snug sm:text-[2rem] md:min-w-0 md:flex-1"
             >
               <T path={["home", "hookA"]} />{" "}
               <span className="hl">
                 <T path={["home", "hookB"]} />
               </span>
             </Block>
-            <div className="flex items-end gap-5 sm:gap-7 md:col-span-6">
+            <Block
+              id="home.introCol"
+              kind="section"
+              label="Intro + photo"
+              noWidth
+              widthMode="width"
+              className="flex items-end gap-5 sm:gap-7 md:w-[calc(50%-1.25rem)] md:shrink-0"
+            >
               <div className="min-w-0 flex-1">
                 <Block
                   id="home.intro"
+                  resizeVia="home.introCol"
+                  handleSide="left"
                   label="Intro"
                   as="p"
-                  className="max-w-md text-lg text-ink-soft"
+                  className="max-w-md text-lg text-ink-soft md:max-w-none"
                 >
                   <T path={["home", "intro"]} multiline />
                 </Block>
@@ -121,7 +130,7 @@ export default function HomeView() {
                   <MediaTools path={["home", "photo"]} />
                 </Block>
               )}
-            </div>
+            </Block>
           </div>
         </Window>
 

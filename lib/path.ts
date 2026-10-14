@@ -12,13 +12,23 @@ export function getIn(obj: unknown, path: Path): unknown {
 export function setIn<T>(obj: T, path: Path, value: unknown): T {
   if (path.length === 0) return value as T;
   const [key, ...rest] = path;
-  const base = (obj ?? (typeof key === "number" ? [] : {})) as Record<string | number, unknown>;
-  const copy = (Array.isArray(base) ? [...base] : { ...base }) as Record<string | number, unknown>;
+  const base = (obj ?? (typeof key === "number" ? [] : {})) as Record<
+    string | number,
+    unknown
+  >;
+  const copy = (Array.isArray(base) ? [...base] : { ...base }) as Record<
+    string | number,
+    unknown
+  >;
   copy[key] = setIn(base[key], rest, value);
   return copy as T;
 }
 
-export function updateList<T>(obj: T, path: Path, fn: (list: unknown[]) => unknown[]): T {
+export function updateList<T>(
+  obj: T,
+  path: Path,
+  fn: (list: unknown[]) => unknown[],
+): T {
   const cur = getIn(obj, path);
   return setIn(obj, path, fn(Array.isArray(cur) ? cur : []));
 }

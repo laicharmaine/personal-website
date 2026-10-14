@@ -81,9 +81,11 @@ const projects: Project[] = [
     year: "2023–25",
     line: "Took a CPU-based generative AI platform to market.",
     metric: { value: "$5M", label: "partner pipeline" },
-    problem: "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
+    problem:
+      "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
     did: "Go-to-market, market research, multi-channel marketing, dogfooding + user feedback across major releases, Numenta’s first API docs, 5+ conferences.",
-    result: "A $5M partner pipeline incl. Intel and F5, +110% event leads, dev setup cut from days to hours.",
+    result:
+      "A $5M partner pipeline incl. Intel and F5, +110% event leads, dev setup cut from days to hours.",
     badge: {
       label: "Featured in Intel Parallel Universe",
       href: "https://www.intel.com/content/www/us/en/developer/articles/technical/usher-in-a-new-era-of-accelerated-ai-on-cpus.html",
@@ -98,10 +100,17 @@ const projects: Project[] = [
     metric: { value: "65%", label: "peak YoY traffic lift" },
     problem: "The site and brand lagged behind where the product was going.",
     did: "Coordinated the full revamp, owned the site (domain, front end, back end) and ran Google Ads tests.",
-    result: "Traffic up as much as 65% year over year; Google Ads A/B tests lifted click-through 30% and cut cost per lead 20%.",
+    result:
+      "Traffic up as much as 65% year over year; Google Ads A/B tests lifted click-through 30% and cut cost per lead 20%.",
     links: [
-      { label: "Before (2020, Wayback)", href: "https://web.archive.org/web/20201218073306/https://numenta.com/" },
-      { label: "After (2023, Wayback)", href: "https://web.archive.org/web/2023/https://www.numenta.com/" },
+      {
+        label: "Before (2020, Wayback)",
+        href: "https://web.archive.org/web/20201218073306/https://numenta.com/",
+      },
+      {
+        label: "After (2023, Wayback)",
+        href: "https://web.archive.org/web/2023/https://www.numenta.com/",
+      },
     ],
   },
   {
@@ -111,9 +120,11 @@ const projects: Project[] = [
     year: "2020–21",
     line: "Launched Jeff Hawkins’ book with a video + podcast series and live events.",
     metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
-    problem: "A book about the brain and AI had to reach past the neuroscience crowd.",
+    problem:
+      "A book about the brain and AI had to reach past the neuroscience crowd.",
     did: "Multi-channel launch, a four-part companion video + podcast series, an animated explainer, and the Numenta News Digest.",
-    result: "55K+ engagements, incl. 30K+ views on the series and 25K+ on the explainer; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
+    result:
+      "55K+ engagements, incl. 30K+ views on the series and 25K+ on the explainer; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
     media: {
       src: "/fun/proj-thousand-brains.webp",
       alt: "A Thousand Brains book cover, from the series introduction video",
@@ -121,8 +132,14 @@ const projects: Project[] = [
       caption: "Watch the series intro",
     },
     links: [
-      { label: "Podcast", href: "https://numenta.buzzsprout.com/188368/episodes/7929319-a-thousand-brains-by-jeff-hawkins-introduction" },
-      { label: "Animated explainer", href: "https://www.youtube.com/watch?v=LaAYuygr7_8" },
+      {
+        label: "Podcast",
+        href: "https://numenta.buzzsprout.com/188368/episodes/7929319-a-thousand-brains-by-jeff-hawkins-introduction",
+      },
+      {
+        label: "Animated explainer",
+        href: "https://www.youtube.com/watch?v=LaAYuygr7_8",
+      },
     ],
   },
   {
@@ -134,7 +151,8 @@ const projects: Project[] = [
     metric: { value: "1.2K+", label: "members" },
     problem: "Numenta wanted a bigger voice where neuroscience meets AI.",
     did: "Organized and hosted a quarterly meetup, recruiting speakers from AI research and startups, incl. RL pioneer and Turing Award winner Richard Sutton.",
-    result: "1.2K+ members, 200+ attendees per event, and Numenta as a hub for brain-inspired AI.",
+    result:
+      "1.2K+ members, 200+ attendees per event, and Numenta as a hub for brain-inspired AI.",
     media: {
       src: "/fun/proj-brainsbay-sutton.webp",
       alt: "Brains@Bay title card: Sensorimotor Learning in AI, Dec 15, 2021",
@@ -142,7 +160,10 @@ const projects: Project[] = [
       caption: "Hosted Richard Sutton",
     },
     links: [
-      { label: "All recordings", href: "https://www.youtube.com/playlist?list=PL3yXMgtrZmDqWkN_8VxStZjzbRKarAn6b" },
+      {
+        label: "All recordings",
+        href: "https://www.youtube.com/playlist?list=PL3yXMgtrZmDqWkN_8VxStZjzbRKarAn6b",
+      },
       { label: "Meetup", href: "https://www.meetup.com/brains-bay/" },
     ],
   },
@@ -153,21 +174,38 @@ const projects: Project[] = [
     year: "2025–26",
     line: "Turned buyer requirements in China into a product plan.",
     metric: { value: "$7M", label: "potential opportunities" },
-    problem: "What do railroad buyers in China actually need, and what should the product lead with?",
+    problem:
+      "What do railroad buyers in China actually need, and what should the product lead with?",
     did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations; built bilingual sales collateral.",
-    result: "$7M in potential opportunities; bids to 10+ China Railway bureaus across 8 provinces.",
-    links: [{ label: "Schlatter rail welding", href: "https://www.schlattergroup.com/en/welding-machines/flash-butt-welding-machines-for-rails" }],
+    result:
+      "$7M in potential opportunities; bids to 10+ China Railway bureaus across 8 provinces.",
+    links: [
+      {
+        label: "Schlatter rail welding",
+        href: "https://www.schlattergroup.com/en/welding-machines/flash-butt-welding-machines-for-rails",
+      },
+    ],
   },
 ];
 
-export type SideProject = { title: string; line: string; links?: Link[]; note?: string; media?: FunMedia };
+export type SideProject = {
+  title: string;
+  line: string;
+  links?: Link[];
+  note?: string;
+  media?: FunMedia;
+};
 
 const sideProjects: SideProject[] = [
   {
     title: "Tabby",
     line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
     links: [{ label: "Try it", href: "https://tabby-wmtt.onrender.com" }],
-    media: { src: "/fun/proj-tabby.webp", alt: "Tabby’s start screen: You covered the tab. Let everyone claim their own.", href: "https://tabby-wmtt.onrender.com" },
+    media: {
+      src: "/fun/proj-tabby.webp",
+      alt: "Tabby’s start screen: You covered the tab. Let everyone claim their own.",
+      href: "https://tabby-wmtt.onrender.com",
+    },
   },
   {
     title: "Dayline",
@@ -188,7 +226,12 @@ const sideProjects: SideProject[] = [
  *    with `caption` as its label.
  *  - Easiest: use the in-browser editor (/admin) and click the frame to upload.
  */
-export type FunMedia = { src?: string; alt?: string; href?: string; caption?: string };
+export type FunMedia = {
+  src?: string;
+  alt?: string;
+  href?: string;
+  caption?: string;
+};
 
 export type FunItem = {
   slug: string;
@@ -210,11 +253,22 @@ const fun: FunItem[] = [
     title: "Photography",
     file: "my_photos/",
     line: "Portraits, mostly. The full portfolio lives on my Wix site.",
-    links: [{ label: "See the portfolio", href: "https://laicharmaine.wixsite.com/portfolio" }],
+    links: [
+      {
+        label: "See the portfolio",
+        href: "https://laicharmaine.wixsite.com/portfolio",
+      },
+    ],
     shape: "portrait",
     media: [
-      { src: "/fun/portrait-1.jpg", alt: "Portrait by Charmaine: a laughing subject against a wall of red flowers" },
-      { src: "/fun/portrait-2.jpg", alt: "Portrait by Charmaine: a subject with pink hair against a lavender wall" },
+      {
+        src: "/fun/portrait-1.jpg",
+        alt: "Portrait by Charmaine: a laughing subject against a wall of red flowers",
+      },
+      {
+        src: "/fun/portrait-2.jpg",
+        alt: "Portrait by Charmaine: a subject with pink hair against a lavender wall",
+      },
     ],
   },
   {
@@ -270,8 +324,19 @@ const fun: FunItem[] = [
   },
 ];
 
-export type Role = { title: string; period: string; bullets: string[]; work?: Link };
-export type Job = { company: string; about?: string; location: string; period: string; roles: Role[] };
+export type Role = {
+  title: string;
+  period: string;
+  bullets: string[];
+  work?: Link;
+};
+export type Job = {
+  company: string;
+  about?: string;
+  location: string;
+  period: string;
+  roles: Role[];
+};
 
 const experience: Job[] = [
   {
@@ -283,21 +348,26 @@ const experience: Job[] = [
       {
         title: "Product Consultant",
         period: "2025–26",
-        bullets: ["Product and market strategy for rail welding systems in China."],
+        bullets: [
+          "Product and market strategy for rail welding systems in China.",
+        ],
         work: { label: "See the work", href: "/projects#railroad-product" },
       },
     ],
   },
   {
     company: "Numenta",
-    about: "Neuroscience-based AI company building efficient generative AI on CPUs.",
+    about:
+      "Neuroscience-based AI company building efficient generative AI on CPUs.",
     location: "Redwood City, CA",
     period: "2020–25",
     roles: [
       {
         title: "Marketing Manager",
         period: "Sep 2023 – Jun 2025",
-        bullets: ["Go-to-market and product lifecycle for NuPIC, Numenta’s first commercial product."],
+        bullets: [
+          "Go-to-market and product lifecycle for NuPIC, Numenta’s first commercial product.",
+        ],
         work: { label: "See the work", href: "/projects#nupic-launch" },
       },
       {
@@ -309,14 +379,21 @@ const experience: Job[] = [
       {
         title: "Marketing Associate",
         period: "Aug 2020 – Aug 2021",
-        bullets: ["Launch marketing and science content for Jeff Hawkins’ A Thousand Brains."],
+        bullets: [
+          "Launch marketing and science content for Jeff Hawkins’ A Thousand Brains.",
+        ],
         work: { label: "See the work", href: "/projects#a-thousand-brains" },
       },
     ],
   },
 ];
 
-export type Education = { school: string; degree: string; period: string; note: string };
+export type Education = {
+  school: string;
+  degree: string;
+  period: string;
+  note: string;
+};
 
 const education: Education[] = [
   {
@@ -336,19 +413,44 @@ const education: Education[] = [
 export type Extra = { label: string; value: string };
 
 const resumeExtras: Extra[] = [
-  { label: "Skills", value: "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events" },
-  { label: "Coursework", value: "Tech Product Management · Applied AI for Business · Computational Thinking · Marketing" },
-  { label: "Internships", value: "YINA.CO · Lane Crawford · Marco Polo Hotels · PwC" },
-  { label: "Tools", value: "Figma · Google Analytics · Jira · Zapier · WordPress · HTML/CSS · Photoshop · Final Cut Pro" },
+  {
+    label: "Skills",
+    value:
+      "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events",
+  },
+  {
+    label: "Coursework",
+    value:
+      "Tech Product Management · Applied AI for Business · Computational Thinking · Marketing",
+  },
+  {
+    label: "Internships",
+    value: "YINA.CO · Lane Crawford · Marco Polo Hotels · PwC",
+  },
+  {
+    label: "Tools",
+    value:
+      "Figma · Google Analytics · Jira · Zapier · WordPress · HTML/CSS · Photoshop · Final Cut Pro",
+  },
   { label: "Languages", value: "English · Cantonese · Mandarin" },
   {
     label: "Certificates",
-    value: "Python for Everybody (UMich) · IBM Data Science · Google Project Management · Writing in the Sciences (Stanford)",
+    value:
+      "Python for Everybody (UMich) · IBM Data Science · Google Project Management · Writing in the Sciences (Stanford)",
   },
-  { label: "Volunteer", value: "Tri-Valley Animal Rescue · SRL Alumni Association (web developer) · SuperTech FT" },
+  {
+    label: "Volunteer",
+    value:
+      "Tri-Valley Animal Rescue · SRL Alumni Association (web developer) · SuperTech FT",
+  },
 ];
 
-export type Article = { title: string; outlet: string; date: string; href: string };
+export type Article = {
+  title: string;
+  outlet: string;
+  date: string;
+  href: string;
+};
 
 /** Published writing, verified by byline. Numenta’s own blog is offline, so
  *  links point to Numenta’s Medium mirror or the Internet Archive. */
@@ -396,6 +498,10 @@ const contactLinks: Link[] = [
  */
 export type BlockLayout = {
   w?: "s" | "m" | "l" | "full";
+  /** dragged width, % of the container (20–100), md+ only */
+  wp?: number;
+  /** dragged photo width in px (48–640), md+ only */
+  px?: number;
   size?: "sm" | "lg";
   align?: "left" | "center";
   img?: "s" | "l";
@@ -502,14 +608,38 @@ export const templates = {
     did: "What I did.",
     result: "The result.",
   }),
-  sideProject: { title: "New side project", line: "One line about it.", links: [], note: "" } as SideProject,
+  sideProject: {
+    title: "New side project",
+    line: "One line about it.",
+    links: [],
+    note: "",
+  } as SideProject,
   link: { label: "Link", href: "https://" } as Link,
-  job: { company: "Company", location: "City", period: "2026", roles: [] } as Job,
-  role: { title: "Role", period: "2026", bullets: ["One line about the scope."] } as Role,
+  job: {
+    company: "Company",
+    location: "City",
+    period: "2026",
+    roles: [],
+  } as Job,
+  role: {
+    title: "Role",
+    period: "2026",
+    bullets: ["One line about the scope."],
+  } as Role,
   bullet: "New bullet.",
-  education: { school: "School", degree: "Degree", period: "Years", note: "" } as Education,
+  education: {
+    school: "School",
+    degree: "Degree",
+    period: "Years",
+    note: "",
+  } as Education,
   extra: { label: "Label", value: "Value" } as Extra,
-  article: { title: "New article", outlet: "Outlet", date: "2026", href: "https://" } as Article,
+  article: {
+    title: "New article",
+    outlet: "Outlet",
+    date: "2026",
+    href: "https://",
+  } as Article,
   media: { caption: "Coming soon" } as FunMedia,
   funItem: (): FunItem => ({
     slug: `fun-${Math.random().toString(36).slice(2, 8)}`,

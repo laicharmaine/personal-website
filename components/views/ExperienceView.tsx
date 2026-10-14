@@ -5,10 +5,16 @@ import Window from "@/components/Window";
 import { AddButton, Href, ItemTools, T } from "@/components/edit/Editable";
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
-import Block, { Sections, slugId } from "@/components/edit/Block";
+import Block, {
+  Sections,
+  SortArea,
+  slugId,
+  useListMove,
+} from "@/components/edit/Block";
 
 export default function ExperienceView() {
   const { content: c, editing, setAt } = useEdit();
+  const moveJob = useListMove(["experience"]);
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
@@ -25,194 +31,212 @@ export default function ExperienceView() {
                   className="win-open"
                   bodyClassName="divide-y divide-line"
                 >
-                  {c.experience.map((job, i) => (
-                    <Block
-                      key={i}
-                      id={`job.${slugId(job.company)}`}
-                      kind="item"
-                      label="Job"
-                      as="section"
-                      className="relative px-5 py-7 sm:px-8"
-                    >
-                      <ItemTools
-                        path={["experience"]}
-                        index={i}
-                        length={c.experience.length}
-                        noun="job"
-                        confirmRemove
-                        className="right-3 top-2"
-                      />
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                        <h2 className="pixel text-[2.75rem]">
-                          <T path={["experience", i, "company"]} />
-                        </h2>
-                        <p className="font-mono text-sm text-ink-soft">
-                          <T path={["experience", i, "location"]} /> ·{" "}
-                          <T path={["experience", i, "period"]} />
-                        </p>
-                      </div>
-                      {(job.about || editing) && (
-                        <p className="mt-1 max-w-2xl text-sm text-ink-soft">
-                          <T
-                            path={["experience", i, "about"]}
-                            placeholder="One line about the company (optional)"
-                          />
-                        </p>
-                      )}
-                      <ul className="mt-4 space-y-5">
-                        {job.roles.map((r, j) => (
-                          <li
-                            key={j}
-                            className="relative grid gap-1.5 sm:grid-cols-[14rem_1fr] sm:gap-8"
-                          >
-                            <ItemTools
-                              path={["experience", i, "roles"]}
-                              index={j}
-                              length={job.roles.length}
-                              noun="role"
-                              confirmRemove
-                              className="-top-4 left-0"
+                  <SortArea
+                    ids={c.experience.map((_, i) => `j${i}`)}
+                    onMove={moveJob}
+                  >
+                    {c.experience.map((job, i) => (
+                      <Block
+                        key={i}
+                        id={`job.${slugId(job.company)}`}
+                        kind="item"
+                        sortKey={`j${i}`}
+                        label="Job"
+                        as="section"
+                        className="relative px-5 py-7 sm:px-8"
+                      >
+                        <ItemTools
+                          path={["experience"]}
+                          index={i}
+                          length={c.experience.length}
+                          noun="job"
+                          confirmRemove
+                          className="right-3 top-2"
+                        />
+                        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                          <h2 className="pixel text-[2.75rem]">
+                            <T path={["experience", i, "company"]} />
+                          </h2>
+                          <p className="font-mono text-sm text-ink-soft">
+                            <T path={["experience", i, "location"]} /> ·{" "}
+                            <T path={["experience", i, "period"]} />
+                          </p>
+                        </div>
+                        {(job.about || editing) && (
+                          <p className="mt-1 max-w-2xl text-sm text-ink-soft">
+                            <T
+                              path={["experience", i, "about"]}
+                              placeholder="One line about the company (optional)"
                             />
-                            <div>
-                              <p className="font-semibold">
-                                <T
-                                  path={["experience", i, "roles", j, "title"]}
-                                />
-                              </p>
-                              {(job.roles.length > 1 || editing) && (
-                                <p className="font-mono text-xs text-ink-soft">
+                          </p>
+                        )}
+                        <ul className="mt-4 space-y-5">
+                          {job.roles.map((r, j) => (
+                            <li
+                              key={j}
+                              className="relative grid gap-1.5 sm:grid-cols-[14rem_1fr] sm:gap-8"
+                            >
+                              <ItemTools
+                                path={["experience", i, "roles"]}
+                                index={j}
+                                length={job.roles.length}
+                                noun="role"
+                                confirmRemove
+                                className="-top-4 left-0"
+                              />
+                              <div>
+                                <p className="font-semibold">
                                   <T
                                     path={[
                                       "experience",
                                       i,
                                       "roles",
                                       j,
-                                      "period",
+                                      "title",
                                     ]}
                                   />
                                 </p>
-                              )}
-                            </div>
-                            <div className="max-w-2xl">
-                              <ul className="space-y-1 text-ink-soft">
-                                {r.bullets.map((_, k) => (
-                                  <li key={k} className="relative">
+                                {(job.roles.length > 1 || editing) && (
+                                  <p className="font-mono text-xs text-ink-soft">
                                     <T
                                       path={[
                                         "experience",
                                         i,
                                         "roles",
                                         j,
-                                        "bullets",
-                                        k,
+                                        "period",
                                       ]}
-                                      multiline
                                     />
-                                    <ItemTools
-                                      path={[
-                                        "experience",
-                                        i,
-                                        "roles",
-                                        j,
-                                        "bullets",
-                                      ]}
-                                      index={k}
-                                      length={r.bullets.length}
-                                      noun="bullet"
-                                      className="-right-2 top-0 translate-x-full"
-                                    />
-                                  </li>
-                                ))}
-                                {editing && r.bullets.length === 0 && (
-                                  <li>
-                                    <AddButton
-                                      path={[
-                                        "experience",
-                                        i,
-                                        "roles",
-                                        j,
-                                        "bullets",
-                                      ]}
-                                      make={() => templates.bullet}
-                                      label="Add a line"
-                                    />
-                                  </li>
+                                  </p>
                                 )}
-                              </ul>
-                              {r.work ? (
-                                <p className="relative mt-1.5 text-sm font-semibold">
-                                  <a href={r.work.href} className="ulink">
-                                    <T
+                              </div>
+                              <div className="max-w-2xl">
+                                <ul className="space-y-1 text-ink-soft">
+                                  {r.bullets.map((_, k) => (
+                                    <li key={k} className="relative">
+                                      <T
+                                        path={[
+                                          "experience",
+                                          i,
+                                          "roles",
+                                          j,
+                                          "bullets",
+                                          k,
+                                        ]}
+                                        multiline
+                                      />
+                                      <ItemTools
+                                        path={[
+                                          "experience",
+                                          i,
+                                          "roles",
+                                          j,
+                                          "bullets",
+                                        ]}
+                                        index={k}
+                                        length={r.bullets.length}
+                                        noun="bullet"
+                                        className="-right-2 top-0 translate-x-full"
+                                      />
+                                    </li>
+                                  ))}
+                                  {editing && r.bullets.length === 0 && (
+                                    <li>
+                                      <AddButton
+                                        path={[
+                                          "experience",
+                                          i,
+                                          "roles",
+                                          j,
+                                          "bullets",
+                                        ]}
+                                        make={() => templates.bullet}
+                                        label="Add a line"
+                                      />
+                                    </li>
+                                  )}
+                                </ul>
+                                {r.work ? (
+                                  <p className="relative mt-1.5 text-sm font-semibold">
+                                    <a href={r.work.href} className="ulink">
+                                      <T
+                                        path={[
+                                          "experience",
+                                          i,
+                                          "roles",
+                                          j,
+                                          "work",
+                                          "label",
+                                        ]}
+                                      />{" "}
+                                      <span aria-hidden>→</span>
+                                    </a>
+                                    <Href
                                       path={[
                                         "experience",
                                         i,
                                         "roles",
                                         j,
                                         "work",
-                                        "label",
+                                        "href",
                                       ]}
-                                    />{" "}
-                                    <span aria-hidden>→</span>
-                                  </a>
-                                  <Href
-                                    path={[
-                                      "experience",
-                                      i,
-                                      "roles",
-                                      j,
-                                      "work",
-                                      "href",
-                                    ]}
-                                  />
-                                  {editing && (
+                                    />
+                                    {editing && (
+                                      <button
+                                        type="button"
+                                        data-editor-ui=""
+                                        aria-label="Remove link"
+                                        className="ml-1 rounded-full border-[1.5px] border-ink bg-paper px-1.5 font-mono text-xs hover:bg-pink"
+                                        onClick={() =>
+                                          setAt(
+                                            [
+                                              "experience",
+                                              i,
+                                              "roles",
+                                              j,
+                                              "work",
+                                            ],
+                                            undefined,
+                                          )
+                                        }
+                                      >
+                                        ✕
+                                      </button>
+                                    )}
+                                  </p>
+                                ) : (
+                                  editing && (
                                     <button
                                       type="button"
                                       data-editor-ui=""
-                                      aria-label="Remove link"
-                                      className="ml-1 rounded-full border-[1.5px] border-ink bg-paper px-1.5 font-mono text-xs hover:bg-pink"
+                                      className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-dashed border-ink bg-paper/70 px-3 py-1 font-mono text-xs font-medium hover:bg-lime"
                                       onClick={() =>
                                         setAt(
                                           ["experience", i, "roles", j, "work"],
-                                          undefined,
+                                          {
+                                            label: "See the work",
+                                            href: "/projects",
+                                          },
                                         )
                                       }
                                     >
-                                      ✕
+                                      + Add “See the work” link
                                     </button>
-                                  )}
-                                </p>
-                              ) : (
-                                editing && (
-                                  <button
-                                    type="button"
-                                    data-editor-ui=""
-                                    className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-dashed border-ink bg-paper/70 px-3 py-1 font-mono text-xs font-medium hover:bg-lime"
-                                    onClick={() =>
-                                      setAt(
-                                        ["experience", i, "roles", j, "work"],
-                                        {
-                                          label: "See the work",
-                                          href: "/projects",
-                                        },
-                                      )
-                                    }
-                                  >
-                                    + Add “See the work” link
-                                  </button>
-                                )
-                              )}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                      <AddButton
-                        path={["experience", i, "roles"]}
-                        make={() => structuredClone(templates.role)}
-                        label="Add role"
-                        className="mt-5"
-                      />
-                    </Block>
-                  ))}
+                                  )
+                                )}
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                        <AddButton
+                          path={["experience", i, "roles"]}
+                          make={() => structuredClone(templates.role)}
+                          label="Add role"
+                          className="mt-5"
+                        />
+                      </Block>
+                    ))}
+                  </SortArea>
                   {editing && (
                     <div className="px-5 py-3 sm:px-8">
                       <AddButton

@@ -45,7 +45,12 @@ export function verifyPassword(submitted: string): boolean {
 
 /** Only allow same-origin relative paths for post-login redirect. */
 export function safeNextPath(next: string | null | undefined): string {
-  if (!next || !next.startsWith("/") || next.startsWith("//") || next.includes("://")) {
+  if (
+    !next ||
+    !next.startsWith("/") ||
+    next.startsWith("//") ||
+    next.includes("://")
+  ) {
     return "/";
   }
   return next;

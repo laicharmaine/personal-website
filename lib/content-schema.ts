@@ -238,6 +238,14 @@ function sanitizeLayout(value: unknown): Record<string, unknown> {
     if (size) l.size = size;
     if (align) l.align = align;
     if (img) l.img = img;
+    const num = (v: unknown, lo: number, hi: number) =>
+      typeof v === "number" && Number.isFinite(v)
+        ? Math.round(Math.min(hi, Math.max(lo, v)))
+        : undefined;
+    const wp = num(r.wp, 20, 100);
+    const px = num(r.px, 48, 640);
+    if (wp) l.wp = wp;
+    if (px) l.px = px;
     if (r.hidden === true) l.hidden = true;
     if (Array.isArray(r.order)) {
       const order = r.order

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Block from "@/components/edit/Block";
+import Block, { SortArea, useListMove } from "@/components/edit/Block";
 import PageHeader from "@/components/PageHeader";
 import Window from "@/components/Window";
 import {
@@ -91,178 +91,182 @@ function Frame({
 
 export default function FunView() {
   const { content: c, editing } = useEdit();
+  const moveFun = useListMove(["fun"]);
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
       <PageHeader at="funPage" />
 
       <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-        {c.fun.map((item, idx) => (
-          <Block
-            key={idx}
-            id={`fun.${item.slug || idx}`}
-            kind="item"
-            label="Card"
-          >
-            <Window
-              as="section"
-              title={<T path={["fun", idx, "file"]} />}
-              tone={item.stat ? "lime" : "peri"}
-              className={`relative ${idx < 2 ? "win-open" : "win-open-2"}`}
-              bodyClassName="px-5 pb-6 pt-5 sm:px-7 sm:pb-7"
-              labelledBy={`fun-${item.slug}`}
+        <SortArea ids={c.fun.map((_, i) => `f${i}`)} onMove={moveFun} grid>
+          {c.fun.map((item, idx) => (
+            <Block
+              key={idx}
+              id={`fun.${item.slug || idx}`}
+              kind="item"
+              sortKey={`f${idx}`}
+              label="Card"
             >
-              <ItemTools
-                path={["fun"]}
-                index={idx}
-                length={c.fun.length}
-                noun="card"
-                confirmRemove
-                className="right-10 top-1"
-              />
-              <div id={item.slug} className="scroll-mt-24">
-                {item.stat ? (
-                  <div className="flex items-center gap-4 sm:gap-5">
-                    <div className="grid aspect-[16/7] min-w-0 flex-1 place-items-center rounded-md bg-ink text-center">
-                      <p>
-                        <span className="pixel block text-[5.5rem] text-lime sm:text-[6.5rem]">
-                          <T path={["fun", idx, "stat", "value"]} />
-                        </span>
-                        <span className="mt-1 block font-mono text-sm text-paper">
-                          <T path={["fun", idx, "stat", "label"]} />
-                        </span>
-                      </p>
-                    </div>
-                    {item.media[0] ? (
-                      <Block
-                        id={`fun.${item.slug || idx}.photo`}
-                        kind="image"
-                        label="Photo"
-                        as="span"
-                        className="relative block w-28 shrink-0 sm:w-32"
-                        sizes={{
-                          s: "relative block w-20 shrink-0 sm:w-24",
-                          l: "relative block w-36 shrink-0 sm:w-44",
-                        }}
-                      >
-                        <Frame
-                          m={item.media[0]}
-                          shape="square"
-                          i={1}
-                          path={["fun", idx, "media", 0]}
-                          small
-                        />
-                      </Block>
-                    ) : (
-                      editing && (
-                        <AddButton
-                          path={["fun", idx, "media"]}
-                          make={() => ({ ...templates.media })}
-                          label="Add photo"
-                        />
-                      )
-                    )}
-                  </div>
-                ) : (
-                  <>
-                    <div
-                      className={`grid gap-4 ${
-                        item.media.length >= 3
-                          ? "grid-cols-3"
-                          : item.media.length === 2
-                            ? "grid-cols-2"
-                            : "grid-cols-1"
-                      }`}
-                    >
-                      {item.media.map((m, i) => (
+              <Window
+                as="section"
+                title={<T path={["fun", idx, "file"]} />}
+                tone={item.stat ? "lime" : "peri"}
+                className={`relative ${idx < 2 ? "win-open" : "win-open-2"}`}
+                bodyClassName="px-5 pb-6 pt-5 sm:px-7 sm:pb-7"
+                labelledBy={`fun-${item.slug}`}
+              >
+                <ItemTools
+                  path={["fun"]}
+                  index={idx}
+                  length={c.fun.length}
+                  noun="card"
+                  confirmRemove
+                  className="right-10 top-1"
+                />
+                <div id={item.slug} className="scroll-mt-24">
+                  {item.stat ? (
+                    <div className="flex items-center gap-4 sm:gap-5">
+                      <div className="grid aspect-[16/7] min-w-0 flex-1 place-items-center rounded-md bg-ink text-center">
+                        <p>
+                          <span className="pixel block text-[5.5rem] text-lime sm:text-[6.5rem]">
+                            <T path={["fun", idx, "stat", "value"]} />
+                          </span>
+                          <span className="mt-1 block font-mono text-sm text-paper">
+                            <T path={["fun", idx, "stat", "label"]} />
+                          </span>
+                        </p>
+                      </div>
+                      {item.media[0] ? (
                         <Block
-                          key={i}
-                          id={`fun.${item.slug || idx}.media.${i}`}
+                          id={`fun.${item.slug || idx}.photo`}
                           kind="image"
                           label="Photo"
                           as="span"
-                          className="relative block"
+                          className="relative block w-28 shrink-0 sm:w-32"
                           sizes={{
-                            s: "relative mx-auto block w-[72%]",
-                            l: "relative block",
+                            s: "relative block w-20 shrink-0 sm:w-24",
+                            l: "relative block w-36 shrink-0 sm:w-44",
                           }}
                         >
                           <Frame
-                            m={m}
-                            shape={item.shape}
-                            i={i}
-                            path={["fun", idx, "media", i]}
-                          />
-                          <ItemTools
-                            path={["fun", idx, "media"]}
-                            index={i}
-                            length={item.media.length}
-                            noun="frame"
-                            className="-top-3 right-0"
+                            m={item.media[0]}
+                            shape="square"
+                            i={1}
+                            path={["fun", idx, "media", 0]}
+                            small
                           />
                         </Block>
-                      ))}
-                    </div>
-                    {editing && (
-                      <AddButton
-                        path={["fun", idx, "media"]}
-                        make={() => ({ ...templates.media })}
-                        label="Add frame"
-                        className="mt-4"
-                      />
-                    )}
-                  </>
-                )}
-
-                <h2
-                  id={`fun-${item.slug}`}
-                  className="pixel mt-6 text-[2.6rem]"
-                >
-                  <T path={["fun", idx, "title"]} />
-                </h2>
-                <Block
-                  id={`fun.${item.slug || idx}.line`}
-                  label="Card text"
-                  as="p"
-                  className="mt-2 text-ink-soft"
-                >
-                  <T path={["fun", idx, "line"]} multiline />
-                </Block>
-                {(item.links?.length || editing) && (
-                  <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                    {item.links?.map((l, j) => (
-                      <span key={j} className="relative">
-                        <a
-                          href={l.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="ulink"
-                        >
-                          <T path={["fun", idx, "links", j, "label"]} /> ↗
-                        </a>
-                        <Href path={["fun", idx, "links", j, "href"]} />
-                        {editing && (
-                          <ItemTools
-                            path={["fun", idx, "links"]}
-                            index={j}
-                            length={item.links!.length}
-                            noun="link"
-                            className="-top-6 left-0"
+                      ) : (
+                        editing && (
+                          <AddButton
+                            path={["fun", idx, "media"]}
+                            make={() => ({ ...templates.media })}
+                            label="Add photo"
                           />
-                        )}
-                      </span>
-                    ))}
-                    <AddButton
-                      path={["fun", idx, "links"]}
-                      make={() => ({ ...templates.link })}
-                      label="Add link"
-                    />
-                  </p>
-                )}
-              </div>
-            </Window>
-          </Block>
-        ))}
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        className={`grid gap-4 ${
+                          item.media.length >= 3
+                            ? "grid-cols-3"
+                            : item.media.length === 2
+                              ? "grid-cols-2"
+                              : "grid-cols-1"
+                        }`}
+                      >
+                        {item.media.map((m, i) => (
+                          <Block
+                            key={i}
+                            id={`fun.${item.slug || idx}.media.${i}`}
+                            kind="image"
+                            label="Photo"
+                            as="span"
+                            className="relative block"
+                            sizes={{
+                              s: "relative mx-auto block w-[72%]",
+                              l: "relative block",
+                            }}
+                          >
+                            <Frame
+                              m={m}
+                              shape={item.shape}
+                              i={i}
+                              path={["fun", idx, "media", i]}
+                            />
+                            <ItemTools
+                              path={["fun", idx, "media"]}
+                              index={i}
+                              length={item.media.length}
+                              noun="frame"
+                              className="-top-3 right-0"
+                            />
+                          </Block>
+                        ))}
+                      </div>
+                      {editing && (
+                        <AddButton
+                          path={["fun", idx, "media"]}
+                          make={() => ({ ...templates.media })}
+                          label="Add frame"
+                          className="mt-4"
+                        />
+                      )}
+                    </>
+                  )}
+
+                  <h2
+                    id={`fun-${item.slug}`}
+                    className="pixel mt-6 text-[2.6rem]"
+                  >
+                    <T path={["fun", idx, "title"]} />
+                  </h2>
+                  <Block
+                    id={`fun.${item.slug || idx}.line`}
+                    label="Card text"
+                    as="p"
+                    className="mt-2 text-ink-soft"
+                  >
+                    <T path={["fun", idx, "line"]} multiline />
+                  </Block>
+                  {(item.links?.length || editing) && (
+                    <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                      {item.links?.map((l, j) => (
+                        <span key={j} className="relative">
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ulink"
+                          >
+                            <T path={["fun", idx, "links", j, "label"]} /> ↗
+                          </a>
+                          <Href path={["fun", idx, "links", j, "href"]} />
+                          {editing && (
+                            <ItemTools
+                              path={["fun", idx, "links"]}
+                              index={j}
+                              length={item.links!.length}
+                              noun="link"
+                              className="-top-6 left-0"
+                            />
+                          )}
+                        </span>
+                      ))}
+                      <AddButton
+                        path={["fun", idx, "links"]}
+                        make={() => ({ ...templates.link })}
+                        label="Add link"
+                      />
+                    </p>
+                  )}
+                </div>
+              </Window>
+            </Block>
+          ))}
+        </SortArea>
       </div>
       <AddButton
         path={["fun"]}
