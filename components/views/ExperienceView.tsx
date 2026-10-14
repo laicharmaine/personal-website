@@ -25,6 +25,11 @@ export default function ExperienceView() {
                 <T path={["experience", i, "location"]} /> · <T path={["experience", i, "period"]} />
               </p>
             </div>
+            {(job.about || editing) && (
+              <p className="mt-1 max-w-2xl text-sm text-ink-soft">
+                <T path={["experience", i, "about"]} placeholder="One line about the company (optional)" />
+              </p>
+            )}
             <ul className="mt-4 space-y-5">
               {job.roles.map((r, j) => (
                 <li key={j} className="relative grid gap-1.5 sm:grid-cols-[14rem_1fr] sm:gap-8">

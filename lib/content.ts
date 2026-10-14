@@ -36,7 +36,7 @@ export const nav = [
 export type Stat = { value: string; label: string };
 
 const proof: Stat[] = [
-  { value: "3", label: "launch-quarter partnerships" },
+  { value: "$5M", label: "partner pipeline" },
   { value: "65%", label: "peak YoY traffic lift" },
   { value: "Top 5", label: "Bill Gates’ 2021 books" },
   { value: "450k+", label: "followers (it’s a cat)" },
@@ -74,10 +74,10 @@ const projects: Project[] = [
     org: "Numenta",
     year: "2023–25",
     line: "Took a CPU-based generative AI platform to market.",
-    metric: { value: "3", label: "partnerships in quarter one" },
+    metric: { value: "$5M", label: "partner pipeline" },
     problem: "A new generative AI platform that runs on CPUs, and no map of who would buy it.",
-    did: "Market research, multi-channel GTM, dogfooding sessions, Numenta’s first API docs, 5+ conferences.",
-    result: "3 strategic partnerships in the launch quarter, 3 product iterations, +110% event leads, dev setup cut from days to hours.",
+    did: "Go-to-market, market research, multi-channel marketing, dogfooding + user feedback across major releases, Numenta’s first API docs, 5+ conferences.",
+    result: "A $5M partner pipeline incl. Intel and F5, +110% event leads, dev setup cut from days to hours.",
   },
   {
     slug: "numenta-website",
@@ -120,8 +120,8 @@ const projects: Project[] = [
     line: "Turned buyer requirements in China into a product plan.",
     metric: { value: "$7M", label: "potential opportunities" },
     problem: "What do railroad buyers in China actually need, and what should the product lead with?",
-    did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations.",
-    result: "$7M in potential opportunities.",
+    did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations; built bilingual sales collateral.",
+    result: "$7M in potential opportunities; bids to 10+ China Railway bureaus across 8 provinces.",
   },
 ];
 
@@ -213,11 +213,12 @@ const fun: FunItem[] = [
 ];
 
 export type Role = { title: string; period: string; bullets: string[] };
-export type Job = { company: string; location: string; period: string; roles: Role[] };
+export type Job = { company: string; about?: string; location: string; period: string; roles: Role[] };
 
 const experience: Job[] = [
   {
     company: "YES International",
+    about: "Exclusive HK/China agent for Schlatter rail welding machinery.",
     location: "Hong Kong",
     period: "2025–26",
     roles: [
@@ -226,12 +227,14 @@ const experience: Job[] = [
         period: "2025–26",
         bullets: [
           "Turned railroad buyers’ requirements in China into prioritized product capabilities, unlocking $7M in potential opportunities.",
+          "Built bilingual sales collateral supporting bids to 10+ China Railway bureaus across 8 provinces.",
         ],
       },
     ],
   },
   {
     company: "Numenta",
+    about: "Neuroscience-based AI company building efficient generative AI on CPUs.",
     location: "Redwood City, CA",
     period: "2020–25",
     roles: [
@@ -239,8 +242,8 @@ const experience: Job[] = [
         title: "Marketing Manager",
         period: "Sep 2023 – Jun 2025",
         bullets: [
-          "Led go-to-market for NuPIC, a CPU-based generative AI platform: 3 strategic partnerships in the launch quarter.",
-          "Ran dogfooding that shaped 3 product iterations; drove +110% event leads across 5+ conferences.",
+          "Led go-to-market for NuPIC, a CPU-based generative AI platform: built a $5M partner pipeline incl. Intel and F5.",
+          "Owned the product lifecycle across major releases via dogfooding and user feedback; drove +110% event leads across 5+ conferences.",
           "Turned undocumented setup know-how into Numenta’s first API docs: developer setup went from days to hours.",
         ],
       },
@@ -258,7 +261,7 @@ const experience: Job[] = [
         period: "Aug 2020 – Aug 2021",
         bullets: [
           "Launched Jeff Hawkins’ A Thousand Brains with a four-part video + podcast series (30K+ views). Bill Gates made it a top-5 book of 2021.",
-          "Led an animated Thousand Brains explainer (25K+ views) and wrote the Numenta News Digest (40+ issues, 800+ subscribers).",
+          "Turned neuroscience research into campaigns reaching 55K+ engagements, incl. an animated explainer (25K+ views) and the News Digest (40+ issues, 800+ subscribers).",
         ],
       },
     ],
@@ -278,7 +281,7 @@ const education: Education[] = [
     school: "UC Berkeley",
     degree: "BS, Environmental Economics and Policy",
     period: "2016–20",
-    note: "AFX Dance Executive Director · Asian American Association President · DeCal instructor · Humanity First co-founder",
+    note: "AFX Dance Executive Director · Asian American Association President · Cantonese DeCal instructor · Humanity First co-founder",
   },
 ];
 
@@ -287,7 +290,7 @@ export type Extra = { label: string; value: string };
 const resumeExtras: Extra[] = [
   { label: "Skills", value: "Go-to-market · Positioning · Market research · Dogfooding · Technical writing · Events" },
   { label: "Coursework", value: "Tech Product Management · Applied AI for Business · Computational Thinking · Marketing" },
-  { label: "Internships", value: "YINA.CO · Lane Crawford · Marco Polo Hotels · PwC · ChongBang" },
+  { label: "Internships", value: "YINA.CO · Lane Crawford · Marco Polo Hotels · PwC" },
   { label: "Tools", value: "Figma · Google Analytics · Jira · Zapier · WordPress · HTML/CSS · Photoshop · Final Cut Pro" },
   { label: "Languages", value: "English · Cantonese · Mandarin" },
   {

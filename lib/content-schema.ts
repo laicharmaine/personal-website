@@ -68,10 +68,11 @@ const schema: Schema = obj({
   experience: arr(
     obj({
       company: "str",
+      about: "text",
       location: "str",
       period: "str",
       roles: arr(obj({ title: "str", period: "str", bullets: arr("text", 12) }), 12),
-    }),
+    }, ["about"]),
     20,
   ),
   education: arr(obj({ school: "str", degree: "text", period: "str", note: "text" }), 10),
