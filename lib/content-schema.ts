@@ -125,7 +125,15 @@ const schema: Schema = obj({
         location: "str",
         period: "str",
         roles: arr(
-          obj({ title: "str", period: "str", bullets: arr("text", 12) }),
+          obj(
+            {
+              title: "str",
+              period: "str",
+              bullets: arr("text", 12),
+              work: link,
+            },
+            ["work"],
+          ),
           12,
         ),
       },

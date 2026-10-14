@@ -97,8 +97,8 @@ const projects: Project[] = [
     line: "Rebuilt the site and brand around the product strategy.",
     metric: { value: "65%", label: "peak YoY traffic lift" },
     problem: "The site and brand lagged behind where the product was going.",
-    did: "Coordinated the full revamp, then owned the site: domain, front end, back end.",
-    result: "Traffic up as much as 65% year over year.",
+    did: "Coordinated the full revamp, owned the site (domain, front end, back end) and ran Google Ads tests.",
+    result: "Traffic up as much as 65% year over year; Google Ads A/B tests lifted click-through 30% and cut cost per lead 20%.",
     links: [
       { label: "Before (2020, Wayback)", href: "https://web.archive.org/web/20201218073306/https://numenta.com/" },
       { label: "After (2023, Wayback)", href: "https://web.archive.org/web/2023/https://www.numenta.com/" },
@@ -112,8 +112,8 @@ const projects: Project[] = [
     line: "Launched Jeff Hawkins’ book with a video + podcast series and live events.",
     metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
     problem: "A book about the brain and AI had to reach past the neuroscience crowd.",
-    did: "Multi-channel launch, a four-part companion video + podcast series, and live events.",
-    result: "30K+ YouTube views on the series. Bill Gates named it one of his five favorite books of 2021.",
+    did: "Multi-channel launch, a four-part companion video + podcast series, an animated explainer, and the Numenta News Digest.",
+    result: "55K+ engagements, incl. 30K+ views on the series and 25K+ on the explainer; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
     media: {
       src: "/fun/proj-thousand-brains.webp",
       alt: "A Thousand Brains book cover, from the series introduction video",
@@ -248,7 +248,7 @@ const fun: FunItem[] = [
   },
 ];
 
-export type Role = { title: string; period: string; bullets: string[] };
+export type Role = { title: string; period: string; bullets: string[]; work?: Link };
 export type Job = { company: string; about?: string; location: string; period: string; roles: Role[] };
 
 const experience: Job[] = [
@@ -261,10 +261,8 @@ const experience: Job[] = [
       {
         title: "Product Consultant",
         period: "2025–26",
-        bullets: [
-          "Turned railroad buyers’ requirements in China into prioritized product capabilities, unlocking $7M in potential opportunities.",
-          "Built bilingual sales collateral supporting bids to 10+ China Railway bureaus across 8 provinces.",
-        ],
+        bullets: ["Product and market strategy for rail welding systems in China."],
+        work: { label: "See the work", href: "/projects#railroad-product" },
       },
     ],
   },
@@ -277,28 +275,20 @@ const experience: Job[] = [
       {
         title: "Marketing Manager",
         period: "Sep 2023 – Jun 2025",
-        bullets: [
-          "Led go-to-market for NuPIC, a CPU-based generative AI platform: built a $5M partner pipeline incl. Intel and F5.",
-          "Owned the product lifecycle across major releases via dogfooding and user feedback; drove +110% event leads across 5+ conferences.",
-          "Turned undocumented setup know-how into Numenta’s first API docs: developer setup went from days to hours.",
-        ],
+        bullets: ["Go-to-market and product lifecycle for NuPIC, Numenta’s first commercial product."],
+        work: { label: "See the work", href: "/projects#nupic-launch" },
       },
       {
         title: "Senior Marketing Specialist",
         period: "Sep 2021 – Aug 2023",
-        bullets: [
-          "Coordinated a website and brand revamp that lifted traffic up to 65% year over year.",
-          "Grew Brains@Bay, a quarterly neuroscience + AI meetup, to 1.2K+ members (200+ attendees per event).",
-          "A/B-tested Google Ads: +30% click-through rate, −20% cost per lead.",
-        ],
+        bullets: ["Website, brand, paid search and the Brains@Bay community."],
+        work: { label: "See the work", href: "/projects#numenta-website" },
       },
       {
         title: "Marketing Associate",
         period: "Aug 2020 – Aug 2021",
-        bullets: [
-          "Launched Jeff Hawkins’ A Thousand Brains with a four-part video + podcast series (30K+ views). Bill Gates made it a top-5 book of 2021.",
-          "Turned neuroscience research into campaigns reaching 55K+ engagements, incl. an animated explainer (25K+ views) and the News Digest (40+ issues, 800+ subscribers).",
-        ],
+        bullets: ["Launch marketing and science content for Jeff Hawkins’ A Thousand Brains."],
+        work: { label: "See the work", href: "/projects#a-thousand-brains" },
       },
     ],
   },
@@ -478,7 +468,7 @@ export const templates = {
   sideProject: { title: "New side project", line: "One line about it.", links: [], note: "" } as SideProject,
   link: { label: "Link", href: "https://" } as Link,
   job: { company: "Company", location: "City", period: "2026", roles: [] } as Job,
-  role: { title: "Role", period: "2026", bullets: ["What I did."] } as Role,
+  role: { title: "Role", period: "2026", bullets: ["One line about the scope."] } as Role,
   bullet: "New bullet.",
   education: { school: "School", degree: "Degree", period: "Years", note: "" } as Education,
   extra: { label: "Label", value: "Value" } as Extra,
