@@ -238,7 +238,15 @@ const fun: FunItem[] = [
     file: "crafts.zip",
     line: "Junk journaling and other things I make with my hands instead of a keyboard.",
     shape: "portrait",
-    media: [{ caption: "Coming soon" }, { caption: "Coming soon" }, { caption: "Coming soon" }],
+    media: [
+      {
+        src: "/fun/craft-anamorphic.webp",
+        alt: "Anamorphic drawing: a stretched skull on paper reflects as an upright skull in a mirrored cylinder",
+        caption: "Anamorphic mirror drawing",
+      },
+      { caption: "Coming soon" },
+      { caption: "Coming soon" },
+    ],
   },
   {
     slug: "litto-lychee",
