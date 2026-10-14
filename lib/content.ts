@@ -223,7 +223,14 @@ const fun: FunItem[] = [
     file: "afx_dance.mov",
     line: "I was Executive Director of AFX Dance at UC Berkeley, and I choreograph.",
     shape: "wide",
-    media: [{ caption: "Choreography video coming soon" }],
+    media: [
+      {
+        src: "/fun/dance-duracell.webp",
+        alt: "Title card: AFX Showcase, Spring 2017, Duracell",
+        href: "https://www.youtube.com/watch?v=GfjT5Nz7-7U",
+        caption: "On the team · Duracell, AFX Showcase Spring 2017",
+      },
+    ],
   },
   {
     slug: "crafts",
