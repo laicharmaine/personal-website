@@ -250,7 +250,14 @@ const fun: FunItem[] = [
       { label: "Instagram", href: "https://www.instagram.com/litto_lychee/" },
     ],
     shape: "square",
-    media: [],
+    media: [
+      {
+        src: "/fun/lychee.webp",
+        alt: "Lychee the cat, mouth open mid-meow",
+        href: "https://www.tiktok.com/@litto_lychee",
+        caption: "Lychee · @litto_lychee",
+      },
+    ],
     stat: { value: "450k+", label: "followers" },
   },
 ];
