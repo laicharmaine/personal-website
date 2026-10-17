@@ -122,9 +122,9 @@ const projects: Project[] = [
     metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
     problem:
       "A book about the brain and AI had to reach past the neuroscience crowd.",
-    did: "Multi-channel launch, a four-part companion video + podcast series, an animated explainer, and the Numenta News Digest.",
+    did: "Multi-channel launch, a four-part companion video + podcast series, and the Numenta News Digest.",
     result:
-      "55K+ engagements, incl. 30K+ views on the series and 25K+ on the explainer; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
+      "30K+ views on the companion series; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
     media: {
       src: "/fun/proj-thousand-brains.webp",
       alt: "A Thousand Brains book cover, from the series introduction video",
@@ -136,11 +136,25 @@ const projects: Project[] = [
         label: "Podcast",
         href: "https://numenta.buzzsprout.com/188368/episodes/7929319-a-thousand-brains-by-jeff-hawkins-introduction",
       },
-      {
-        label: "Animated explainer",
-        href: "https://www.youtube.com/watch?v=LaAYuygr7_8",
-      },
     ],
+  },
+  {
+    slug: "thousand-brains-explainer",
+    title: "Thousand Brains Theory explainer",
+    org: "Numenta",
+    year: "2022",
+    line: "An animated video on how the brain works, per Numenta’s theory.",
+    metric: { value: "25K+", label: "YouTube views" },
+    problem:
+      "The Thousand Brains Theory is dense science. Most people need an easy way in.",
+    did: "Made an animated explainer for Numenta’s YouTube channel.",
+    result: "25K+ views on YouTube.",
+    media: {
+      src: "/fun/proj-tbt-explainer.webp",
+      alt: "Thumbnail of Numenta’s animated video How the Brain Works: The Thousand Brains Theory of Intelligence",
+      href: "https://www.youtube.com/watch?v=LaAYuygr7_8",
+      caption: "Watch the explainer",
+    },
   },
   {
     slug: "brains-at-bay",
@@ -165,25 +179,6 @@ const projects: Project[] = [
         href: "https://www.youtube.com/playlist?list=PL3yXMgtrZmDqWkN_8VxStZjzbRKarAn6b",
       },
       { label: "Meetup", href: "https://www.meetup.com/brains-bay/" },
-    ],
-  },
-  {
-    slug: "railroad-product",
-    title: "Railroad product strategy",
-    org: "YES International",
-    year: "2025–26",
-    line: "Turned buyer requirements in China into a product plan.",
-    metric: { value: "$7M", label: "potential opportunities" },
-    problem:
-      "What do railroad buyers in China actually need, and what should the product lead with?",
-    did: "Mapped market and procurement dynamics; ranked product capabilities; wrote deployment recommendations; built bilingual sales collateral.",
-    result:
-      "$7M in potential opportunities; bids to 10+ China Railway bureaus across 8 provinces.",
-    links: [
-      {
-        label: "Schlatter rail welding",
-        href: "https://www.schlattergroup.com/en/welding-machines/flash-butt-welding-machines-for-rails",
-      },
     ],
   },
 ];
@@ -351,7 +346,6 @@ const experience: Job[] = [
         bullets: [
           "Product and market strategy for rail welding systems in China.",
         ],
-        work: { label: "See the work", href: "/projects#railroad-product" },
       },
     ],
   },
