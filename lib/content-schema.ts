@@ -43,6 +43,8 @@ const schema: Schema = obj({
     workHeading: "str",
     workAll: "str",
     workWindow: "str",
+    buildsLead: "str",
+    buildsText: "str",
     funLead: "str",
     funText: "str",
     ctaHeading: "str",
@@ -65,6 +67,7 @@ const schema: Schema = obj({
     obj(
       {
         slug: "str",
+        role: "str",
         title: "str",
         org: "str",
         year: "str",
@@ -82,7 +85,7 @@ const schema: Schema = obj({
         badge: link,
         links: arr(link, 6),
       },
-      ["media", "badge", "links"],
+      ["role", "media", "badge", "links"],
     ),
     30,
   ),
@@ -93,6 +96,7 @@ const schema: Schema = obj({
         line: "text",
         links: arr(link, 6),
         note: "str",
+        points: arr("text", 4),
         media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
           "src",
           "alt",
@@ -100,7 +104,7 @@ const schema: Schema = obj({
           "caption",
         ]),
       },
-      ["links", "note", "media"],
+      ["links", "note", "points", "media"],
     ),
     20,
   ),
@@ -111,6 +115,7 @@ const schema: Schema = obj({
     window: "str",
     educationHeading: "str",
     alsoHeading: "str",
+    highlightsLabel: "str",
   }),
   experience: arr(
     obj(

@@ -2,9 +2,10 @@
 
 import PageHeader from "@/components/PageHeader";
 import Window from "@/components/Window";
-import { AddButton, Href, ItemTools, T } from "@/components/edit/Editable";
+import { AddButton, ItemTools, T } from "@/components/edit/Editable";
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
+import ProjectItem from "@/components/views/ProjectItem";
 import Block, {
   Sections,
   SortArea,
@@ -13,7 +14,7 @@ import Block, {
 } from "@/components/edit/Block";
 
 export default function ExperienceView() {
-  const { content: c, editing, setAt } = useEdit();
+  const { content: c, editing } = useEdit();
   const moveJob = useListMove(["experience"]);
 
   return (
@@ -156,74 +157,50 @@ export default function ExperienceView() {
                                     </li>
                                   )}
                                 </ul>
-                                {r.work ? (
-                                  <p className="relative mt-1.5 text-sm font-semibold">
-                                    <a href={r.work.href} className="ulink">
-                                      <T
-                                        path={[
-                                          "experience",
-                                          i,
-                                          "roles",
-                                          j,
-                                          "work",
-                                          "label",
-                                        ]}
-                                      />{" "}
-                                      <span aria-hidden>→</span>
-                                    </a>
-                                    <Href
-                                      path={[
-                                        "experience",
-                                        i,
-                                        "roles",
-                                        j,
-                                        "work",
-                                        "href",
-                                      ]}
-                                    />
-                                    {editing && (
-                                      <button
-                                        type="button"
-                                        data-editor-ui=""
-                                        aria-label="Remove link"
-                                        className="ml-1 rounded-full border-[1.5px] border-ink bg-paper px-1.5 font-mono text-xs hover:bg-pink"
-                                        onClick={() =>
-                                          setAt(
-                                            [
-                                              "experience",
-                                              i,
-                                              "roles",
-                                              j,
-                                              "work",
-                                            ],
-                                            undefined,
-                                          )
-                                        }
-                                      >
-                                        ✕
-                                      </button>
-                                    )}
-                                  </p>
-                                ) : (
-                                  editing && (
-                                    <button
-                                      type="button"
-                                      data-editor-ui=""
-                                      className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-dashed border-ink bg-paper/70 px-3 py-1 font-mono text-xs font-medium hover:bg-lime"
-                                      onClick={() =>
-                                        setAt(
-                                          ["experience", i, "roles", j, "work"],
-                                          {
-                                            label: "See the work",
-                                            href: "/projects",
-                                          },
-                                        )
-                                      }
-                                    >
-                                      + Add “See the work” link
-                                    </button>
-                                  )
-                                )}
+                                {(() => {
+                                  const hl = c.projects
+                                    .map((p, k) => ({ p, k }))
+                                    .filter(
+                                      ({ p }) =>
+                                        p.role === r.title &&
+                                        job.company === "Numenta",
+                                    );
+                                  if (!hl.length && !editing) return null;
+                                  return (
+                                    <div className="mt-3">
+                                      {hl.length > 0 && (
+                                        <>
+                                          <p className="label mb-1.5">
+                                            <T
+                                              path={[
+                                                "experiencePage",
+                                                "highlightsLabel",
+                                              ]}
+                                            />
+                                          </p>
+                                          <ol className="divide-y divide-line overflow-hidden rounded-md border border-ink bg-paper">
+                                            {hl.map(({ k }) => (
+                                              <ProjectItem
+                                                key={k}
+                                                i={k}
+                                                compact
+                                              />
+                                            ))}
+                                          </ol>
+                                        </>
+                                      )}
+                                      <AddButton
+                                        path={["projects"]}
+                                        make={() => ({
+                                          ...templates.project(),
+                                          role: r.title,
+                                        })}
+                                        label="Add highlight"
+                                        className="mt-2"
+                                      />
+                                    </div>
+                                  );
+                                })()}
                               </div>
                             </li>
                           ))}

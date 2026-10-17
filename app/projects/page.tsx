@@ -4,7 +4,7 @@ import ProjectsView from "@/components/views/ProjectsView";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Selected work by Charmaine Lai: launching NuPIC, Numenta’s website revamp, A Thousand Brains, the Thousand Brains Theory explainer, and Brains@Bay, plus side projects.",
+    "Things Charmaine Lai builds off the clock: M:XR (2nd place, MBAi Hackathon), Tabby, Dayline, and this site.",
 };
 
 export default function ProjectsPage() {

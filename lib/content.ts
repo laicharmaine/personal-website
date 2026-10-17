@@ -57,6 +57,8 @@ export type Link = { label: string; href: string };
 
 export type Project = {
   slug: string;
+  /** Role title on /experience this highlight sits under. */
+  role?: string;
   title: string;
   org: string;
   year: string;
@@ -76,6 +78,7 @@ export type Project = {
 const projects: Project[] = [
   {
     slug: "nupic-launch",
+    role: "Marketing Manager",
     title: "Launching NuPIC",
     org: "Numenta",
     year: "2023–25",
@@ -93,6 +96,7 @@ const projects: Project[] = [
   },
   {
     slug: "numenta-website",
+    role: "Senior Marketing Specialist",
     title: "Numenta’s website + brand",
     org: "Numenta",
     year: "2021–23",
@@ -115,6 +119,7 @@ const projects: Project[] = [
   },
   {
     slug: "a-thousand-brains",
+    role: "Marketing Associate",
     title: "A Thousand Brains launch",
     org: "Numenta",
     year: "2020–21",
@@ -140,6 +145,7 @@ const projects: Project[] = [
   },
   {
     slug: "thousand-brains-explainer",
+    role: "Senior Marketing Specialist",
     title: "Thousand Brains Theory explainer",
     org: "Numenta",
     year: "2022",
@@ -158,6 +164,7 @@ const projects: Project[] = [
   },
   {
     slug: "brains-at-bay",
+    role: "Senior Marketing Specialist",
     title: "Brains@Bay",
     org: "Numenta",
     year: "2021–23",
@@ -188,10 +195,25 @@ export type SideProject = {
   line: string;
   links?: Link[];
   note?: string;
+  /** 1–2 short "what I built / result" lines. */
+  points?: string[];
   media?: FunMedia;
 };
 
 const sideProjects: SideProject[] = [
+  {
+    title: "M:XR",
+    line: "Less group chat, more mixers. An AI agent that plans a club mixer in minutes, not weeks of texts.",
+    note: "2nd place · MBAi Hackathon 2026",
+    points: [
+      "The agent finds groups free that night, picks the right bar, and holds the reservation.",
+      "Pay-for-results model: venues pay a commission only when groups show up.",
+    ],
+    media: {
+      src: "/fun/proj-mxr.webp",
+      alt: "M:XR app mockup on desktop and phone, listing bars and student groups to mix with",
+    },
+  },
   {
     title: "Tabby",
     line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
@@ -204,8 +226,18 @@ const sideProjects: SideProject[] = [
   },
   {
     title: "Dayline",
-    line: "My to-dos, calendars, and recruiting pipeline on one screen.",
+    line: "My to-dos and calendars on one screen.",
     note: "Private",
+  },
+  {
+    title: "charmainel.ai",
+    line: "This site. Built with Next.js, plus a visual editor so I can drag, resize, and edit everything in the browser.",
+    links: [{ label: "You’re here", href: "https://charmainel.ai" }],
+    media: {
+      src: "/fun/proj-site.webp",
+      alt: "Home page of charmainel.ai, a Y2K-style desktop window",
+      href: "https://charmainel.ai",
+    },
   },
 ];
 
@@ -362,13 +394,11 @@ const experience: Job[] = [
         bullets: [
           "Go-to-market and product lifecycle for NuPIC, Numenta’s first commercial product.",
         ],
-        work: { label: "See the work", href: "/projects#nupic-launch" },
       },
       {
         title: "Senior Marketing Specialist",
         period: "Sep 2021 – Aug 2023",
         bullets: ["Website, brand, paid search and the Brains@Bay community."],
-        work: { label: "See the work", href: "/projects#numenta-website" },
       },
       {
         title: "Marketing Associate",
@@ -376,7 +406,6 @@ const experience: Job[] = [
         bullets: [
           "Launch marketing and science content for Jeff Hawkins’ A Thousand Brains.",
         ],
-        work: { label: "See the work", href: "/projects#a-thousand-brains" },
       },
     ],
   },
@@ -518,22 +547,24 @@ export const defaultContent = {
     proof,
     strengths,
     workHeading: "Selected work",
-    workAll: "All projects",
+    workAll: "Full experience",
     workWindow: "selected_work/",
+    buildsLead: "Builds:",
+    buildsText: "M:XR, Tabby and this site",
     funLead: "Off the clock:",
     funText: "photos, dance, crafts and a famous cat",
     ctaHeading: "Say hi.",
     resume: "Résumé",
   },
   projectsPage: {
-    path: "C:\\Charmaine\\case_studies",
+    path: "C:\\Charmaine\\builds",
     title: "Projects",
-    intro: "Five launches and bets. Tap one for the story.",
+    intro: "Things I build off the clock.",
     window: "case_studies/",
     problemLabel: "Problem",
     didLabel: "What I did",
     resultLabel: "Result",
-    sideHeading: "Side quests",
+    sideHeading: "Builds",
     offTitle: "Off the clock",
     offLine: "Photos, dance, crafts and a famous cat.",
     offLink: "For fun",
@@ -547,6 +578,7 @@ export const defaultContent = {
     window: "work_history.doc",
     educationHeading: "Education",
     alsoHeading: "Also",
+    highlightsLabel: "Highlights",
   },
   experience,
   education,

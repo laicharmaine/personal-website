@@ -227,7 +227,7 @@ export default function HomeView() {
         <h2 id="work-title" className="pixel text-5xl sm:text-6xl">
           <T path={["home", "workHeading"]} />
         </h2>
-        <Link href="/projects" className="ulink text-sm font-semibold">
+        <Link href="/experience" className="ulink text-sm font-semibold">
           <T path={["home", "workAll"]} />
         </Link>
       </div>
@@ -236,7 +236,7 @@ export default function HomeView() {
           {c.projects.map((p, i) => (
             <li key={i}>
               <Link
-                href={`/projects#${p.slug}`}
+                href={`/experience#${p.slug}`}
                 className="file-row grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-x-3 px-4 py-5 sm:grid-cols-[3rem_1fr_1fr_auto] sm:gap-x-6 sm:px-6"
               >
                 <span className="font-mono text-sm text-ink-soft">{`0${i + 1}`}</span>
@@ -258,8 +258,26 @@ export default function HomeView() {
         </ol>
       </Window>
       <Link
-        href="/fun"
+        href="/projects"
         className="group mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg"
+      >
+        <span
+          aria-hidden
+          className="holo h-5 w-5 rounded-[4px] border-[1.5px] border-ink transition-transform duration-300 group-hover:rotate-12"
+        />
+        <span className="font-semibold">
+          <T path={["home", "buildsLead"]} />
+        </span>
+        <span className="text-ink-soft group-hover:text-ink">
+          <T path={["home", "buildsText"]} />
+        </span>
+        <span aria-hidden className="arrow">
+          →
+        </span>
+      </Link>
+      <Link
+        href="/fun"
+        className="group mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg"
       >
         <span
           aria-hidden
