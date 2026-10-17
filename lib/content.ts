@@ -601,8 +601,8 @@ export const defaultContent = {
       "I’m an AI marketer turned MBA in Artificial Intelligence at Northwestern Kellogg. At Numenta I launched deep-tech products and built the brands and communities around them. Off the clock: dance, crafts and Lychee the cat.",
     // Small tilted polaroid on the contact page. Swap it in the editor.
     photo: {
-      src: "/fun/charmaine.webp",
-      alt: "Charmaine in a leather jacket and sunglasses, holding a coffee in front of a red wall",
+      src: "/fun/charmaine-portrait.webp",
+      alt: "Charmaine in sunglasses, a black leather jacket and grey shirt, holding a coffee cup in front of a red paneled wall",
     } as FunMedia,
     window: "new_message.eml",
     emailLabel: "Email",
