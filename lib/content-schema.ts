@@ -36,11 +36,6 @@ const schema: Schema = obj({
     hookA: "str",
     hookB: "str",
     intro: "text",
-    photo: obj({ src: "img", alt: "text", caption: "str" }, [
-      "src",
-      "alt",
-      "caption",
-    ]),
     ctaWork: "str",
     ctaEmail: "str",
     proof: arr(stat, 12),
@@ -177,6 +172,11 @@ const schema: Schema = obj({
     20,
   ),
   contactPage: obj({
+    photo: obj({ src: "img", alt: "text", caption: "str" }, [
+      "src",
+      "alt",
+      "caption",
+    ]),
     path: "str",
     title: "str",
     intro: "text",

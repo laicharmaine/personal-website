@@ -30,11 +30,10 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${defaultContent.site.name} — PM / PMM · Northwestern MBAi ’28`,
+    default: `${defaultContent.site.name} — AI marketer · Northwestern MBAi ’28`,
     template: `%s · ${defaultContent.site.name}`,
   },
-  description:
-    defaultContent.site.description,
+  description: defaultContent.site.description,
   openGraph: {
     title: `${defaultContent.site.name} — personal site`,
     description: defaultContent.site.description,

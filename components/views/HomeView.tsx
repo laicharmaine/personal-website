@@ -1,14 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import Window from "@/components/Window";
-import {
-  AddButton,
-  ItemTools,
-  MediaTools,
-  T,
-} from "@/components/edit/Editable";
+import { AddButton, ItemTools, T } from "@/components/edit/Editable";
 import Email from "@/components/views/Email";
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
@@ -97,39 +91,6 @@ export default function HomeView() {
                   </a>
                 </div>
               </div>
-              {(c.home.photo?.src || editing) && (
-                <Block
-                  id="home.photo"
-                  kind="image"
-                  label="My photo"
-                  as="span"
-                  className="relative block w-24 shrink-0 self-start sm:w-32 md:self-end lg:w-36"
-                  sizes={{
-                    s: "relative block w-20 shrink-0 self-start sm:w-24 md:self-end lg:w-28",
-                    l: "relative block w-28 shrink-0 self-start sm:w-40 md:self-end lg:w-48",
-                  }}
-                >
-                  {c.home.photo?.src ? (
-                    <span className="photo-frame block rotate-[2.5deg] bg-paper p-1.5 pb-4">
-                      <span className="relative block aspect-[3/4] overflow-hidden">
-                        <Image
-                          src={c.home.photo.src}
-                          alt={c.home.photo.alt ?? ""}
-                          fill
-                          sizes="(min-width: 1024px) 144px, (min-width: 640px) 128px, 96px"
-                          className="object-cover"
-                          unoptimized={/^https?:/.test(c.home.photo.src)}
-                        />
-                      </span>
-                    </span>
-                  ) : (
-                    <span className="placeholder-frame grid aspect-[3/4] place-items-center rounded-md border-[1.5px] border-dashed border-ink/40 bg-desk/50 font-mono text-xs text-ink-soft">
-                      my photo
-                    </span>
-                  )}
-                  <MediaTools path={["home", "photo"]} />
-                </Block>
-              )}
             </Block>
           </div>
         </Window>

@@ -15,7 +15,7 @@ const site = {
   linkedin: "https://www.linkedin.com/in/charmaine-lai",
   github: "https://github.com/laicharmaine",
   description:
-    "Charmaine Lai: ex-Numenta AI marketer, now an MBA in Artificial Intelligence student at Northwestern (Kellogg + McCormick), looking for a summer 2027 PM / PMM internship in the Bay Area.",
+    "Charmaine Lai: ex-Numenta AI marketer, now an MBA in Artificial Intelligence student at Northwestern (Kellogg + McCormick). Launches, brands and communities for deep tech.",
 };
 
 const cat = {
@@ -514,17 +514,11 @@ export const defaultContent = {
   site,
   home: {
     windowTitle: "about_charmaine.exe",
-    sticker: "Open for\nSummer\n’27!",
+    sticker: "Hello\nWorld!",
     hookA: "Marketer by craft.",
     hookB: "Product by curiosity.",
     intro:
-      "Ex-Numenta AI marketer, now MBA in Artificial Intelligence at Northwestern. Seeking a summer 2027 PM or PMM internship in the Bay Area.",
-    // Small polaroid next to the intro. Swap it in the editor (click the photo) or
-    // point src at another file in /public/fun/.
-    photo: {
-      src: "/fun/charmaine.webp",
-      alt: "Charmaine in a leather jacket and sunglasses, holding a coffee in front of a red wall",
-    } as FunMedia,
+      "Ex-Numenta AI marketer, now MBA in Artificial Intelligence at Northwestern Kellogg. I launch deep-tech products and build the brands and communities around them.",
     ctaWork: "See my work",
     ctaEmail: "Email me",
     proof,
@@ -534,7 +528,7 @@ export const defaultContent = {
     workWindow: "selected_work/",
     funLead: "Off the clock:",
     funText: "photos, dance, crafts and a famous cat",
-    ctaHeading: "Let’s talk.",
+    ctaHeading: "Say hi.",
     resume: "Résumé",
   },
   projectsPage: {
@@ -579,7 +573,12 @@ export const defaultContent = {
   contactPage: {
     path: "C:\\Charmaine\\say_hi.exe",
     title: "Say hi",
-    intro: "Hiring for summer 2027? Email is fastest.",
+    intro: "Ideas, collabs, or just hello. Email is fastest.",
+    // Small tilted polaroid on the contact page. Swap it in the editor.
+    photo: {
+      src: "/fun/charmaine.webp",
+      alt: "Charmaine in a leather jacket and sunglasses, holding a coffee in front of a red wall",
+    } as FunMedia,
     window: "new_message.eml",
     emailLabel: "Email",
     button: "Write me",

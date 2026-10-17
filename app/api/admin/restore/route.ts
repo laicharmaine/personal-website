@@ -11,7 +11,10 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   const denied = await requireAdmin(request);
   if (denied) return denied;
-  const body = (await request.json().catch(() => null)) as { pathname?: string; original?: boolean } | null;
+  const body = (await request.json().catch(() => null)) as {
+    pathname?: string;
+    original?: boolean;
+  } | null;
   try {
     if (body?.original) {
       const saved = await saveContent(defaultContent, "reset");
@@ -25,6 +28,9 @@ export async function POST(request: Request) {
     return Response.json({ ok: true, content: saved });
   } catch (err) {
     console.error(err);
-    return Response.json({ error: "Could not restore that version." }, { status: 500 });
+    return Response.json(
+      { error: "Could not restore that version." },
+      { status: 500 },
+    );
   }
 }
