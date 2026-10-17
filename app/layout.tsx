@@ -29,6 +29,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://charmainel.ai"),
   title: {
     default: `${defaultContent.site.name} — AI marketer · Northwestern MBAi ’28`,
     template: `%s · ${defaultContent.site.name}`,
@@ -38,6 +39,13 @@ export const metadata: Metadata = {
     title: `${defaultContent.site.name} — personal site`,
     description: defaultContent.site.description,
     type: "website",
+    url: "https://charmainel.ai",
+    siteName: defaultContent.site.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${defaultContent.site.name} — personal site`,
+    description: defaultContent.site.description,
   },
 };
 

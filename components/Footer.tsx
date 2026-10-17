@@ -45,14 +45,6 @@ export default function Footer() {
             </a>
             <Href path={["site", "github"]} />
           </span>
-          <form action="/api/logout" method="POST" className="inline">
-            <button
-              type="submit"
-              className="hover:text-peri-deep hover:underline"
-            >
-              Log out
-            </button>
-          </form>
         </div>
       </div>
     </footer>

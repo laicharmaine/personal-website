@@ -38,7 +38,7 @@ export type Stat = { value: string; label: string };
 const proof: Stat[] = [
   { value: "$5M", label: "partner pipeline" },
   { value: "65%", label: "peak YoY traffic lift" },
-  { value: "Top 5", label: "Bill Gates’ 2021 books" },
+  { value: "1.2K+", label: "Brains@Bay members" },
   { value: "450k+", label: "followers (it’s a cat)" },
 ];
 
@@ -124,12 +124,11 @@ const projects: Project[] = [
     org: "Numenta",
     year: "2020–21",
     line: "Launched Jeff Hawkins’ book with a video + podcast series and live events.",
-    metric: { value: "Top 5", label: "Bill Gates’ 2021 books" },
+    metric: { value: "30K+", label: "series views" },
     problem:
       "A book about the brain and AI had to reach past the neuroscience crowd.",
     did: "Multi-channel launch, a four-part companion video + podcast series, and the Numenta News Digest.",
-    result:
-      "30K+ views on the companion series; 800+ digest subscribers. Bill Gates named it a top-5 book of 2021.",
+    result: "30K+ views on the companion series and 800+ digest subscribers.",
     media: {
       src: "/fun/proj-thousand-brains.webp",
       alt: "A Thousand Brains book cover, from the series introduction video",
