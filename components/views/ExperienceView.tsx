@@ -226,9 +226,13 @@ function Role({ i, j }: { i: number; j: number }) {
         <h3 className="text-lg font-semibold">
           <T path={["experience", i, "roles", j, "title"]} />
         </h3>
-        <p className="font-mono text-xs text-ink-soft">
-          <T path={["experience", i, "roles", j, "period"]} />
-        </p>
+        {(editing ||
+          c.experience[i].roles.length > 1 ||
+          r.period !== c.experience[i].period) && (
+          <p className="font-mono text-xs text-ink-soft">
+            <T path={["experience", i, "roles", j, "period"]} />
+          </p>
+        )}
       </div>
       <ul className="mt-1.5 grid max-w-2xl gap-1 text-ink-soft">
         {r.bullets.slice(0, 3).map((_, k) => (

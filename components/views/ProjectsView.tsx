@@ -103,6 +103,7 @@ function Feature({
               path={["sideProjects", i, "media"]}
               title={`${sp.title.toLowerCase().replace(/[^a-z0-9]+/g, "")}.app`}
               big
+              bare={framed}
             />
           </Block>
         ) : (
@@ -231,12 +232,29 @@ function Placeholder({ title, tag }: { title: string; tag?: string }) {
           {title.toLowerCase().replace(/[^a-z0-9]+/g, "")}.app
         </span>
       </div>
-      <div className="relative grid aspect-[16/10] place-items-center bg-desk/60">
-        <div className="text-center">
-          <p className="pixel pixel-shadow text-6xl sm:text-7xl">{title}</p>
+      <div className="relative grid aspect-[16/10] grid-cols-[5.5rem_1fr] gap-3 bg-desk/40 p-4 sm:grid-cols-[7rem_1fr] sm:p-6">
+        <div aria-hidden className="grid content-start gap-2">
+          {[70, 55, 80, 45, 60].map((w, k) => (
+            <span
+              key={k}
+              className="h-2 rounded-full bg-peri/30"
+              style={{ width: `${w}%` }}
+            />
+          ))}
+        </div>
+        <div aria-hidden className="grid grid-cols-7 content-start gap-1.5">
+          {Array.from({ length: 28 }, (_, k) => (
+            <span
+              key={k}
+              className={`aspect-square rounded-[3px] border ${k === 9 ? "border-ink bg-lime" : [3, 15, 22].includes(k) ? "border-peri bg-peri/25" : "border-line bg-paper/70"}`}
+            />
+          ))}
+        </div>
+        <div className="col-span-2 self-end">
+          <p className="pixel text-4xl sm:text-5xl">{title}</p>
           {tag && (
-            <p className="mt-2 font-mono text-xs text-ink-soft">
-              🔒 {tag.toLowerCase()} build
+            <p className="mt-1 font-mono text-xs text-ink-soft">
+              🔒 {tag.toLowerCase()} build, screenshots stay private
             </p>
           )}
         </div>

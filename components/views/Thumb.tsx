@@ -12,12 +12,15 @@ export default function Thumb({
   path,
   title,
   big,
+  bare,
 }: {
   m?: FunMedia;
   path: Path;
   title?: string;
   /** feature size: sharper image, 16:10, roomier title bar */
   big?: boolean;
+  /** no title bar or shadow (when already inside a window) */
+  bare?: boolean;
 }) {
   const { editing } = useEdit();
   if (!m?.src && !editing) return null;
@@ -52,21 +55,25 @@ export default function Thumb({
     </span>
   );
   return (
-    <span className="thumb-win relative block w-full overflow-hidden rounded-[6px] border border-ink bg-paper shadow-[3px_3px_0_var(--peri)]">
-      <span
-        aria-hidden
-        className={`flex items-center gap-1 border-b border-ink bg-peri/60 ${big ? "h-6 px-2.5" : "h-4 px-1.5"}`}
-      >
-        <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
-        <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
-        {title && (
-          <span
-            className={`ml-1 truncate font-mono leading-none text-ink ${big ? "text-[0.7rem]" : "text-[0.6rem]"}`}
-          >
-            {title}
-          </span>
-        )}
-      </span>
+    <span
+      className={`thumb-win relative block w-full overflow-hidden rounded-[6px] border bg-paper ${bare ? "border-line" : "border-ink shadow-[3px_3px_0_var(--peri)]"}`}
+    >
+      {!bare && (
+        <span
+          aria-hidden
+          className={`flex items-center gap-1 border-b border-ink bg-peri/60 ${big ? "h-6 px-2.5" : "h-4 px-1.5"}`}
+        >
+          <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
+          <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
+          {title && (
+            <span
+              className={`ml-1 truncate font-mono leading-none text-ink ${big ? "text-[0.7rem]" : "text-[0.6rem]"}`}
+            >
+              {title}
+            </span>
+          )}
+        </span>
+      )}
       {m?.href && !editing ? (
         <a
           href={m.href}
