@@ -197,6 +197,8 @@ export type SideProject = {
   note?: string;
   /** 1–2 short "what I built / result" lines. */
   points?: string[];
+  /** Small tags, e.g. "Live", "Private", "2nd place · MBAi Hackathon". */
+  tags?: string[];
   media?: FunMedia;
 };
 
@@ -204,7 +206,7 @@ const sideProjects: SideProject[] = [
   {
     title: "M:XR",
     line: "Less group chat, more mixers. An AI agent that plans a club mixer in minutes, not weeks of texts.",
-    note: "2nd place · MBAi Hackathon 2026",
+    tags: ["2nd place · MBAi Hackathon 2026", "AI agent"],
     points: [
       "The agent finds groups free that night, picks the right bar, and holds the reservation.",
       "Pay-for-results model: venues pay a commission only when groups show up.",
@@ -216,8 +218,13 @@ const sideProjects: SideProject[] = [
   },
   {
     title: "Tabby",
-    line: "A no-account bill splitter for MBA happy hours. Scan, share a link, everyone claims their own.",
-    links: [{ label: "Try it", href: "https://tabby-wmtt.onrender.com" }],
+    line: "A no-account bill splitter for MBA happy hours.",
+    points: [
+      "Scan the receipt and share one link.",
+      "Everyone claims their own items.",
+    ],
+    tags: ["Live", "Web app"],
+    links: [{ label: "Try Tabby", href: "https://tabby-wmtt.onrender.com" }],
     media: {
       src: "/fun/proj-tabby.webp",
       alt: "Tabby’s start screen: You covered the tab. Let everyone claim their own.",
@@ -227,17 +234,7 @@ const sideProjects: SideProject[] = [
   {
     title: "Dayline",
     line: "My to-dos and calendars on one screen.",
-    note: "Private",
-  },
-  {
-    title: "charmainel.ai",
-    line: "This site. Built with Next.js, plus a visual editor so I can drag, resize, and edit everything in the browser.",
-    links: [{ label: "You’re here", href: "https://charmainel.ai" }],
-    media: {
-      src: "/fun/proj-site.webp",
-      alt: "Home page of charmainel.ai, a Y2K-style desktop window",
-      href: "https://charmainel.ai",
-    },
+    tags: ["Private", "Personal tool"],
   },
 ];
 
@@ -600,6 +597,9 @@ export const defaultContent = {
     path: "C:\\Charmaine\\say_hi.exe",
     title: "Say hi",
     intro: "Ideas, collabs, or just hello. Email is fastest.",
+    photoTitle: "hi.jpg",
+    about:
+      "I’m an AI marketer turned MBA in Artificial Intelligence at Northwestern Kellogg. At Numenta I launched deep-tech products and built the brands and communities around them. Off the clock: dance, crafts and Lychee the cat.",
     // Small tilted polaroid on the contact page. Swap it in the editor.
     photo: {
       src: "/fun/charmaine.webp",

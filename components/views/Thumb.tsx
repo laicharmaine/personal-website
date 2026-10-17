@@ -11,22 +11,27 @@ export default function Thumb({
   m,
   path,
   title,
+  big,
 }: {
   m?: FunMedia;
   path: Path;
   title?: string;
+  /** feature size: sharper image, 16:10, roomier title bar */
+  big?: boolean;
 }) {
   const { editing } = useEdit();
   if (!m?.src && !editing) return null;
   const remote = Boolean(m?.src && /^https?:/.test(m.src));
   const img = m?.src ? (
-    <span className="relative block aspect-video overflow-hidden bg-desk">
+    <span
+      className={`relative block overflow-hidden bg-desk ${big ? "aspect-[16/10]" : "aspect-video"}`}
+    >
       <Image
         src={m.src}
         alt={m.alt ?? ""}
         fill
         loading="lazy"
-        sizes="208px"
+        sizes={big ? "(min-width: 768px) 600px, 100vw" : "208px"}
         className="object-cover"
         unoptimized={remote}
       />
@@ -40,7 +45,9 @@ export default function Thumb({
       )}
     </span>
   ) : (
-    <span className="grid aspect-video place-items-center border border-dashed border-ink/40 bg-desk/50 font-mono text-xs text-ink-soft">
+    <span
+      className={`grid ${big ? "aspect-[16/10]" : "aspect-video"} place-items-center border border-dashed border-ink/40 bg-desk/50 font-mono text-xs text-ink-soft`}
+    >
       no image
     </span>
   );
@@ -48,12 +55,14 @@ export default function Thumb({
     <span className="thumb-win relative block w-full overflow-hidden rounded-[6px] border border-ink bg-paper shadow-[3px_3px_0_var(--peri)]">
       <span
         aria-hidden
-        className="flex h-4 items-center gap-1 border-b border-ink bg-peri/60 px-1.5"
+        className={`flex items-center gap-1 border-b border-ink bg-peri/60 ${big ? "h-6 px-2.5" : "h-4 px-1.5"}`}
       >
         <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
         <span className="h-1.5 w-1.5 rounded-full border border-ink bg-paper" />
         {title && (
-          <span className="ml-1 truncate font-mono text-[0.6rem] leading-none text-ink">
+          <span
+            className={`ml-1 truncate font-mono leading-none text-ink ${big ? "text-[0.7rem]" : "text-[0.6rem]"}`}
+          >
             {title}
           </span>
         )}

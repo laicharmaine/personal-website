@@ -97,6 +97,7 @@ const schema: Schema = obj({
         links: arr(link, 6),
         note: "str",
         points: arr("text", 4),
+        tags: arr("str", 4),
         media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
           "src",
           "alt",
@@ -104,7 +105,7 @@ const schema: Schema = obj({
           "caption",
         ]),
       },
-      ["links", "note", "points", "media"],
+      ["links", "note", "points", "tags", "media"],
     ),
     20,
   ),
@@ -177,6 +178,8 @@ const schema: Schema = obj({
     20,
   ),
   contactPage: obj({
+    photoTitle: "str",
+    about: "text",
     photo: obj({ src: "img", alt: "text", caption: "str" }, [
       "src",
       "alt",
