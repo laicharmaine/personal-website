@@ -32,7 +32,7 @@ const schema: Schema = obj({
   }),
   home: obj({
     windowTitle: "str",
-    sticker: "str",
+    sticker: "text",
     hookA: "str",
     hookB: "str",
     intro: "text",
@@ -275,8 +275,7 @@ function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
     if (typeof value !== "string") return fb;
     switch (s) {
       case "str":
-        // Single-line field: any line break becomes a space.
-        return cleanString(value, 400).replace(/\s*\n\s*/g, " ");
+        return cleanString(value, 400);
       case "text":
         return cleanString(value, 3000);
       case "email":
