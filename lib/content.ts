@@ -419,7 +419,7 @@ const education: Education[] = [
     school: "Northwestern University",
     degree: "MBA in Artificial Intelligence (MBAi) · Kellogg + McCormick",
     period: "2026 – Mar 2028",
-    note: "Kellogg Tech Club Marketing Director · Charity Auction Ball Auction Director · MBAi Social Chair · 2nd place, MBAi Hackathon · Kellogg Scholarship",
+    note: "Tech Club (Marketing Director) · Charity Auction Ball (Auction Director) · Marketing Club (Partnerships Director) · AI Conference (Speaker Chair) · MBAi Social Chair\n2nd place, MBAi Hackathon · Kellogg Scholarship",
   },
   {
     school: "UC Berkeley",

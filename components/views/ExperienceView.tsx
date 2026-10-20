@@ -143,7 +143,7 @@ export default function ExperienceView() {
                           <T path={["education", i, "degree"]} multiline />
                         </p>
                         {(e.note || editing) && (
-                          <p className="mt-1 text-sm text-ink-soft">
+                          <p className="mt-1 whitespace-pre-line text-sm text-ink-soft">
                             <T
                               path={["education", i, "note"]}
                               multiline
