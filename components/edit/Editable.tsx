@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { getIn, type Path } from "@/lib/path";
 import { EDITOR_HEADERS, useEdit } from "./EditProvider";
+import { isMultilinePath } from "@/lib/content-schema";
 
 /* ------------------------------------------------------------------ */
 /* Text                                                                 */
@@ -10,6 +11,7 @@ import { EDITOR_HEADERS, useEdit } from "./EditProvider";
 
 type TProps = {
   path: Path;
+  /** Override; by default this follows the content schema ("text" = multi-line). */
   multiline?: boolean;
   className?: string;
   placeholder?: string;
@@ -17,27 +19,97 @@ type TProps = {
 
 /**
  * Editable text. Outside edit mode it renders the plain string (no extra
- * markup, so the design is unchanged). In edit mode it becomes a
- * click-to-type field.
+ * markup, so the design is unchanged; a value with line breaks gets a
+ * `whitespace-pre-line` span so each \n shows as a new line). In edit mode
+ * it becomes a click-to-type field.
+ *
+ * Enter: multi-line fields ("text" in lib/content-schema.ts) insert a line
+ * break, stored as "\n". Single-line fields (titles, labels, buttons, link
+ * text) block Enter and just finish editing; the server also turns any
+ * stray break in a single-line field into a space.
  */
 export function T({
   path,
-  multiline = false,
+  multiline,
   className,
   placeholder = "Type here",
 }: TProps) {
   const { content, editing, setAt } = useEdit();
   const value = String(getIn(content, path) ?? "");
-  if (!editing) return <>{value}</>;
+  const multi = multiline ?? isMultilinePath(path);
+  if (!editing) {
+    return multi && value.includes("\n") ? (
+      <span className="whitespace-pre-line">{value}</span>
+    ) : (
+      <>{value}</>
+    );
+  }
   return (
     <EditableText
       value={value}
-      multiline={multiline}
+      multiline={multi}
       className={className}
       placeholder={placeholder}
       onChange={(v) => setAt(path, v)}
     />
   );
+}
+
+const SENTINEL = "data-eol";
+
+/** Read the field's DOM as plain text: <br> and block elements become \n. */
+function readText(el: HTMLElement): string {
+  let out = "";
+  const walk = (n: Node) => {
+    if (n.nodeType === Node.TEXT_NODE) {
+      out += (n as Text).data;
+      return;
+    }
+    if (!(n instanceof HTMLElement)) return;
+    if (n.tagName === "BR") {
+      if (!n.hasAttribute(SENTINEL)) out += "\n";
+      return;
+    }
+    const block = /^(DIV|P|LI|H[1-6])$/.test(n.tagName);
+    if (block && out && !out.endsWith("\n")) out += "\n";
+    n.childNodes.forEach(walk);
+  };
+  el.childNodes.forEach(walk);
+  return out.replace(/\u00a0/g, " ").replace(/\r\n?/g, "\n");
+}
+
+/** Put plain text into the DOM: text nodes only, plus an end-of-line marker
+ *  so a trailing line break is visible while typing. */
+function writeText(el: HTMLElement, v: string) {
+  el.textContent = v;
+  if (v.endsWith("\n")) {
+    const br = document.createElement("br");
+    br.setAttribute(SENTINEL, "");
+    el.appendChild(br);
+  }
+}
+
+/** Insert plain text at the caret (replacing any selection) and move the caret after it. */
+function insertAtCaret(el: HTMLElement, text: string) {
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  if (!el.contains(range.commonAncestorContainer)) return;
+  range.deleteContents();
+  const node = document.createTextNode(text);
+  range.insertNode(node);
+  // A break at the very end needs a marker <br> to show the new empty line.
+  el.querySelectorAll(`br[${SENTINEL}]`).forEach((b) => b.remove());
+  if (readText(el).endsWith("\n")) {
+    const br = document.createElement("br");
+    br.setAttribute(SENTINEL, "");
+    el.appendChild(br);
+  }
+  const after = document.createRange();
+  after.setStartAfter(node);
+  after.collapse(true);
+  sel.removeAllRanges();
+  sel.addRange(after);
 }
 
 function EditableText({
@@ -60,8 +132,15 @@ function EditableText({
     const el = ref.current;
     if (!el) return;
     if (value === lastEmitted.current) return; // our own typing: leave the caret alone
-    if (el.innerText !== value) el.textContent = value;
+    if (readText(el) !== value) writeText(el, value);
   }, [value]);
+
+  const emit = (el: HTMLElement) => {
+    let v = readText(el);
+    if (!multiline) v = v.replace(/\s*\n\s*/g, " ");
+    lastEmitted.current = v;
+    onChange(v);
+  };
 
   return (
     <span
@@ -73,20 +152,34 @@ function EditableText({
       suppressContentEditableWarning
       spellCheck
       data-editable=""
+      data-multiline={multiline ? "" : undefined}
       data-placeholder={placeholder}
       className={`editable ${multiline ? "whitespace-pre-line" : ""} ${className ?? ""}`}
-      onInput={(e) => {
-        const raw = e.currentTarget.innerText.replace(/\u00a0/g, " ");
-        const v = multiline ? raw.replace(/\n$/, "") : raw.replace(/\n/g, " ");
-        lastEmitted.current = v;
-        onChange(v);
-      }}
+      onInput={(e) => emit(e.currentTarget)}
       onKeyDown={(e) => {
-        if (e.key === "Enter" && !multiline) {
-          e.preventDefault();
+        if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
+        // Our Enter: never a form submit, link click, <summary> toggle or drag start.
+        e.preventDefault();
+        e.stopPropagation();
+        if (!multiline) {
           e.currentTarget.blur();
+          return;
         }
+        insertAtCaret(e.currentTarget, "\n");
+        emit(e.currentTarget);
       }}
+      onKeyUp={(e) => {
+        if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+      }}
+      onPaste={(e) => {
+        // Plain text only, line breaks kept (or flattened in single-line fields).
+        e.preventDefault();
+        let text = e.clipboardData.getData("text/plain").replace(/\r\n?/g, "\n");
+        if (!multiline) text = text.replace(/\s*\n\s*/g, " ");
+        insertAtCaret(e.currentTarget, text);
+        emit(e.currentTarget);
+      }}
+      onDrop={(e) => e.preventDefault()}
       onBlur={() => {
         lastEmitted.current = null;
       }}

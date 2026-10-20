@@ -76,7 +76,7 @@ const schema: Schema = obj({
         problem: "text",
         did: "text",
         result: "text",
-        media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+        media: obj({ src: "img", alt: "text", href: "url", caption: "text" }, [
           "src",
           "alt",
           "href",
@@ -98,7 +98,7 @@ const schema: Schema = obj({
         note: "str",
         points: arr("text", 4),
         tags: arr("str", 4),
-        media: obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+        media: obj({ src: "img", alt: "text", href: "url", caption: "text" }, [
           "src",
           "alt",
           "href",
@@ -163,7 +163,7 @@ const schema: Schema = obj({
         links: arr(link, 6),
         shape: "shape",
         media: arr(
-          obj({ src: "img", alt: "text", href: "url", caption: "str" }, [
+          obj({ src: "img", alt: "text", href: "url", caption: "text" }, [
             "src",
             "alt",
             "href",
@@ -180,7 +180,7 @@ const schema: Schema = obj({
   contactPage: obj({
     photoTitle: "str",
     about: "text",
-    photo: obj({ src: "img", alt: "text", caption: "str" }, [
+    photo: obj({ src: "img", alt: "text", caption: "text" }, [
       "src",
       "alt",
       "caption",
@@ -275,7 +275,8 @@ function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
     if (typeof value !== "string") return fb;
     switch (s) {
       case "str":
-        return cleanString(value, 400);
+        // Single-line field: any line break becomes a space.
+        return cleanString(value, 400).replace(/\s*\n\s*/g, " ");
       case "text":
         return cleanString(value, 3000);
       case "email":
@@ -312,6 +313,19 @@ function sanitize(value: unknown, s: Schema, fallback: unknown): unknown {
     out[key] = sanitize(has ? src[key] : undefined, sub, fb[key]);
   }
   return out;
+}
+
+/**
+ * Is the field at `path` multi-line ("text") or single-line? Used by the
+ * editor so Enter adds a line break only where the saved data keeps it.
+ */
+export function isMultilinePath(path: (string | number)[]): boolean {
+  let s: Schema | undefined = schema;
+  for (const key of path) {
+    if (!s || typeof s === "string") return false;
+    s = "arr" in s ? s.arr : s.obj[String(key)];
+  }
+  return s === "text";
 }
 
 /** Validate untrusted content, filling anything missing from the defaults. */
