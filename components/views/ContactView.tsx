@@ -28,7 +28,7 @@ export default function ContactView() {
           id="contact.photo"
           kind="image"
           label="Portrait"
-          className="relative mx-auto block w-full max-w-[15.5rem] md:col-span-5 md:mx-0 md:mt-2 md:max-w-[16rem]"
+          className="relative mx-auto block w-full max-w-[21rem] md:col-span-5 md:mx-0 md:mt-2 md:max-w-[24rem]"
         >
           {photo?.src && hasGazeFrames(photo.src) ? (
             <figure className="relative pb-4">
@@ -36,14 +36,14 @@ export default function ContactView() {
               <img
                 src="/fun/washi-tape.png"
                 alt=""
-                width={220}
-                height={70}
+                width={440}
+                height={140}
                 aria-hidden
                 draggable={false}
-                className="pointer-events-none absolute left-1/2 top-[1%] z-10 w-[40%] -translate-x-[48%] -rotate-[8deg] select-none"
+                className="pointer-events-none absolute left-1/2 top-[1.5%] z-10 w-[36%] -translate-x-[48%] -rotate-[8deg] select-none"
               />
               <LivingPortrait alt={photo.alt || "Charmaine Lai"} />
-              <figcaption className="pointer-events-none mt-2 text-center font-mono text-[11px] tracking-wide text-ink-soft">
+              <figcaption className="pointer-events-none mt-2.5 text-center font-mono text-xs tracking-wide text-ink-soft">
                 <T path={["contactPage", "photoTitle"]} />
               </figcaption>
             </figure>
@@ -54,7 +54,7 @@ export default function ContactView() {
                 alt={photo.alt || "Charmaine Lai"}
                 fill
                 priority
-                sizes="(min-width: 768px) 380px, 304px"
+                sizes="(min-width: 768px) 384px, 336px"
                 className="object-cover object-[50%_30%]"
                 unoptimized={/^https?:/.test(photo.src)}
               />

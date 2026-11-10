@@ -63,8 +63,8 @@ function gazeName(x: number, y: number): "rest" | GazeDir {
   return GAZE_DIRS[i];
 }
 
-const MASK_W = 160;
-const MASK_H = 156;
+const MASK_W = 180;
+const MASK_H = 175;
 const HIT_ALPHA = 40;
 
 /**
@@ -293,21 +293,21 @@ export default function LivingPortrait({
       data-living-portrait=""
       data-gaze-frame={shown}
       data-expression={isExpr ? shown : undefined}
-      className={`relative block aspect-[665/647] ${className}`}
+      className={`relative block aspect-[1331/1294] ${className}`}
     >
       {/* Stable silhouette shadow so crossfades don't flicker a drop-shadow. */}
       <img
         src={GAZE.rest}
         alt=""
-        width={665}
-        height={647}
+        width={1331}
+        height={1294}
         aria-hidden
         draggable={false}
         className="pointer-events-none absolute inset-0 h-full w-full object-contain"
         style={{
-          filter: "brightness(0) blur(8px)",
+          filter: "brightness(0) blur(10px)",
           opacity: 0.2,
-          transform: "translate(5px, 7px)",
+          transform: "translate(7px, 10px)",
         }}
       />
       {ALL_FRAMES.map(({ name, src }) => (
@@ -315,8 +315,8 @@ export default function LivingPortrait({
           key={name}
           src={src}
           alt=""
-          width={665}
-          height={647}
+          width={1331}
+          height={1294}
           draggable={false}
           decoding="async"
           fetchPriority={name === "rest" ? "high" : "low"}
