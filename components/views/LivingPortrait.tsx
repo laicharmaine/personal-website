@@ -58,7 +58,8 @@ function clamp(n: number, a: number, b: number) {
 
 function gazeName(x: number, y: number): "rest" | GazeDir {
   if (Math.hypot(x, y) < 0.13) return "rest";
-  const i = Math.round(Math.atan2(y, x) / (Math.PI / 4) + 8) % 8;
+  // Look away from the pointer / tilt vector (right -> left, up -> down).
+  const i = Math.round(Math.atan2(-y, -x) / (Math.PI / 4) + 8) % 8;
   return GAZE_DIRS[i];
 }
 
@@ -67,7 +68,7 @@ const MASK_H = 156;
 const HIT_ALPHA = 40;
 
 /**
- * Cursor-following die-cut head sticker for /contact.
+ * Die-cut head sticker for /contact. Looks away from the cursor.
  *
  * Frames are preloaded transparent webps with a shared white sticker
  * outline. A smoothed gaze vector picks rest or one of eight directions.
