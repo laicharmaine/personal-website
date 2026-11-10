@@ -2,19 +2,50 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/** 5x5 gaze/head-turn frames. Center (r2c2) is the real photo crop; the rest are generated variants. */
-export const GAZE_ROWS = 5;
-export const GAZE_COLS = 5;
-export const GAZE_CENTER = 2 * GAZE_COLS + 2;
-export const GAZE_FRAMES = Array.from(
-  { length: GAZE_ROWS * GAZE_COLS },
-  (_, i) => `/fun/gaze/r${Math.floor(i / GAZE_COLS)}c${i % GAZE_COLS}.webp`,
-);
+/** 8 compass directions, matching wayturn.dev (atan2 of a down-positive y). */
+export const GAZE_DIRS = [
+  "right",
+  "downright",
+  "down",
+  "downleft",
+  "left",
+  "upleft",
+  "up",
+  "upright",
+] as const;
+
+export type GazeDir = (typeof GAZE_DIRS)[number];
+export type Expression = "pout" | "smirk" | "blink" | "half";
+export type FrameName = "rest" | GazeDir | Expression;
+
+const GAZE: Record<"rest" | GazeDir, string> = {
+  rest: "/fun/gaze/rest.webp",
+  right: "/fun/gaze/right.webp",
+  downright: "/fun/gaze/downright.webp",
+  down: "/fun/gaze/down.webp",
+  downleft: "/fun/gaze/downleft.webp",
+  left: "/fun/gaze/left.webp",
+  upleft: "/fun/gaze/upleft.webp",
+  up: "/fun/gaze/up.webp",
+  upright: "/fun/gaze/upright.webp",
+};
+
+const EXPR: Record<Expression, string> = {
+  pout: "/fun/gaze/pout.webp",
+  smirk: "/fun/gaze/smirk.webp",
+  blink: "/fun/gaze/blink.webp",
+  half: "/fun/gaze/half.webp",
+};
+
+const ALL_FRAMES: { name: FrameName; src: string }[] = [
+  ...Object.entries(GAZE).map(([name, src]) => ({ name: name as FrameName, src })),
+  ...Object.entries(EXPR).map(([name, src]) => ({ name: name as FrameName, src })),
+];
 
 /** Live gaze is tied to this portrait. A swapped photo in the editor falls back to a still. */
 const LIVE_SOURCES = new Set([
   "/fun/charmaine-portrait.webp",
-  GAZE_FRAMES[GAZE_CENTER],
+  "/fun/gaze/rest.webp",
 ]);
 
 export function hasGazeFrames(src?: string) {
@@ -25,19 +56,22 @@ function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
-function cell(x: number, y: number) {
-  const col = Math.round(((clamp(x, -1, 1) + 1) / 2) * (GAZE_COLS - 1));
-  const row = Math.round(((clamp(y, -1, 1) + 1) / 2) * (GAZE_ROWS - 1));
-  return row * GAZE_COLS + col;
+function gazeName(x: number, y: number): "rest" | GazeDir {
+  if (Math.hypot(x, y) < 0.13) return "rest";
+  const i = Math.round(Math.atan2(y, x) / (Math.PI / 4) + 8) % 8;
+  return GAZE_DIRS[i];
 }
 
 /**
  * Cursor-following portrait for the /contact "hi.jpg" window.
  *
- * Frames are preloaded webp. A smoothed gaze vector picks the nearest cell.
- * Desktop: the face follows the cursor (page-wide). Touch/mobile: device tilt
- * if the browser already provides it, otherwise a gentle idle loop.
- * `prefers-reduced-motion` shows only the still center frame.
+ * Frames are preloaded webp. A smoothed gaze vector picks rest or one of
+ * eight directions (wayturn-style compass). Desktop: the face follows the
+ * cursor (page-wide). Hovering on or just next to the portrait for 100ms
+ * shows a pout; a click/tap holds a smirk for 1.2s. Periodic blinks run
+ * every ~2.2–5.6s. Touch/mobile: device tilt if the browser already
+ * provides it, otherwise a gentle idle loop, plus blinks and tap-to-smirk.
+ * `prefers-reduced-motion` shows only the still rest frame.
  */
 export default function LivingPortrait({
   alt,
@@ -51,7 +85,13 @@ export default function LivingPortrait({
   const cur = useRef({ x: 0, y: 0 });
   const lastPointer = useRef(0);
   const hasPointer = useRef(false);
-  const [idx, setIdx] = useState(GAZE_CENTER);
+  const hovering = useRef(false);
+  const hoverSince = useRef(0);
+  const moodUntil = useRef(0);
+  const nextBlink = useRef(0);
+  const blinkStart = useRef(-Infinity);
+  const downAt = useRef<{ t: number; x: number; y: number } | null>(null);
+  const [shown, setShown] = useState<FrameName>("rest");
   const [reduce, setReduce] = useState(false);
 
   useEffect(() => {
@@ -63,8 +103,7 @@ export default function LivingPortrait({
   }, []);
 
   useEffect(() => {
-    // Warm the decoder so the first turn isn't a blank frame.
-    for (const src of GAZE_FRAMES) {
+    for (const { src } of ALL_FRAMES) {
       const im = new Image();
       im.decoding = "async";
       im.src = src;
@@ -73,22 +112,21 @@ export default function LivingPortrait({
 
   useEffect(() => {
     if (reduce) {
-      setIdx(GAZE_CENTER);
+      setShown("rest");
       return;
     }
     const coarse = window.matchMedia("(pointer: coarse)").matches;
 
+    const faceBox = () => root.current?.getBoundingClientRect() ?? null;
+
     const onMove = (e: PointerEvent) => {
       if (e.pointerType === "touch") return;
-      const el = root.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      // Origin is her face, slightly left and high in the 4:5 crop.
-      // Map so the face is rest, and each edge of the viewport is a full turn
-      // that way — the portrait sits on the left, so a fixed pixel radius
-      // would barely reach a left-looking frame.
-      const cx = r.left + r.width * 0.42;
-      const cy = r.top + r.height * 0.3;
+      const r = faceBox();
+      if (!r) return;
+      // Origin is the center of her face in the 4:5 crop.
+      // Map so the face is rest, and each edge of the viewport is a full turn.
+      const cx = r.left + r.width * 0.5;
+      const cy = r.top + r.height * 0.38;
       const vx = e.clientX < cx ? cx : window.innerWidth - cx;
       const vy = e.clientY < cy ? cy : window.innerHeight - cy;
       target.current = {
@@ -97,11 +135,29 @@ export default function LivingPortrait({
       };
       lastPointer.current = performance.now();
       hasPointer.current = true;
+
+      const pad = Math.max(24, r.width * 0.08);
+      const over =
+        e.clientX >= r.left - pad &&
+        e.clientX <= r.right + pad &&
+        e.clientY >= r.top - pad &&
+        e.clientY <= r.bottom + pad;
+      if (over) {
+        if (!hovering.current) {
+          hovering.current = true;
+          hoverSince.current = performance.now();
+        }
+      } else {
+        hovering.current = false;
+      }
     };
+
     const onLeave = () => {
       hasPointer.current = false;
+      hovering.current = false;
       if (!coarse) target.current = { x: 0, y: 0 };
     };
+
     const onOrient = (e: DeviceOrientationEvent) => {
       if (!coarse) return;
       if (hasPointer.current && performance.now() - lastPointer.current < 800)
@@ -114,21 +170,45 @@ export default function LivingPortrait({
       lastPointer.current = performance.now();
     };
 
+    const onDown = (e: PointerEvent) => {
+      if (e.button !== 0 || !e.isPrimary) return;
+      const r = faceBox();
+      if (!r) return;
+      if (
+        e.clientX < r.left ||
+        e.clientX > r.right ||
+        e.clientY < r.top ||
+        e.clientY > r.bottom
+      )
+        return;
+      downAt.current = { t: performance.now(), x: e.clientX, y: e.clientY };
+    };
+
+    const onUp = (e: PointerEvent) => {
+      const d = downAt.current;
+      downAt.current = null;
+      if (!d) return;
+      const now = performance.now();
+      const dist = Math.hypot(e.clientX - d.x, e.clientY - d.y);
+      if (dist < 10 && now - d.t < 600) {
+        moodUntil.current = now + 1200;
+        lastPointer.current = now;
+      }
+    };
+
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave);
     window.addEventListener("blur", onLeave);
     window.addEventListener("deviceorientation", onOrient);
+    window.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointerup", onUp);
     let raf = 0;
     let last = performance.now();
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       // On a phone with no tilt data, a slow figure-eight so the portrait still feels alive.
-      if (
-        coarse &&
-        !hasPointer.current &&
-        now - lastPointer.current > 700
-      ) {
+      if (coarse && !hasPointer.current && now - lastPointer.current > 700) {
         const u = now / 1000;
         target.current = {
           x: Math.sin(u * 0.55) * 0.72,
@@ -140,8 +220,30 @@ export default function LivingPortrait({
         x: cur.current.x + (target.current.x - cur.current.x) * k,
         y: cur.current.y + (target.current.y - cur.current.y) * k,
       };
-      const next = cell(cur.current.x, cur.current.y);
-      setIdx((i) => (i === next ? i : next));
+
+      if (nextBlink.current === 0) {
+        nextBlink.current = now + 2200 + 3400 * Math.random();
+      }
+
+      let next: FrameName;
+      if (now < moodUntil.current) {
+        next = "smirk";
+      } else {
+        if (now >= nextBlink.current) {
+          blinkStart.current = now;
+          nextBlink.current = now + 2200 + 3400 * Math.random();
+        }
+        const o = now - blinkStart.current;
+        if (o >= 0 && o < 180) {
+          next = o < 55 || o > 125 ? "half" : "blink";
+        } else if (!coarse && hovering.current && now - hoverSince.current > 100) {
+          next = "pout";
+        } else {
+          next = gazeName(cur.current.x, cur.current.y);
+        }
+      }
+
+      setShown((s) => (s === next ? s : next));
       raf = window.requestAnimationFrame(tick);
     };
     raf = window.requestAnimationFrame(tick);
@@ -151,8 +253,13 @@ export default function LivingPortrait({
       document.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("blur", onLeave);
       window.removeEventListener("deviceorientation", onOrient);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
     };
   }, [reduce]);
+
+  const fadeMs = shown === "half" || shown === "blink" ? 25 : 80;
+  const isExpr = shown === "pout" || shown === "smirk" || shown === "blink" || shown === "half";
 
   return (
     <span
@@ -160,25 +267,25 @@ export default function LivingPortrait({
       role="img"
       aria-label={alt}
       data-living-portrait=""
-      data-gaze-frame={idx}
+      data-gaze-frame={shown}
+      data-expression={isExpr ? shown : undefined}
       className={`relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-desk ${className}`}
     >
-      {GAZE_FRAMES.map((src, i) => (
+      {ALL_FRAMES.map(({ name, src }) => (
         <img
-          key={src}
+          key={name}
           src={src}
           alt=""
           width={800}
           height={1000}
           draggable={false}
           decoding="async"
-          // Center is the still everyone should see first; the rest preload in the background.
-          fetchPriority={i === GAZE_CENTER ? "high" : "low"}
+          fetchPriority={name === "rest" ? "high" : "low"}
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover"
           style={{
-            opacity: (reduce ? i === GAZE_CENTER : i === idx) ? 1 : 0,
-            transition: reduce ? "none" : "opacity 80ms linear",
+            opacity: (reduce ? name === "rest" : name === shown) ? 1 : 0,
+            transition: reduce ? "none" : `opacity ${fadeMs}ms linear`,
           }}
         />
       ))}
