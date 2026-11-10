@@ -14,6 +14,7 @@ import {
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
 import Block from "@/components/edit/Block";
+import LivingPortrait, { hasGazeFrames } from "@/components/views/LivingPortrait";
 
 /** /contact: a small about + contact page. Portrait left, words and links right. */
 export default function ContactView() {
@@ -35,7 +36,9 @@ export default function ContactView() {
             className="win-open"
             bodyClassName="p-2"
           >
-            {photo?.src ? (
+            {photo?.src && hasGazeFrames(photo.src) ? (
+              <LivingPortrait alt={photo.alt || "Charmaine Lai"} />
+            ) : photo?.src ? (
               <span className="relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-desk">
                 <Image
                   src={photo.src}
