@@ -63,18 +63,19 @@ function gazeName(x: number, y: number): "rest" | GazeDir {
 }
 
 const MASK_W = 160;
-const MASK_H = 192;
+const MASK_H = 156;
 const HIT_ALPHA = 40;
 
 /**
- * Cursor-following cut-out portrait for /contact.
+ * Cursor-following die-cut head sticker for /contact.
  *
- * Frames are preloaded transparent webp. A smoothed gaze vector picks rest
- * or one of eight directions. Hovering an opaque pixel for 100ms shows a
- * pout; a click/tap on the figure holds a smirk for 1.2s. Periodic blinks
- * run every ~2.2–5.6s. Touch/mobile: device tilt if available, otherwise a
- * gentle idle loop, plus blinks and tap-to-smirk. `prefers-reduced-motion`
- * shows only the still rest frame.
+ * Frames are preloaded transparent webps with a shared white sticker
+ * outline. A smoothed gaze vector picks rest or one of eight directions.
+ * Hovering an opaque pixel for 100ms shows a pout; a click/tap on the
+ * figure holds a smirk for 1.2s. Periodic blinks run every ~2.2–5.6s.
+ * Touch/mobile: device tilt if available, otherwise a gentle idle loop,
+ * plus blinks and tap-to-smirk. `prefers-reduced-motion` shows only the
+ * still rest frame.
  */
 export default function LivingPortrait({
   alt,
@@ -157,10 +158,10 @@ export default function LivingPortrait({
       if (e.pointerType === "touch") return;
       const r = faceBox();
       if (!r) return;
-      // Origin is the center of her face in the 4:5 crop.
+      // Origin is the center of her eyes in the tight head-sticker crop.
       // Map so the face is rest, and each edge of the viewport is a full turn.
-      const cx = r.left + r.width * 0.5;
-      const cy = r.top + r.height * 0.35;
+      const cx = r.left + r.width * 0.50;
+      const cy = r.top + r.height * 0.39;
       const vx = e.clientX < cx ? cx : window.innerWidth - cx;
       const vy = e.clientY < cy ? cy : window.innerHeight - cy;
       target.current = {
@@ -291,21 +292,21 @@ export default function LivingPortrait({
       data-living-portrait=""
       data-gaze-frame={shown}
       data-expression={isExpr ? shown : undefined}
-      className={`relative block aspect-[5/6] ${className}`}
+      className={`relative block aspect-[665/647] ${className}`}
     >
       {/* Stable silhouette shadow so crossfades don't flicker a drop-shadow. */}
       <img
         src={GAZE.rest}
         alt=""
-        width={800}
-        height={960}
+        width={665}
+        height={647}
         aria-hidden
         draggable={false}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-contain"
         style={{
-          filter: "brightness(0) blur(14px)",
-          opacity: 0.22,
-          transform: "translateY(16px)",
+          filter: "brightness(0) blur(8px)",
+          opacity: 0.2,
+          transform: "translate(5px, 7px)",
         }}
       />
       {ALL_FRAMES.map(({ name, src }) => (
@@ -313,13 +314,13 @@ export default function LivingPortrait({
           key={name}
           src={src}
           alt=""
-          width={800}
-          height={960}
+          width={665}
+          height={647}
           draggable={false}
           decoding="async"
           fetchPriority={name === "rest" ? "high" : "low"}
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain"
           style={{
             opacity: (reduce ? name === "rest" : name === shown) ? 1 : 0,
             transition: reduce ? "none" : `opacity ${fadeMs}ms linear`,

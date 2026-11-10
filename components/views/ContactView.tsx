@@ -28,12 +28,22 @@ export default function ContactView() {
           id="contact.photo"
           kind="image"
           label="Portrait"
-          className="relative mx-auto block w-full max-w-[20rem] md:col-span-5 md:mx-0 md:max-w-none"
+          className="relative mx-auto block w-full max-w-[15.5rem] md:col-span-5 md:mx-0 md:mt-2 md:max-w-[16rem]"
         >
           {photo?.src && hasGazeFrames(photo.src) ? (
-            <figure className="relative pb-3">
+            <figure className="relative pb-4">
+              {/* A scrap of masking tape, held to the page — not part of the frames. */}
+              <img
+                src="/fun/washi-tape.png"
+                alt=""
+                width={220}
+                height={70}
+                aria-hidden
+                draggable={false}
+                className="pointer-events-none absolute left-1/2 top-[1%] z-10 w-[40%] -translate-x-[48%] -rotate-[8deg] select-none"
+              />
               <LivingPortrait alt={photo.alt || "Charmaine Lai"} />
-              <figcaption className="pointer-events-none mt-1 text-center font-mono text-[11px] tracking-wide text-ink-soft">
+              <figcaption className="pointer-events-none mt-2 text-center font-mono text-[11px] tracking-wide text-ink-soft">
                 <T path={["contactPage", "photoTitle"]} />
               </figcaption>
             </figure>
