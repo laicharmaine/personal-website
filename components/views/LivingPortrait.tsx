@@ -62,16 +62,19 @@ function gazeName(x: number, y: number): "rest" | GazeDir {
   return GAZE_DIRS[i];
 }
 
+const MASK_W = 160;
+const MASK_H = 192;
+const HIT_ALPHA = 40;
+
 /**
- * Cursor-following portrait for the /contact "hi.jpg" window.
+ * Cursor-following cut-out portrait for /contact.
  *
- * Frames are preloaded webp. A smoothed gaze vector picks rest or one of
- * eight directions (wayturn-style compass). Desktop: the face follows the
- * cursor (page-wide). Hovering on or just next to the portrait for 100ms
- * shows a pout; a click/tap holds a smirk for 1.2s. Periodic blinks run
- * every ~2.2–5.6s. Touch/mobile: device tilt if the browser already
- * provides it, otherwise a gentle idle loop, plus blinks and tap-to-smirk.
- * `prefers-reduced-motion` shows only the still rest frame.
+ * Frames are preloaded transparent webp. A smoothed gaze vector picks rest
+ * or one of eight directions. Hovering an opaque pixel for 100ms shows a
+ * pout; a click/tap on the figure holds a smirk for 1.2s. Periodic blinks
+ * run every ~2.2–5.6s. Touch/mobile: device tilt if available, otherwise a
+ * gentle idle loop, plus blinks and tap-to-smirk. `prefers-reduced-motion`
+ * shows only the still rest frame.
  */
 export default function LivingPortrait({
   alt,
@@ -91,6 +94,7 @@ export default function LivingPortrait({
   const nextBlink = useRef(0);
   const blinkStart = useRef(-Infinity);
   const downAt = useRef<{ t: number; x: number; y: number } | null>(null);
+  const unionMask = useRef<Uint8Array | null>(null);
   const [shown, setShown] = useState<FrameName>("rest");
   const [reduce, setReduce] = useState(false);
 
@@ -103,9 +107,27 @@ export default function LivingPortrait({
   }, []);
 
   useEffect(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = MASK_W;
+    canvas.height = MASK_H;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return;
+    const union = new Uint8Array(MASK_W * MASK_H);
+    let pending = ALL_FRAMES.length;
     for (const { src } of ALL_FRAMES) {
       const im = new Image();
       im.decoding = "async";
+      im.onload = () => {
+        ctx.clearRect(0, 0, MASK_W, MASK_H);
+        ctx.drawImage(im, 0, 0, MASK_W, MASK_H);
+        const data = ctx.getImageData(0, 0, MASK_W, MASK_H).data;
+        for (let i = 0; i < union.length; i++) {
+          const a = data[i * 4 + 3];
+          if (a > union[i]) union[i] = a;
+        }
+        pending -= 1;
+        if (pending === 0) unionMask.current = union;
+      };
       im.src = src;
     }
   }, []);
@@ -119,6 +141,18 @@ export default function LivingPortrait({
 
     const faceBox = () => root.current?.getBoundingClientRect() ?? null;
 
+    const hitsFigure = (clientX: number, clientY: number) => {
+      const r = faceBox();
+      const mask = unionMask.current;
+      if (!r || !mask) return false;
+      const u = (clientX - r.left) / r.width;
+      const v = (clientY - r.top) / r.height;
+      if (u < 0 || v < 0 || u >= 1 || v >= 1) return false;
+      const x = Math.min(MASK_W - 1, Math.max(0, Math.floor(u * MASK_W)));
+      const y = Math.min(MASK_H - 1, Math.max(0, Math.floor(v * MASK_H)));
+      return mask[y * MASK_W + x] > HIT_ALPHA;
+    };
+
     const onMove = (e: PointerEvent) => {
       if (e.pointerType === "touch") return;
       const r = faceBox();
@@ -126,7 +160,7 @@ export default function LivingPortrait({
       // Origin is the center of her face in the 4:5 crop.
       // Map so the face is rest, and each edge of the viewport is a full turn.
       const cx = r.left + r.width * 0.5;
-      const cy = r.top + r.height * 0.38;
+      const cy = r.top + r.height * 0.35;
       const vx = e.clientX < cx ? cx : window.innerWidth - cx;
       const vy = e.clientY < cy ? cy : window.innerHeight - cy;
       target.current = {
@@ -136,12 +170,7 @@ export default function LivingPortrait({
       lastPointer.current = performance.now();
       hasPointer.current = true;
 
-      const pad = Math.max(24, r.width * 0.08);
-      const over =
-        e.clientX >= r.left - pad &&
-        e.clientX <= r.right + pad &&
-        e.clientY >= r.top - pad &&
-        e.clientY <= r.bottom + pad;
+      const over = hitsFigure(e.clientX, e.clientY);
       if (over) {
         if (!hovering.current) {
           hovering.current = true;
@@ -172,15 +201,7 @@ export default function LivingPortrait({
 
     const onDown = (e: PointerEvent) => {
       if (e.button !== 0 || !e.isPrimary) return;
-      const r = faceBox();
-      if (!r) return;
-      if (
-        e.clientX < r.left ||
-        e.clientX > r.right ||
-        e.clientY < r.top ||
-        e.clientY > r.bottom
-      )
-        return;
+      if (!hitsFigure(e.clientX, e.clientY)) return;
       downAt.current = { t: performance.now(), x: e.clientX, y: e.clientY };
     };
 
@@ -190,7 +211,7 @@ export default function LivingPortrait({
       if (!d) return;
       const now = performance.now();
       const dist = Math.hypot(e.clientX - d.x, e.clientY - d.y);
-      if (dist < 10 && now - d.t < 600) {
+      if (dist < 10 && now - d.t < 600 && hitsFigure(e.clientX, e.clientY)) {
         moodUntil.current = now + 1200;
         lastPointer.current = now;
       }
@@ -259,7 +280,8 @@ export default function LivingPortrait({
   }, [reduce]);
 
   const fadeMs = shown === "half" || shown === "blink" ? 25 : 80;
-  const isExpr = shown === "pout" || shown === "smirk" || shown === "blink" || shown === "half";
+  const isExpr =
+    shown === "pout" || shown === "smirk" || shown === "blink" || shown === "half";
 
   return (
     <span
@@ -269,15 +291,30 @@ export default function LivingPortrait({
       data-living-portrait=""
       data-gaze-frame={shown}
       data-expression={isExpr ? shown : undefined}
-      className={`relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-desk ${className}`}
+      className={`relative block aspect-[5/6] ${className}`}
     >
+      {/* Stable silhouette shadow so crossfades don't flicker a drop-shadow. */}
+      <img
+        src={GAZE.rest}
+        alt=""
+        width={800}
+        height={960}
+        aria-hidden
+        draggable={false}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        style={{
+          filter: "brightness(0) blur(14px)",
+          opacity: 0.22,
+          transform: "translateY(16px)",
+        }}
+      />
       {ALL_FRAMES.map(({ name, src }) => (
         <img
           key={name}
           src={src}
           alt=""
           width={800}
-          height={1000}
+          height={960}
           draggable={false}
           decoding="async"
           fetchPriority={name === "rest" ? "high" : "low"}

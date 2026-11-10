@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
-import Window from "@/components/Window";
 import Email from "@/components/views/Email";
 import {
   AddButton,
@@ -29,34 +28,33 @@ export default function ContactView() {
           id="contact.photo"
           kind="image"
           label="Portrait"
-          className="relative mx-auto block w-full max-w-[19rem] md:col-span-5 md:mx-0 md:max-w-none"
+          className="relative mx-auto block w-full max-w-[20rem] md:col-span-5 md:mx-0 md:max-w-none"
         >
-          <Window
-            title={<T path={["contactPage", "photoTitle"]} />}
-            className="win-open"
-            bodyClassName="p-2"
-          >
-            {photo?.src && hasGazeFrames(photo.src) ? (
+          {photo?.src && hasGazeFrames(photo.src) ? (
+            <figure className="relative pb-3">
               <LivingPortrait alt={photo.alt || "Charmaine Lai"} />
-            ) : photo?.src ? (
-              <span className="relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-desk">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt || "Charmaine Lai"}
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 380px, 304px"
-                  className="object-cover object-[50%_30%]"
-                  unoptimized={/^https?:/.test(photo.src)}
-                />
-              </span>
-            ) : (
-              <span className="grid aspect-[4/5] place-items-center rounded-[3px] border border-dashed border-ink/40 bg-desk/50 font-mono text-xs text-ink-soft">
-                my photo
-              </span>
-            )}
-            <MediaTools path={["contactPage", "photo"]} />
-          </Window>
+              <figcaption className="pointer-events-none mt-1 text-center font-mono text-[11px] tracking-wide text-ink-soft">
+                <T path={["contactPage", "photoTitle"]} />
+              </figcaption>
+            </figure>
+          ) : photo?.src ? (
+            <span className="relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-desk">
+              <Image
+                src={photo.src}
+                alt={photo.alt || "Charmaine Lai"}
+                fill
+                priority
+                sizes="(min-width: 768px) 380px, 304px"
+                className="object-cover object-[50%_30%]"
+                unoptimized={/^https?:/.test(photo.src)}
+              />
+            </span>
+          ) : (
+            <span className="grid aspect-[4/5] place-items-center rounded-[3px] border border-dashed border-ink/40 bg-desk/50 font-mono text-xs text-ink-soft">
+              my photo
+            </span>
+          )}
+          <MediaTools path={["contactPage", "photo"]} />
         </Block>
 
         <div className="md:col-span-7 md:pt-2">
