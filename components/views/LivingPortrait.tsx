@@ -74,9 +74,11 @@ const HIT_ALPHA = 40;
  * outline. A smoothed gaze vector picks rest or one of eight directions.
  * Hovering an opaque pixel for 100ms shows a pout; a click/tap on the
  * figure holds a smirk for 1.2s. Periodic blinks run every ~2.2–5.6s.
- * Touch/mobile: device tilt if available, otherwise a gentle idle loop,
- * plus blinks and tap-to-smirk. `prefers-reduced-motion` shows only the
- * still rest frame.
+ * Starts on the rest frame and only begins following after a real
+ * pointer move or a meaningful device-tilt change. Touch/mobile: device
+ * tilt if available, otherwise a gentle idle loop after that first
+ * interaction, plus blinks and tap-to-smirk. `prefers-reduced-motion`
+ * shows only the still rest frame.
  */
 export default function LivingPortrait({
   alt,
@@ -90,6 +92,9 @@ export default function LivingPortrait({
   const cur = useRef({ x: 0, y: 0 });
   const lastPointer = useRef(0);
   const hasPointer = useRef(false);
+  const awake = useRef(false);
+  const lastPtrPos = useRef<{ x: number; y: number } | null>(null);
+  const baseOrient = useRef<{ g: number; b: number } | null>(null);
   const hovering = useRef(false);
   const hoverSince = useRef(0);
   const moodUntil = useRef(0);
@@ -159,6 +164,14 @@ export default function LivingPortrait({
       if (e.pointerType === "touch") return;
       const r = faceBox();
       if (!r) return;
+      // Ignore the one-shot pointermove some browsers fire on load.
+      // Stay on rest until the cursor actually moves.
+      const prev = lastPtrPos.current;
+      lastPtrPos.current = { x: e.clientX, y: e.clientY };
+      if (!awake.current) {
+        if (!prev || Math.hypot(e.clientX - prev.x, e.clientY - prev.y) < 4) return;
+        awake.current = true;
+      }
       // Origin is the center of her eyes in the tight head-sticker crop.
       // Map so the face is rest, and each edge of the viewport is a full turn.
       const cx = r.left + r.width * 0.50;
@@ -191,9 +204,20 @@ export default function LivingPortrait({
 
     const onOrient = (e: DeviceOrientationEvent) => {
       if (!coarse) return;
+      if (e.gamma == null || e.beta == null) return;
+      // Hold rest until the device actually tilts from its load baseline.
+      if (!awake.current) {
+        if (!baseOrient.current) {
+          baseOrient.current = { g: e.gamma, b: e.beta };
+          return;
+        }
+        const dg = e.gamma - baseOrient.current.g;
+        const db = e.beta - baseOrient.current.b;
+        if (Math.hypot(dg, db) < 6) return;
+        awake.current = true;
+      }
       if (hasPointer.current && performance.now() - lastPointer.current < 800)
         return;
-      if (e.gamma == null || e.beta == null) return;
       target.current = {
         x: clamp(e.gamma / 16, -1, 1),
         y: clamp((e.beta - 50) / 22, -1, 1),
@@ -214,6 +238,7 @@ export default function LivingPortrait({
       const now = performance.now();
       const dist = Math.hypot(e.clientX - d.x, e.clientY - d.y);
       if (dist < 10 && now - d.t < 600 && hitsFigure(e.clientX, e.clientY)) {
+        awake.current = true;
         moodUntil.current = now + 1200;
         lastPointer.current = now;
       }
@@ -230,8 +255,13 @@ export default function LivingPortrait({
     const tick = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      // On a phone with no tilt data, a slow figure-eight so the portrait still feels alive.
-      if (coarse && !hasPointer.current && now - lastPointer.current > 700) {
+      // After the first real interaction, a slow figure-eight on phones with no tilt.
+      if (
+        awake.current &&
+        coarse &&
+        !hasPointer.current &&
+        now - lastPointer.current > 700
+      ) {
         const u = now / 1000;
         target.current = {
           x: Math.sin(u * 0.55) * 0.72,
@@ -261,6 +291,8 @@ export default function LivingPortrait({
           next = o < 55 || o > 125 ? "half" : "blink";
         } else if (!coarse && hovering.current && now - hoverSince.current > 100) {
           next = "pout";
+        } else if (!awake.current) {
+          next = "rest";
         } else {
           next = gazeName(cur.current.x, cur.current.y);
         }
