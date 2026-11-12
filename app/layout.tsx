@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { DM_Mono, Hanken_Grotesk, Jersey_10 } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -95,9 +94,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <Script id="theme-boot" strategy="beforeInteractive">
-          {THEME_BOOT}
-        </Script>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
       </head>
       <body className="flex min-h-full flex-col font-sans">
         <EditProvider initial={content}>

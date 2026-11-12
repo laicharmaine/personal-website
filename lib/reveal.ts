@@ -1,5 +1,9 @@
-/* Full-cover downtown vinyl sheet that waits for a click, then flies off. Once per session. */
-(function () {
+/* Homepage sticker cover. Once per session. Called from RevealCover's effect.
+   Must not load via next/script or detach the React-owned #reveal-sheet node. */
+export function startReveal(sheet: HTMLElement): () => void {
+
+type Piece = { src: string; x: number; y: number; w: number; r: number; z: number };
+
   const KEY = "y2k-glossy2-reveal";
   const FLY = 560;
   const STAGGER = 40; // 8 waves * 40ms = 320ms
@@ -32,14 +36,14 @@
     ME + "egg-tart.svg", ME + "pineapple-bun.svg", ME + "bao.svg",
     ME + "boba.svg", ME + "cherry-pair.svg", ME + "strawberry.svg",
   ];
-  const FILL = [];
+  const FILL: string[] = [];
   FILL_BASE.forEach((src, i) => {
     FILL.push(src);
     FILL.push(PERSONAL[i % PERSONAL.length]);
   });
 
   function densePieces() {
-    const out = [];
+    const out: Piece[] = [];
     let i = 0;
     for (let y = -8; y <= 108; y += 8) {
       for (let x = -8; x <= 108; x += 8) {
@@ -131,17 +135,10 @@
   }
 
   function sheetEl() {
-    let el = document.getElementById("reveal-sheet");
-    if (!el) {
-      el = document.createElement("div");
-      el.id = "reveal-sheet";
-      el.setAttribute("aria-hidden", "true");
-      document.body.prepend(el);
-    }
-    return el;
+    return sheet;
   }
 
-  function populate(el) {
+  function populate(el: HTMLElement) {
     el.innerHTML = "";
     PIECES.forEach((p, i) => {
       const img = document.createElement("img");
@@ -177,7 +174,7 @@
     addPrompt(el);
   }
 
-  function addHero(el) {
+  function addHero(el: HTMLElement) {
     const wrap = document.createElement("div");
     wrap.className = "reveal-piece reveal-hero";
     wrap.setAttribute("aria-hidden", "true");
@@ -202,7 +199,7 @@
     el.appendChild(wrap);
   }
 
-  function addPrompt(el) {
+  function addPrompt(el: HTMLElement) {
     const prompt = document.createElement("div");
     prompt.className = "reveal-piece reveal-prompt";
     prompt.setAttribute("aria-hidden", "true");
@@ -223,16 +220,23 @@
     el.appendChild(prompt);
   }
 
-  let holdTimer, doneTimer, finished = false;
+  let holdTimer: ReturnType<typeof setTimeout> | undefined;
+  let doneTimer: ReturnType<typeof setTimeout> | undefined;
+  let finished = false;
   let detachWait = function () {};
 
   function removeSheet() {
     document.documentElement.classList.remove("has-reveal", "is-revealing");
-    const el = document.getElementById("reveal-sheet");
-    if (el) el.remove();
+    // Leave the React-owned node in place — only clear it. Removing it
+    // here made the App Router throw removeChild on the next navigation.
+    sheet.className = "";
+    sheet.removeAttribute("style");
+    sheet.removeAttribute("tabindex");
+    sheet.setAttribute("aria-hidden", "true");
+    sheet.innerHTML = "";
   }
 
-  function finish(remember) {
+  function finish(remember: boolean) {
     detachWait();
     clearTimeout(holdTimer);
     clearTimeout(doneTimer);
@@ -244,7 +248,7 @@
   }
 
   function leave() {
-    const el = document.getElementById("reveal-sheet");
+    const el = sheetEl();
     if (!el || finished) return;
     detachWait();
     document.documentElement.classList.add("is-revealing");
@@ -262,18 +266,18 @@
 
   function skip() { finish(true); }
 
-  function armWait(el) {
+  function armWait(el: HTMLElement) {
     el.setAttribute("role", "button");
     el.setAttribute("aria-label", "Open site");
     el.setAttribute("tabindex", "0");
     el.removeAttribute("aria-hidden");
-    const onKey = (ev) => {
+    const onKey = (ev: KeyboardEvent) => {
       if (finished) return;
       if (ev.key !== "Enter" && ev.key !== " " && ev.key !== "Escape") return;
       ev.preventDefault();
       leave();
     };
-    const onClick = (ev) => {
+    const onClick = (ev: Event) => {
       if (finished) return;
       ev.preventDefault();
       leave();
@@ -298,7 +302,7 @@
     armWait(el);
   }
 
-  function goto(state) {
+  function goto(state: string) {
     document.documentElement.classList.add("has-reveal");
     const el = sheetEl();
     populate(el);
@@ -320,32 +324,36 @@
     }
   }
 
-  window.__y2kReveal = { play, skip, goto, finish, populate };
+  (window as Window & { __y2kReveal?: object }).__y2kReveal = { play, skip, goto, finish, populate };
+
+  function stopReveal() {
+    detachWait();
+    clearTimeout(holdTimer);
+    clearTimeout(doneTimer);
+    document.documentElement.classList.remove("has-reveal", "is-revealing");
+  }
 
   const q = params().get("reveal");
   if (q === "cover") {
     document.documentElement.classList.add("has-reveal");
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => goto("cover"));
-    else goto("cover");
-    return;
+    goto("cover");
+    return stopReveal;
   }
   if (q === "mid") {
     document.documentElement.classList.add("has-reveal");
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => goto("mid"));
-    else goto("mid");
-    return;
+    goto("mid");
+    return stopReveal;
   }
   if (q === "done" || q === "skip") {
     removeSheet();
-    return;
+    return stopReveal;
   }
 
   if (!shouldPlay()) {
     removeSheet();
-    return;
+    return stopReveal;
   }
   document.documentElement.classList.add("has-reveal");
-  const start = () => play();
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
-  else start();
-})();
+  play();
+  return stopReveal;
+}
