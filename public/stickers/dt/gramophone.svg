@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 192" fill="none">
+  <defs>
+
+    <filter id="die" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die)">
+
+    <!-- horn -->
+    <path fill="#171717" d="M86 70 C 86 70 170 10 176 70 C 170 130 86 90 86 90 Z"/>
+    <path fill="#c8102e" d="M100 70 C 108 40 160 36 166 70 C 160 104 108 100 100 70 Z"/>
+    <path fill="#8a0e22" d="M118 70 C 122 52 152 52 156 70 C 152 88 122 88 118 70 Z"/>
+    <!-- arm -->
+    <rect x="70" y="84" width="22" height="8" rx="2" fill="#3a3a3a"/>
+    <!-- box -->
+    <rect x="18" y="92" width="80" height="50" rx="4" fill="#3a2a22"/>
+    <rect x="18" y="92" width="80" height="12" fill="#4a382c"/>
+    <!-- platter -->
+    <ellipse cx="58" cy="92" rx="30" ry="8" fill="#171717"/>
+    <ellipse cx="58" cy="92" rx="10" ry="3" fill="#f3eee4"/>
+    <rect x="28" y="142" width="16" height="8" fill="#3a2a22"/>
+    <rect x="72" y="142" width="16" height="8" fill="#3a2a22"/>
+    
+  </g>
+</svg>

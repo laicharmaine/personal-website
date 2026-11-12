@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 212" fill="none">
+  <defs>
+    <filter id="die-strawberry" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-strawberry)">
+
+    <!-- calyx (cream, not green) -->
+    <g fill="#f3eee4" stroke="#171717" stroke-width="3" stroke-linejoin="round">
+      <path d="M88 40 L 68 8 L 84 28 Z"/>
+      <path d="M100 36 L 100 2 L 112 28 Z"/>
+      <path d="M112 40 L 136 8 L 118 28 Z"/>
+      <path d="M80 44 L 52 20 L 78 36 Z"/>
+      <path d="M120 44 L 150 20 L 124 36 Z"/>
+    </g>
+    <!-- berry body -->
+    <path d="M100 36
+             Q 160 44 154 96
+             Q 146 148 100 168
+             Q 54 148 46 96
+             Q 40 44 100 36 Z" fill="#c8102e"/>
+    <path d="M100 36
+             Q 160 44 154 96
+             Q 146 148 100 168
+             Q 54 148 46 96
+             Q 40 44 100 36 Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <!-- seeds -->
+    <g fill="#f3eee4">
+      <ellipse cx="80" cy="70" rx="4" ry="6" transform="rotate(-20 80 70)"/>
+      <ellipse cx="108" cy="64" rx="4" ry="6" transform="rotate(16 108 64)"/>
+      <ellipse cx="126" cy="86" rx="4" ry="6" transform="rotate(24 126 86)"/>
+      <ellipse cx="70" cy="96" rx="4" ry="6" transform="rotate(-24 70 96)"/>
+      <ellipse cx="96" cy="90" rx="4" ry="6" transform="rotate(8 96 90)"/>
+      <ellipse cx="118" cy="112" rx="4" ry="6" transform="rotate(18 118 112)"/>
+      <ellipse cx="80" cy="120" rx="4" ry="6" transform="rotate(-16 80 120)"/>
+      <ellipse cx="100" cy="128" rx="4" ry="6"/>
+      <ellipse cx="88" cy="146" rx="3.5" ry="5" transform="rotate(-8 88 146)"/>
+    </g>
+    <!-- highlight -->
+    <ellipse cx="78" cy="72" rx="10" ry="6" transform="rotate(-30 78 72)" fill="#ffffff" opacity="0.25"/>
+
+  </g>
+</svg>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { nav } from "@/lib/content";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -39,7 +40,7 @@ export default function Nav() {
               aria-current={isActive(item.href) ? "page" : undefined}
               className={`rounded-full px-3.5 py-1.5 text-[0.95rem] font-medium transition-colors ${
                 isActive(item.href)
-                  ? "bg-lime text-ink ring-[1.5px] ring-ink"
+                  ? "nav-on"
                   : "text-ink-soft hover:bg-paper hover:text-ink"
               }`}
             >
@@ -48,15 +49,18 @@ export default function Nav() {
           ))}
         </nav>
 
-        <button
-          type="button"
-          className="rounded-full border-[1.5px] border-ink bg-paper px-4 py-1.5 text-sm font-semibold md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeSwitcher />
+          <button
+            type="button"
+            className="rounded-full border-[1.5px] border-ink bg-paper px-4 py-1.5 text-sm font-semibold md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
 
       {open && (

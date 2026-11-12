@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 200" fill="none">
+  <defs>
+    <filter id="die-desert-sun" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-desert-sun)">
+
+    <path d="M86.2 42.2 L90.0 22.0 L93.835 42.2 Z" fill="#c8102e"/>
+    <path d="M109.3 46.5 L117.0 39.2 L114.604 49.5 Z" fill="#ff4f8b"/>
+    <path d="M126.0 60.8 L145.4 54.0 L129.878 67.4 Z" fill="#c8102e"/>
+    <path d="M133.9 82.9 L144.0 86.0 L133.893 89.1 Z" fill="#ff4f8b"/>
+    <path d="M129.9 104.6 L145.4 118.0 L126.043 111.2 Z" fill="#c8102e"/>
+    <path d="M114.6 122.5 L117.0 132.8 L109.288 125.5 Z" fill="#ff4f8b"/>
+    <path d="M93.8 129.8 L90.0 150.0 L86.165 129.8 Z" fill="#c8102e"/>
+    <path d="M70.7 125.5 L63.0 132.8 L65.396 122.5 Z" fill="#ff4f8b"/>
+    <path d="M54.0 111.2 L34.6 118.0 L50.122 104.6 Z" fill="#c8102e"/>
+    <path d="M46.1 89.1 L36.0 86.0 L46.107 82.9 Z" fill="#ff4f8b"/>
+    <path d="M50.1 67.4 L34.6 54.0 L53.957 60.8 Z" fill="#c8102e"/>
+    <path d="M65.4 49.5 L63.0 39.2 L70.712 46.5 Z" fill="#ff4f8b"/>
+    <circle cx="90" cy="86" r="36" fill="#c8102e"/>
+    <circle cx="90" cy="86" r="26" fill="#ff4f8b"/>
+    <circle cx="80" cy="78" r="8" fill="#f3eee4" opacity="0.45"/>
+    <!-- dune -->
+    <path d="M8 168 Q 50 132 90 148 Q 130 166 172 140 L 176 168 Z" fill="#171717"/>
+    <path d="M8 168 Q 40 150 70 158 Q 50 164 8 168 Z" fill="#2a1818"/>
+
+  </g>
+</svg>

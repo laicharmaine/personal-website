@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { DM_Mono, Hanken_Grotesk, Jersey_10 } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -49,8 +50,34 @@ export const metadata: Metadata = {
   },
 };
 
+
+const THEME_BOOT = `(function () {
+  var html = document.documentElement;
+  var scheme = "cherry";
+  var mode;
+  try {
+    var stored = localStorage.getItem("y2k-glossy2-scheme");
+    if (stored === "cherry" || stored === "lilac" || stored === "cobalt") scheme = stored;
+    mode = localStorage.getItem("y2k-glossy2-mode");
+  } catch (e) {}
+  if (mode !== "light" && mode !== "dark") {
+    mode = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  html.setAttribute("data-scheme", scheme);
+  html.setAttribute("data-mode", mode);
+  try {
+    var path = location.pathname;
+    if (path !== "/" && path !== "") return;
+    var q = new URLSearchParams(location.search).get("reveal");
+    if (q === "skip" || q === "done") return;
+    var force = q === "force" || q === "1" || q === "cover" || q === "mid";
+    if (!force && sessionStorage.getItem("y2k-glossy2-reveal")) return;
+    html.classList.add("has-reveal");
+  } catch (e) {}
+})();`;
+
 export const viewport: Viewport = {
-  themeColor: "#e7e5ff",
+  themeColor: "#f6e1ea",
 };
 
 export default async function RootLayout({
@@ -63,7 +90,15 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${jersey.variable} ${hanken.variable} ${dmMono.variable} h-full`}
+      data-scheme="cherry"
+      data-mode="light"
+      suppressHydrationWarning
     >
+      <head>
+        <Script id="theme-boot" strategy="beforeInteractive">
+          {THEME_BOOT}
+        </Script>
+      </head>
       <body className="flex min-h-full flex-col font-sans">
         <EditProvider initial={content}>
           <Nav />

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 152" fill="none">
+  <defs>
+    <filter id="die-hk-skyline" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-hk-skyline)">
+
+    <!-- mountain / the peak -->
+    <path d="M8 108 L 48 52 L 78 78 L 108 36 L 148 70 L 188 48 L 212 108 Z" fill="#c8102e"/>
+    <!-- sun -->
+    <circle cx="178" cy="28" r="16" fill="#ff4f8b"/>
+    <!-- buildings, back row slightly shorter -->
+    <rect x="18" y="64" width="28" height="56" fill="#2a1818"/>
+    <rect x="52" y="44" width="24" height="76" fill="#171717"/>
+    <!-- IFC-like twin antennas -->
+    <rect x="84" y="22" width="22" height="98" fill="#171717"/>
+    <rect x="91" y="8" width="3" height="16" fill="#171717"/>
+    <rect x="97" y="12" width="2.4" height="12" fill="#171717"/>
+    <!-- mid block -->
+    <rect x="112" y="50" width="32" height="70" fill="#2a1818"/>
+    <!-- ICC-like taper -->
+    <path d="M150 108 L150 34 L162 22 L174 34 L174 108 Z" fill="#171717"/>
+    <rect x="176" y="62" width="22" height="46" fill="#2a1818"/>
+    <!-- waterfront podium -->
+    <rect x="10" y="100" width="196" height="16" fill="#171717"/>
+    <!-- cream windows -->
+    <g fill="#f3eee4">
+      <rect x="24" y="72" width="6" height="8" rx="1"/>
+      <rect x="34" y="72" width="6" height="8" rx="1"/>
+      <rect x="24" y="86" width="6" height="8" rx="1"/>
+      <rect x="34" y="86" width="6" height="8" rx="1"/>
+      <rect x="58" y="52" width="5.5" height="8" rx="1"/>
+      <rect x="67" y="52" width="5.5" height="8" rx="1"/>
+      <rect x="58" y="66" width="5.5" height="8" rx="1"/>
+      <rect x="67" y="66" width="5.5" height="8" rx="1"/>
+      <rect x="58" y="80" width="5.5" height="8" rx="1"/>
+      <rect x="67" y="80" width="5.5" height="8" rx="1"/>
+      <rect x="90" y="30" width="5" height="8" rx="1"/>
+      <rect x="98" y="30" width="5" height="8" rx="1"/>
+      <rect x="90" y="44" width="5" height="8" rx="1"/>
+      <rect x="98" y="44" width="5" height="8" rx="1"/>
+      <rect x="90" y="58" width="5" height="8" rx="1"/>
+      <rect x="98" y="58" width="5" height="8" rx="1"/>
+      <rect x="90" y="72" width="5" height="8" rx="1"/>
+      <rect x="98" y="72" width="5" height="8" rx="1"/>
+      <rect x="118" y="58" width="6" height="8" rx="1"/>
+      <rect x="128" y="58" width="6" height="8" rx="1"/>
+      <rect x="118" y="72" width="6" height="8" rx="1"/>
+      <rect x="128" y="72" width="6" height="8" rx="1"/>
+      <rect x="118" y="86" width="6" height="8" rx="1"/>
+      <rect x="128" y="86" width="6" height="8" rx="1"/>
+      <rect x="156" y="40" width="5" height="8" rx="1"/>
+      <rect x="165" y="40" width="5" height="8" rx="1"/>
+      <rect x="156" y="54" width="5" height="8" rx="1"/>
+      <rect x="165" y="54" width="5" height="8" rx="1"/>
+      <rect x="156" y="68" width="5" height="8" rx="1"/>
+      <rect x="165" y="68" width="5" height="8" rx="1"/>
+      <rect x="182" y="70" width="5" height="7" rx="1"/>
+      <rect x="190" y="70" width="5" height="7" rx="1"/>
+      <rect x="182" y="82" width="5" height="7" rx="1"/>
+      <rect x="190" y="82" width="5" height="7" rx="1"/>
+    </g>
+
+  </g>
+</svg>

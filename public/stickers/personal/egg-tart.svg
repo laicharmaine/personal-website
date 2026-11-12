@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 186" fill="none">
+  <defs>
+    <filter id="die-egg-tart" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-egg-tart)">
+
+    <!-- tin / outer shell -->
+    <ellipse cx="100" cy="118" rx="88" ry="30" fill="#2a1818"/>
+    <path d="M16 100 Q 16 56 100 48 Q 184 56 184 100 L 176 118 Q 100 148 24 118 Z" fill="#f3eee4"/>
+    <path d="M16 100 Q 16 56 100 48 Q 184 56 184 100 L 176 118 Q 100 148 24 118 Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <!-- fluted rim, front -->
+    <g fill="#f3eee4" stroke="#171717" stroke-width="3">
+      <ellipse cx="30" cy="108" rx="14" ry="11"/>
+      <ellipse cx="54" cy="120" rx="14" ry="11"/>
+      <ellipse cx="80" cy="128" rx="14" ry="11"/>
+      <ellipse cx="100" cy="130" rx="14" ry="11"/>
+      <ellipse cx="120" cy="128" rx="14" ry="11"/>
+      <ellipse cx="146" cy="120" rx="14" ry="11"/>
+      <ellipse cx="170" cy="108" rx="14" ry="11"/>
+    </g>
+    <!-- back rim -->
+    <path d="M22 96 Q 100 40 178 96" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <path d="M22 96 Q 100 40 178 96" fill="none" stroke="#f3eee4" stroke-width="2"/>
+    <!-- custard well -->
+    <ellipse cx="100" cy="96" rx="64" ry="28" fill="#ff4f8b"/>
+    <ellipse cx="100" cy="96" rx="64" ry="28" fill="none" stroke="#171717" stroke-width="2"/>
+    <ellipse cx="100" cy="92" rx="42" ry="16" fill="#c8102e"/>
+    <ellipse cx="82" cy="86" rx="12" ry="5" fill="#ffffff" opacity="0.45"/>
+
+  </g>
+</svg>

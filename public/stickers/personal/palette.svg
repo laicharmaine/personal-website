@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 192" fill="none">
+  <defs>
+    <filter id="die-palette" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-palette)">
+
+    <!-- palette -->
+    <path d="M20 88
+             C 20 36 68 8 114 20
+             C 160 32 176 80 150 116
+             C 132 142 86 148 56 132
+             C 28 116 20 110 20 88 Z" fill="#f3eee4"/>
+    <path d="M20 88
+             C 20 36 68 8 114 20
+             C 160 32 176 80 150 116
+             C 132 142 86 148 56 132
+             C 28 116 20 110 20 88 Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <!-- thumb hole -->
+    <ellipse cx="128" cy="96" rx="16" ry="13" fill="#171717"/>
+    <!-- paint dabs -->
+    <circle cx="70" cy="48" r="14" fill="#c8102e"/>
+    <circle cx="104" cy="44" r="12" fill="#ff4f8b"/>
+    <circle cx="52" cy="76" r="12" fill="#171717"/>
+    <circle cx="84" cy="72" r="11" fill="#ffffff"/>
+    <circle cx="84" cy="72" r="11" fill="none" stroke="#171717" stroke-width="2"/>
+    <circle cx="62" cy="108" r="11" fill="#e0263f"/>
+    <!-- brush, lying across the right -->
+    <g transform="rotate(-32 168 40)">
+      <rect x="148" y="28" width="70" height="14" rx="4" fill="#171717"/>
+      <rect x="136" y="26" width="16" height="18" rx="3" fill="#f3eee4"/>
+      <rect x="136" y="26" width="16" height="18" rx="3" fill="none" stroke="#171717" stroke-width="2"/>
+      <path d="M136 29 L 112 23 L 108 35 L 112 47 L 136 41 Z" fill="#c8102e"/>
+    </g>
+
+  </g>
+</svg>

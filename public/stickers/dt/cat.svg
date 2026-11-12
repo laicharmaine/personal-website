@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 200" fill="none">
+  <defs>
+
+    <filter id="die" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die)">
+
+    <!-- tail -->
+    <path d="M118 130 C 150 120 150 70 128 64" fill="none" stroke="#171717" stroke-width="12" stroke-linecap="round"/>
+    <!-- body -->
+    <ellipse cx="70" cy="118" rx="42" ry="36" fill="#171717"/>
+    <!-- haunches -->
+    <ellipse cx="44" cy="140" rx="18" ry="14" fill="#171717"/>
+    <ellipse cx="90" cy="142" rx="16" ry="12" fill="#171717"/>
+    <!-- head -->
+    <circle cx="70" cy="62" r="36" fill="#171717"/>
+    <!-- ears -->
+    <path d="M40 48 L 32 10 L 62 38 Z" fill="#171717"/>
+    <path d="M100 48 L 108 10 L 78 38 Z" fill="#171717"/>
+    <path d="M40 44 L 36 18 L 56 38 Z" fill="#2a1818"/>
+    <path d="M100 44 L 104 18 L 84 38 Z" fill="#2a1818"/>
+    <!-- eyes -->
+    <ellipse cx="56" cy="62" rx="8" ry="9" fill="#f6f2c8"/>
+    <ellipse cx="86" cy="62" rx="8" ry="9" fill="#f6f2c8"/>
+    <ellipse cx="57" cy="63" rx="3" ry="6" fill="#171717"/>
+    <ellipse cx="87" cy="63" rx="3" ry="6" fill="#171717"/>
+    <!-- tiny highlight -->
+    <circle cx="54" cy="59" r="1.6" fill="#fff"/>
+    <circle cx="84" cy="59" r="1.6" fill="#fff"/>
+    <path d="M70 72 L 66 80 L 74 80 Z" fill="#2a1818"/>
+    <path d="M62 86 Q 70 90 78 86" fill="none" stroke="#2a1818" stroke-width="1.6" stroke-linecap="round"/>
+    
+  </g>
+</svg>

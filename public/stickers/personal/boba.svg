@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 220" fill="none">
+  <defs>
+    <filter id="die-boba" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-boba)">
+
+    <!-- straw -->
+    <rect x="118" y="0" width="12" height="70" rx="4" fill="#ff4f8b"/>
+    <rect x="118" y="0" width="12" height="70" rx="4" fill="none" stroke="#171717" stroke-width="3"/>
+    <!-- lid dome -->
+    <path d="M36 58 Q 36 28 90 24 Q 144 28 144 58 Z" fill="#f3eee4"/>
+    <path d="M36 58 Q 36 28 90 24 Q 144 28 144 58 Z" fill="none" stroke="#171717" stroke-width="3"/>
+    <circle cx="124" cy="40" r="6" fill="#171717"/>
+    <!-- cup -->
+    <path d="M40 58 L 48 168 Q 48 180 90 180 Q 132 180 132 168 L 140 58 Z" fill="#f3eee4"/>
+    <path d="M40 58 L 48 168 Q 48 180 90 180 Q 132 180 132 168 L 140 58 Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <!-- tea -->
+    <path d="M46 78 L 52 164 Q 52 172 90 172 Q 128 172 128 164 L 134 78 Z" fill="#c8102e"/>
+    <!-- lighter milk layer on top of tea -->
+    <path d="M44 64 L 46 90 Q 90 98 134 90 L 136 64 Z" fill="#ff4f8b"/>
+    <!-- boba pearls -->
+    <g fill="#171717">
+      <circle cx="68" cy="150" r="8"/>
+      <circle cx="90" cy="158" r="8"/>
+      <circle cx="110" cy="148" r="8"/>
+      <circle cx="80" cy="136" r="7"/>
+      <circle cx="102" cy="134" r="7"/>
+    </g>
+    <!-- lid lip -->
+    <rect x="28" y="54" width="124" height="12" rx="4" fill="#f3eee4"/>
+    <rect x="28" y="54" width="124" height="12" rx="4" fill="none" stroke="#171717" stroke-width="3"/>
+    <!-- highlight on cup -->
+    <path d="M58 90 L 62 140" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 180" fill="none">
+  <defs>
+
+    <filter id="die" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die)">
+
+    <path fill="#c8102e" d="M70 40 C 20 8 4 60 54 70 C 20 80 16 130 70 96 C 124 130 120 80 86 70 C 136 60 120 8 70 40 Z"/>
+    <ellipse cx="70" cy="70" rx="16" ry="20" fill="#8a0e22"/>
+    <path fill="#8a0e22" d="M54 88 L 44 140 L 64 128 L 70 96 Z"/>
+    <path fill="#8a0e22" d="M86 88 L 96 140 L 76 128 L 70 96 Z"/>
+    <ellipse cx="70" cy="64" rx="8" ry="6" fill="#fff" opacity=".3"/>
+    
+  </g>
+</svg>

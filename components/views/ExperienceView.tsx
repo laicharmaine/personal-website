@@ -67,7 +67,7 @@ export default function ExperienceView() {
                       <div className="relative border-l border-peri pb-10 pl-6 pt-1 md:pt-7 sm:pl-8">
                         <span
                           aria-hidden
-                          className="absolute -left-[7px] top-3 h-3.5 w-3.5 rounded-full border-[1.5px] border-ink bg-lime md:top-9"
+                          className="absolute -left-[7px] top-3 h-3.5 w-3.5 rounded-full border-[1.5px] border-ink bg-cta md:top-9"
                         />
                         <h2 className="text-2xl font-semibold sm:text-[1.7rem]">
                           <T path={["experience", i, "company"]} />
@@ -269,7 +269,7 @@ function Role({ i, j }: { i: number; j: number }) {
                 onClick={() => setOpen(open === k ? null : k)}
                 className={`group inline-flex scroll-mt-28 items-center gap-2 rounded-full border py-1 pl-1 pr-3 text-sm font-medium transition-colors ${
                   open === k
-                    ? "border-ink bg-lime"
+                    ? "border-ink bg-cta text-cta-ink"
                     : "border-line bg-paper/80 hover:border-ink"
                 }`}
               >
@@ -369,7 +369,7 @@ function Highlight({ k }: { k: number }) {
               href={p.badge.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-start gap-1.5 rounded-md border border-ink bg-lime px-2 py-1 font-mono text-[0.68rem] font-medium leading-5 text-ink"
+              className="inline-flex items-start gap-1.5 rounded-md border border-ink bg-cta px-2 py-1 font-mono text-[0.68rem] font-medium leading-5 text-cta-ink"
             >
               ★ <T path={["projects", k, "badge", "label"]} /> ↗
             </a>

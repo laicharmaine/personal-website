@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 212" fill="none">
+  <defs>
+    <filter id="die-cactus" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-cactus)">
+
+    <!-- sun disc behind -->
+    <circle cx="86" cy="48" r="40" fill="#ff4f8b"/>
+    <circle cx="86" cy="48" r="28" fill="#c8102e"/>
+    <!-- main trunk -->
+    <rect x="70" y="40" width="32" height="128" rx="16" fill="#171717"/>
+    <!-- left arm -->
+    <path d="M70 96 L 36 96 Q 24 96 24 82 L 24 64 Q 24 50 38 50 L 44 50 Q 54 50 54 62 L 54 78 L 70 78 Z" fill="#171717"/>
+    <!-- right arm, a bit higher -->
+    <path d="M102 80 L 132 80 Q 146 80 146 66 L 146 42 Q 146 28 132 28 L 126 28 Q 116 28 116 40 L 116 62 L 102 62 Z" fill="#171717"/>
+    <!-- trunk ridges (cream ticks) -->
+    <g fill="#f3eee4" opacity="0.85">
+      <rect x="84" y="52" width="4" height="10" rx="2"/>
+      <rect x="84" y="72" width="4" height="10" rx="2"/>
+      <rect x="84" y="92" width="4" height="10" rx="2"/>
+      <rect x="84" y="112" width="4" height="10" rx="2"/>
+      <rect x="84" y="132" width="4" height="10" rx="2"/>
+    </g>
+    <!-- flowers -->
+    <circle cx="38" cy="42" r="10" fill="#ff4f8b"/>
+    <circle cx="38" cy="42" r="4" fill="#f3eee4"/>
+    <circle cx="132" cy="20" r="10" fill="#ff4f8b"/>
+    <circle cx="132" cy="20" r="4" fill="#f3eee4"/>
+    <circle cx="86" cy="32" r="8" fill="#ff4f8b"/>
+    <circle cx="86" cy="32" r="3.2" fill="#f3eee4"/>
+    <!-- ground mound -->
+    <ellipse cx="86" cy="170" rx="50" ry="10" fill="#171717"/>
+
+  </g>
+</svg>

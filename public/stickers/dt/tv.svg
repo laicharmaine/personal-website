@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 192" fill="none">
+  <defs>
+
+    <filter id="die" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die)">
+
+    <line x1="50" y1="8" x2="78" y2="36" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <line x1="130" y1="8" x2="100" y2="36" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="50" cy="8" r="4" fill="#171717"/>
+    <circle cx="130" cy="8" r="4" fill="#171717"/>
+    <rect x="8" y="36" width="164" height="120" rx="8" fill="#2c2c2c"/>
+    <rect x="18" y="46" width="108" height="84" rx="4" fill="#1a1a1a"/>
+    <rect x="22" y="50" width="100" height="76" rx="2" fill="#242018"/>
+    <!-- star on screen, not a person -->
+    <path fill="#f3eee4" opacity=".85" d="M72 64 L78 82 L96 84 L82 96 L86 114 L72 104 L58 114 L62 96 L48 84 L66 82 Z"/>
+    <rect x="134" y="52" width="26" height="26" rx="13" fill="#f3eee4"/>
+    <rect x="134" y="84" width="26" height="26" rx="13" fill="#f3eee4"/>
+    <circle cx="147" cy="65" r="5" fill="#c8102e"/>
+    <circle cx="147" cy="97" r="5" fill="#171717"/>
+    <rect x="48" y="140" width="16" height="10" fill="#2c2c2c"/>
+    <rect x="116" y="140" width="16" height="10" fill="#2c2c2c"/>
+    
+  </g>
+</svg>

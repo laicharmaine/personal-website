@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 208" fill="none">
+  <defs>
+    <filter id="die-palms" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-palms)">
+
+    <!-- sun -->
+    <circle cx="70" cy="70" r="44" fill="#ff4f8b"/>
+    <circle cx="70" cy="70" r="32" fill="#c8102e"/>
+    <!-- left trunk -->
+    <path d="M58 168 C 54 120 62 90 70 70" fill="none" stroke="#171717" stroke-width="10" stroke-linecap="round"/>
+    <!-- right trunk -->
+    <path d="M118 168 C 110 124 100 92 92 74" fill="none" stroke="#171717" stroke-width="9" stroke-linecap="round"/>
+    <!-- left fronds -->
+    <g fill="#171717">
+      <path d="M70 70 C 40 60 18 40 22 22 C 48 36 64 48 70 70 Z"/>
+      <path d="M70 70 C 50 48 44 18 60 6 C 62 32 68 50 70 70 Z"/>
+      <path d="M70 70 C 86 48 108 28 126 22 C 100 44 84 56 70 70 Z"/>
+      <path d="M70 70 C 40 78 16 70 8 58 C 32 64 54 66 70 70 Z"/>
+      <path d="M70 70 C 96 78 118 68 128 54 C 104 64 86 68 70 70 Z"/>
+    </g>
+    <!-- right fronds, a bit cherry for variety -->
+    <g fill="#c8102e">
+      <path d="M92 74 C 80 54 78 28 92 12 C 90 36 92 56 92 74 Z"/>
+      <path d="M92 74 C 108 52 132 36 150 34 C 124 50 106 62 92 74 Z"/>
+      <path d="M92 74 C 70 64 52 70 40 62 C 62 70 80 72 92 74 Z"/>
+      <path d="M92 74 C 116 80 140 72 152 60 C 128 70 108 74 92 74 Z"/>
+    </g>
+    <!-- right tree also needs a dark top cluster so it reads -->
+    <path d="M92 74 C 110 58 130 58 146 50 C 118 66 104 70 92 74 Z" fill="#171717"/>
+
+  </g>
+</svg>

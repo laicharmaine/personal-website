@@ -1,30 +1,178 @@
 @import "tailwindcss";
 
 /*
- * Charmaine.OS, 2026 edition: periwinkle desktop, acid-lime highlights,
- * ink + paper. Thin lines, small coloured shadows, lots of air.
- * AA pairs: ink on desk ~15:1 · ink-soft on desk ~9:1 · peri-deep on paper ~9:1
- *           ink on lime ~17:1 · lime on ink ~16:1 · ink-soft on paper ~12:1
+ * Charmaine.OS y2k-glossy2: cherry (default), lilac, and cobalt schemes
+ * in light and dark. Blush-mauve desk, flat Jersey 10 headings, thin
+ * lines, open space — no blocky cards. Tokens follow the active
+ * data-scheme / data-mode so existing utility classes restyle with the
+ * switcher. AA contrast is checked per scheme in the approved theme.
  */
-:root {
-  --ink: #0e0e14;
+@property --ink { syntax: "<color>"; inherits: true; initial-value: #1f1a17; }
+@property --ink-soft { syntax: "<color>"; inherits: true; initial-value: #5a524c; }
+@property --paper { syntax: "<color>"; inherits: true; initial-value: #fffafc; }
+@property --desk { syntax: "<color>"; inherits: true; initial-value: #f6e1ea; }
+@property --heading { syntax: "<color>"; inherits: true; initial-value: #c8102e; }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #ff4f8b; }
+@property --cta { syntax: "<color>"; inherits: true; initial-value: #c8102e; }
+@property --cta-ink { syntax: "<color>"; inherits: true; initial-value: #fffafc; }
+@property --hl { syntax: "<color>"; inherits: true; initial-value: #f5d0dc; }
+@property --chip { syntax: "<color>"; inherits: true; initial-value: #f8e6ee; }
+@property --cream-line { syntax: "<color>"; inherits: true; initial-value: #ead0dc; }
+@property --hover { syntax: "<color>"; inherits: true; initial-value: #f3d5e0; }
+@property --line { syntax: "<color>"; inherits: true; initial-value: rgb(31 26 23 / 0.14); }
+@property --holo-ring { syntax: "<color>"; inherits: true; initial-value: #fffafc; }
+@property --grid-dot { syntax: "<color>"; inherits: true; initial-value: rgb(90 40 70 / 0.055); }
+
+:root,
+html[data-scheme="cherry"][data-mode="light"] {
+  color-scheme: light;
+  --ink: #1f1a17;
+  --ink-soft: #5a524c;
+  --paper: #fffafc;
+  --desk: #f6e1ea;
+  --heading: #c8102e;
+  --accent: #ff4f8b;
+  --cta: #c8102e;
+  --cta-ink: #fffafc;
+  --hl: #f5d0dc;
+  --chip: #f8e6ee;
+  --cream-line: #ead0dc;
+  --hover: #f3d5e0;
+  --line: rgb(31 26 23 / 0.14);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd4e0, #ff4f8b, #c8102e, #e8d0ee, #ffd4e0);
+  --holo-ring: #fffafc;
+  --grid-dot: rgb(90 40 70 / 0.055);
+  --desk-grad: linear-gradient(165deg, #f7e3ec 0%, #f6e1ea 55%, #efe3f5 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(31 26 23 / 0.22);
+  --shadow-panel: 0 8px 20px rgba(31, 26, 23, 0.08);
+}
+html[data-scheme="cherry"][data-mode="dark"] {
+  color-scheme: dark;
+  --ink: #f3ece7;
+  --ink-soft: #d2c0c4;
+  --paper: #2a1e24;
+  --desk: #1d1418;
+  --heading: #ff6b86;
+  --accent: #ff7aa8;
+  --cta: #ff5a74;
+  --cta-ink: #1d1418;
+  --hl: #4a3038;
+  --chip: #3a2a30;
+  --cream-line: #4a353c;
+  --hover: #3a2a30;
+  --line: rgb(243 236 231 / 0.16);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd4e0, #ff7aa8, #ff5a74, #6a3a50, #ffd4e0);
+  --holo-ring: #f3ece7;
+  --grid-dot: rgb(255 200 220 / 0.07);
+  --desk-grad: linear-gradient(165deg, #22161c 0%, #1d1418 55%, #1a1218 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(0 0 0 / 0.35);
+  --shadow-panel: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+html[data-scheme="lilac"][data-mode="light"] {
+  color-scheme: light;
+  --ink: #1c1b24;
   --ink-soft: #3b3a4e;
   --paper: #fffefb;
   --desk: #e7e5ff;
-  --peri: #9b95ff;
-  --peri-light: #d9d6ff;
-  --peri-deep: #3a32b0;
-  --lime: #c8ff3c;
-  --pink: #ff8fc7;
-  --line: rgb(14 14 20 / 0.16);
-  --holo: conic-gradient(
-    from 200deg at 30% 60%,
-    #ffd0ec,
-    #c8ff3c,
-    #9df3ff,
-    #b9b2ff,
-    #ffd0ec
-  );
+  --heading: #3a32b0;
+  --accent: #c8ff3c;
+  --cta: #c8ff3c;
+  --cta-ink: #1c1b24;
+  --hl: #c8ff3c;
+  --chip: #d9d6ff;
+  --cream-line: #c5c0ef;
+  --hover: #d9d6ff;
+  --line: rgb(28 27 36 / 0.16);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd0ec, #c8ff3c, #9df3ff, #b9b2ff, #ffd0ec);
+  --holo-ring: #fffefb;
+  --grid-dot: rgb(58 50 176 / 0.13);
+  --desk-grad: linear-gradient(165deg, #ebe9ff 0%, #e7e5ff 60%, #e4e8ff 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(58 50 176 / 0.28);
+  --shadow-panel: 0 8px 20px rgba(58, 50, 176, 0.12);
+}
+html[data-scheme="lilac"][data-mode="dark"] {
+  color-scheme: dark;
+  --ink: #eeebf8;
+  --ink-soft: #c5c0dc;
+  --paper: #242038;
+  --desk: #141226;
+  --heading: #c4bfff;
+  --accent: #c8ff3c;
+  --cta: #c8ff3c;
+  --cta-ink: #141226;
+  --hl: #3a3650;
+  --chip: #332e4c;
+  --cream-line: #3c3758;
+  --hover: #332e4c;
+  --line: rgb(238 235 248 / 0.16);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd0ec, #c8ff3c, #9df3ff, #b9b2ff, #ffd0ec);
+  --holo-ring: #eeebf8;
+  --grid-dot: rgb(180 170 255 / 0.08);
+  --desk-grad: linear-gradient(165deg, #18152c 0%, #141226 55%, #12101f 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(0 0 0 / 0.35);
+  --shadow-panel: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+html[data-scheme="cobalt"][data-mode="light"] {
+  color-scheme: light;
+  --ink: #1a1c24;
+  --ink-soft: #4a4e5c;
+  --paper: #fbfcfe;
+  --desk: #eef3f8;
+  --heading: #2547d0;
+  --accent: #ff4f8b;
+  --cta: #2547d0;
+  --cta-ink: #fbfcfe;
+  --hl: #ffd0e0;
+  --chip: #e4eaf6;
+  --cream-line: #cfd6e8;
+  --hover: #e2e8f5;
+  --line: rgb(26 28 36 / 0.14);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd0e0, #ff4f8b, #2547d0, #c5d0f5, #ffd0e0);
+  --holo-ring: #fbfcfe;
+  --grid-dot: rgb(37 71 208 / 0.08);
+  --desk-grad: linear-gradient(165deg, #f3f6fb 0%, #eef3f8 55%, #f2f0ea 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(26 28 36 / 0.18);
+  --shadow-panel: 0 8px 20px rgba(26, 28, 36, 0.08);
+}
+html[data-scheme="cobalt"][data-mode="dark"] {
+  color-scheme: dark;
+  --ink: #eef0f6;
+  --ink-soft: #b8c0d4;
+  --paper: #1c2540;
+  --desk: #12182c;
+  --heading: #8aa0ff;
+  --accent: #ff7aa8;
+  --cta: #6d8aff;
+  --cta-ink: #12182c;
+  --hl: #2a3458;
+  --chip: #263150;
+  --cream-line: #2c3658;
+  --hover: #263150;
+  --line: rgb(238 240 246 / 0.16);
+  --holo: conic-gradient(from 200deg at 30% 60%, #ffd0e0, #ff7aa8, #6d8aff, #2a3458, #ffd0e0);
+  --holo-ring: #eef0f6;
+  --grid-dot: rgb(160 180 255 / 0.07);
+  --desk-grad: linear-gradient(165deg, #161e36 0%, #12182c 55%, #101526 100%);
+  --heading-shadow: 0.05em 0.05em 0 rgb(0 0 0 / 0.35);
+  --shadow-panel: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Legacy aliases so existing bg-lime / text-peri-deep / etc. follow the scheme. */
+:root,
+html[data-scheme][data-mode] {
+  --peri: var(--cream-line);
+  --peri-light: var(--chip);
+  --peri-deep: var(--heading);
+  --lime: var(--accent);
+  --pink: var(--accent);
+}
+
+html.theme-ready {
+  transition:
+    --ink 200ms ease, --ink-soft 200ms ease, --paper 200ms ease, --desk 200ms ease,
+    --heading 200ms ease, --accent 200ms ease, --cta 200ms ease, --cta-ink 200ms ease,
+    --hl 200ms ease, --chip 200ms ease, --cream-line 200ms ease, --hover 200ms ease,
+    --line 200ms ease, --holo-ring 200ms ease, --grid-dot 200ms ease;
 }
 
 @theme inline {
@@ -38,6 +186,14 @@
   --color-lime: var(--lime);
   --color-pink: var(--pink);
   --color-line: var(--line);
+  --color-heading: var(--heading);
+  --color-accent: var(--accent);
+  --color-cta: var(--cta);
+  --color-cta-ink: var(--cta-ink);
+  --color-hl: var(--hl);
+  --color-chip: var(--chip);
+  --color-cream-line: var(--cream-line);
+  --color-hover: var(--hover);
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
   --font-pixel: var(--font-jersey), var(--font-hanken), sans-serif;
@@ -53,16 +209,16 @@ body {
   font-size: 1.0625rem;
   line-height: 1.6;
   background-color: var(--desk);
-  /* faint pixel grid, like an old desktop pattern */
-  background-image: radial-gradient(
-    rgb(58 50 176 / 0.13) 1px,
-    transparent 1.2px
-  );
-  background-size: 22px 22px;
+  background-image:
+    url("/bg-sparkles.svg"),
+    radial-gradient(var(--grid-dot) 1px, transparent 1.2px),
+    var(--desk-grad);
+  background-repeat: repeat, repeat, no-repeat;
+  background-size: 480px 480px, 22px 22px, auto;
 }
 
 ::selection {
-  background: var(--lime);
+  background: var(--hl);
   color: var(--ink);
 }
 
@@ -102,7 +258,7 @@ body {
     background: var(--paper);
     border: 1.5px solid var(--ink);
     border-radius: 6px;
-    box-shadow: 4px 4px 0 var(--peri);
+    box-shadow: 4px 4px 0 var(--cream-line);
     overflow: hidden;
   }
   .win-titlebar {
@@ -119,13 +275,13 @@ body {
           transparent 1px 3px
         )
         0 50% / 100% 55% no-repeat,
-      var(--bar, linear-gradient(180deg, #c9c5ff, var(--peri)));
+      var(--bar, linear-gradient(180deg, var(--chip), var(--cream-line)));
   }
   .win-title {
     margin: 0 auto;
     padding: 0 0.6rem;
     border-radius: 3px;
-    background: var(--bar-solid, #b6b1ff);
+    background: var(--bar-solid, var(--cream-line));
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 500;
@@ -149,14 +305,15 @@ body {
     background: var(--pink);
   }
   .win-lime {
-    --bar: linear-gradient(180deg, #e2ff9a, var(--lime));
-    --bar-solid: #d6ff6e;
+    --bar: linear-gradient(180deg, color-mix(in srgb, var(--cta) 40%, var(--paper)), var(--cta));
+    --bar-solid: var(--cta);
+    --bar-ink: var(--cta-ink);
     box-shadow: 4px 4px 0 var(--ink);
   }
   .win-ink {
-    --bar: linear-gradient(180deg, #2b2a3a, var(--ink));
+    --bar: linear-gradient(180deg, color-mix(in srgb, var(--ink) 85%, var(--paper)), var(--ink));
     --bar-solid: var(--ink);
-    --bar-ink: var(--lime);
+    --bar-ink: var(--accent);
   }
 
   /* ---------- Buttons ---------- */
@@ -184,7 +341,8 @@ body {
     box-shadow: none;
   }
   .btn-lime {
-    background: var(--lime);
+    background: var(--cta);
+    color: var(--cta-ink);
   }
   .btn-paper {
     background: var(--paper);
@@ -202,8 +360,8 @@ body {
   .hl {
     background: linear-gradient(
       transparent 12%,
-      var(--lime) 12%,
-      var(--lime) 92%,
+      var(--hl) 12%,
+      var(--hl) 92%,
       transparent 92%
     );
     box-decoration-break: clone;
@@ -214,11 +372,11 @@ body {
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 4px;
-    text-decoration-color: var(--peri-deep);
+    text-decoration-color: var(--heading);
     transition: background 0.15s;
   }
   .ulink:hover {
-    background: var(--lime);
+    background: var(--hl);
     text-decoration-color: var(--ink);
   }
 
@@ -231,9 +389,10 @@ body {
     color: var(--ink-soft);
   }
 
-  /* Pixel heading with a periwinkle drop */
+  /* Pixel heading in the scheme heading color, flat drop */
   .pixel-shadow {
-    text-shadow: 0.05em 0.05em 0 var(--peri);
+    color: var(--heading);
+    text-shadow: var(--heading-shadow);
   }
   .chrome-text {
     background: linear-gradient(
@@ -288,15 +447,17 @@ body {
       24.5% 6.7%,
       40.2% 13.9%
     );
+    background: var(--cta);
+    color: var(--cta-ink);
   }
 
-  /* File-list rows: "selected file" lime highlight on hover */
+  /* File-list rows: calm scheme hover, not a loud fill */
   .file-row {
     transition: background 0.12s;
   }
   .file-row:hover,
   .file-row:focus-visible {
-    background: var(--lime);
+    background: var(--hover);
   }
   .file-row:hover .muted-on-hover {
     color: var(--ink);
@@ -314,7 +475,7 @@ body {
     top: 0.6em;
     width: 0.45rem;
     height: 0.45rem;
-    background: var(--lime);
+    background: var(--accent);
     outline: 1.5px solid var(--ink);
   }
 
@@ -333,12 +494,19 @@ body {
   }
   details[open] .toggle {
     transform: rotate(45deg);
-    background: var(--lime);
+    background: var(--cta);
   }
   details[open] .details-body {
     animation: fade-up 0.3s ease both;
   }
+
+  .nav-on {
+    background: var(--cta);
+    color: var(--cta-ink);
+    box-shadow: 0 0 0 1.5px var(--ink);
+  }
 }
+
 
 /* ---------- Motion (CSS only) ---------- */
 @keyframes marquee {
@@ -363,6 +531,20 @@ body {
 .blink {
   animation: blink 1.1s steps(1) infinite;
 }
+
+/* Jersey 10 caret: cap-height 0.54em, baseline, no descent */
+.caret {
+  display: inline-block;
+  vertical-align: baseline;
+  width: 0.12em;
+  height: 0.54em;
+  margin: 0 0 0 0.08em;
+  background: var(--accent);
+  border-radius: 0.04em;
+  box-shadow: 0.05em 0.05em 0 var(--paper), 0.06em 0.06em 0 var(--ink);
+  animation: blink 1.05s steps(1) infinite;
+}
+
 
 @keyframes win-open {
   from {
@@ -409,8 +591,12 @@ body {
   html {
     scroll-behavior: auto;
   }
+  html.theme-ready {
+    transition: none;
+  }
   .marquee-track,
   .blink,
+  .caret,
   .win-open,
   .win-open-2,
   details[open] .details-body {
@@ -675,4 +861,243 @@ a:hover > .photo-frame,
   border-radius: 3px;
   background: var(--paper);
   cursor: nesw-resize;
+}
+
+/* ---------- Theme switcher + homepage reveal (ported from y2k-glossy2) ---------- */
+.theme-switcher {
+  display: flex; align-items: center; gap: .4rem;
+  flex: none;
+  padding: .18rem .28rem .18rem .38rem;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 1.5px 1.5px 0 var(--ink);
+}
+.scheme-dots { display: flex; align-items: center; gap: .28rem; }
+.swatch {
+  width: 1.05rem; height: 1.05rem; padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  background: center / 100% no-repeat;
+  box-shadow: 0 1px 0 rgb(31 26 23 / 0.12);
+}
+.swatch-cherry { background-color: #c8102e; }
+.swatch-lilac { background-color: #9b95ff; }
+.swatch-cobalt { background-color: #2547d0; }
+.swatch[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.25px var(--ink);
+}
+.swatch:focus-visible, .mode-toggle:focus-visible {
+  outline: 2px solid var(--heading);
+  outline-offset: 2px;
+}
+.switcher-tick {
+  width: 1px; height: .85rem;
+  background: var(--line);
+  transform: rotate(-12deg);
+}
+.mode-toggle {
+  width: 1.55rem; height: 1.55rem; padding: 0;
+  display: grid; place-items: center;
+  border: 0; background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 50%;
+}
+.mode-toggle svg { width: 1rem; height: 1rem; display: none; }
+html[data-mode="light"] .mode-toggle .icon-sun,
+html:not([data-mode]) .mode-toggle .icon-sun { display: block; }
+html[data-mode="dark"] .mode-toggle .icon-moon { display: block; }
+@media (max-width: 639px) {
+  .theme-switcher { padding: .14rem .22rem .14rem .3rem; gap: .32rem; }
+  .swatch { width: .95rem; height: .95rem; }
+  .mode-toggle { width: 1.4rem; height: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready { transition: none; }
+}
+
+
+/* full-cover downtown vinyl sheet, then fly-off reveal */
+html.has-reveal { overflow: hidden; }
+html.has-reveal:not(.is-revealing) body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--desk);
+}
+#reveal-sheet {
+  display: none;
+}
+html.has-reveal #reveal-sheet {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--desk);
+  overflow: hidden;
+  pointer-events: auto;
+}
+.reveal-piece {
+  position: absolute;
+  height: auto;
+  max-width: none;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  user-select: none;
+}
+html.has-reveal #reveal-sheet {
+  cursor: pointer;
+}
+.reveal-piece.is-wiggling {
+  animation: sticker-wiggle 3.2s ease-in-out infinite;
+  animation-delay: var(--wiggle-delay, 0s);
+}
+@keyframes sticker-wiggle {
+  0%, 100% { transform: translate(-50%, -50%) rotate(var(--rot, 0deg)); }
+  30% { transform: translate(-50%, -50%) rotate(calc(var(--rot, 0deg) + 2.4deg)) translate(0, -2px); }
+  62% { transform: translate(-50%, -50%) rotate(calc(var(--rot, 0deg) - 1.8deg)) translate(1px, 1px); }
+}
+.reveal-hero {
+  left: 50%;
+  top: 50%;
+  width: 44vmin;
+  z-index: 70;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.reveal-hero-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(-2deg);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  user-select: none;
+}
+.reveal-prompt {
+  width: auto !important;
+  left: 50%;
+  top: 50%;
+  z-index: 80;
+  /* hero viewBox 267.6738 x 101.5039 */
+  --prompt-shift: calc((44vmin * 101.5039 / 267.6738) / 2 + 50% + 0.65rem);
+  transform: translate(-50%, -50%) translateY(var(--prompt-shift));
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  color: #171717;
+  font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 3.1vw, 1.55rem);
+  letter-spacing: .02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.reveal-prompt .prompt-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3eee4;
+  color: #171717;
+  border: 3.5px solid #171717;
+  border-radius: 18px;
+  padding: 0.55rem 1.2rem;
+  box-shadow: 0 0 0 6px #fff, 0 5px 0 rgba(23, 23, 23, 0.16);
+  transform: rotate(-3deg);
+  transform-origin: 50% 50%;
+  animation: prompt-pulse 1.85s ease-in-out infinite;
+}
+.reveal-prompt .prompt-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  line-height: 1;
+  text-align: center;
+}
+.reveal-prompt .prompt-star {
+  color: #c8102e;
+  display: block;
+  line-height: 1;
+  font-size: 0.95em;
+  transform: translateY(0.02em);
+}
+@keyframes prompt-pulse {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50% { transform: rotate(-3deg) scale(1.055); }
+}
+#reveal-sheet.is-leaving {
+  animation: sheet-fade .55s ease .15s forwards;
+}
+@keyframes sheet-fade {
+  to { background-color: transparent; }
+}
+#reveal-sheet.is-leaving .reveal-piece {
+  animation: fly-out .56s cubic-bezier(.2,.75,.25,1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+#reveal-sheet.is-leaving .reveal-hero,
+#reveal-sheet.is-leaving .reveal-prompt {
+  animation: fly-out-rest .56s cubic-bezier(.2,.75,.25,1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes fly-out-rest {
+  to {
+    transform: var(--rest) translate(var(--dx), var(--dy)) rotate(var(--spin)) scale(.82);
+    opacity: 0;
+  }
+}
+@keyframes fly-out {
+  to {
+    transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--spin)) scale(.82);
+    opacity: 0;
+  }
+}
+#reveal-sheet.is-fading {
+  animation: sheet-out .28s ease forwards;
+  pointer-events: none;
+}
+#reveal-sheet.is-fading .reveal-piece,
+#reveal-sheet.is-fading .reveal-prompt {
+  animation: none;
+}
+@keyframes sheet-out {
+  to { opacity: 0; }
+}
+html.has-reveal #reveal-sheet.is-mid {
+  background: color-mix(in srgb, var(--desk) 35%, transparent);
+}
+html.has-reveal #reveal-sheet.is-mid .reveal-piece {
+  animation: none;
+  transform: translate(-50%,-50%) translate(calc(var(--dx) * .28), calc(var(--dy) * .28)) rotate(calc(var(--spin) * .32)) scale(.96) !important;
+  opacity: .9;
+}
+html.has-reveal #reveal-sheet.is-mid .reveal-hero {
+  animation: none;
+  transform: translate(-50%,-50%) translate(0, -8vh) rotate(-8deg) scale(.96) !important;
+  opacity: .9;
+}
+html.has-reveal #reveal-sheet.is-mid .reveal-prompt {
+  animation: none;
+  transform: translate(-50%,-50%) translateY(var(--prompt-shift)) translate(0, 10vh) rotate(-8deg) scale(.96) !important;
+  opacity: .9;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-piece.is-wiggling,
+  .reveal-prompt,
+  .reveal-prompt .prompt-inner {
+    animation: none !important;
+  }
+}
+
+/* if the overlay is still in the DOM after has-reveal is cleared, never show or block */
+html:not(.has-reveal) #reveal-sheet {
+  display: none !important;
+  pointer-events: none !important;
+}
+#reveal-sheet.is-leaving {
+  pointer-events: none;
 }

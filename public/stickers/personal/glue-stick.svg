@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 200" fill="none">
+  <defs>
+    <filter id="die-glue-stick" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-glue-stick)">
+
+    <!-- exposed glue -->
+    <rect x="56" y="8" width="48" height="36" rx="8" fill="#f3eee4"/>
+    <rect x="56" y="8" width="48" height="36" rx="8" fill="none" stroke="#171717" stroke-width="3"/>
+    <ellipse cx="80" cy="8" rx="24" ry="8" fill="#ffffff"/>
+    <ellipse cx="80" cy="8" rx="24" ry="8" fill="none" stroke="#171717" stroke-width="3"/>
+    <!-- body -->
+    <rect x="44" y="42" width="72" height="100" rx="10" fill="#c8102e"/>
+    <rect x="44" y="42" width="72" height="100" rx="10" fill="none" stroke="#171717" stroke-width="3"/>
+    <!-- label band, no words, just a cream stripe -->
+    <rect x="44" y="78" width="72" height="28" fill="#f3eee4"/>
+    <rect x="44" y="78" width="72" height="28" fill="none" stroke="#171717" stroke-width="2"/>
+    <circle cx="80" cy="92" r="8" fill="#ff4f8b"/>
+    <!-- twist base -->
+    <rect x="44" y="130" width="72" height="26" rx="8" fill="#2a1818"/>
+    <rect x="56" y="138" width="48" height="8" rx="3" fill="#171717"/>
+    <!-- cap beside it? keep it simple, one stick only -->
+
+  </g>
+</svg>

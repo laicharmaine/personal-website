@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 122" fill="none">
+  <defs>
+    <filter id="die-wristband" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-wristband)">
+
+    <!-- band body, slightly bowed -->
+    <path d="M12 40 Q 110 16 208 40 L 208 78 Q 110 54 12 78 Z" fill="#c8102e"/>
+    <path d="M12 40 Q 110 16 208 40 L 208 78 Q 110 54 12 78 Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <!-- cream stripe -->
+    <path d="M22 50 Q 110 30 198 50 L 198 62 Q 110 42 22 62 Z" fill="#f3eee4"/>
+    <!-- snaps -->
+    <circle cx="36" cy="56" r="8" fill="#171717"/>
+    <circle cx="36" cy="56" r="3.5" fill="#f3eee4"/>
+    <circle cx="184" cy="56" r="8" fill="#171717"/>
+    <circle cx="184" cy="56" r="3.5" fill="#f3eee4"/>
+    <!-- studs / stars along the stripe -->
+    <g fill="#ff4f8b">
+      <circle cx="78" cy="46" r="3.2"/>
+      <circle cx="110" cy="42" r="3.2"/>
+      <circle cx="142" cy="46" r="3.2"/>
+    </g>
+
+  </g>
+</svg>

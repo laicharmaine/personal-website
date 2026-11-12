@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" fill="none">
+  <defs>
+    <filter id="die-scissors" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-scissors)">
+
+    <!-- lower blade (behind) -->
+    <path d="M92 86 L 108 78 L 176 132 L 176 148 L 160 148 Z" fill="#f3eee4"/>
+    <path d="M92 86 L 108 78 L 176 132 L 176 148 L 160 148 Z" fill="none" stroke="#171717" stroke-width="4" stroke-linejoin="round"/>
+    <!-- upper blade -->
+    <path d="M92 82 L 108 90 L 176 36 L 176 20 L 160 20 Z" fill="#f3eee4"/>
+    <path d="M92 82 L 108 90 L 176 36 L 176 20 L 160 20 Z" fill="none" stroke="#171717" stroke-width="4" stroke-linejoin="round"/>
+    <!-- inner cutting edge lines -->
+    <path d="M108 84 L 168 30" fill="none" stroke="#171717" stroke-width="2"/>
+    <path d="M108 84 L 168 138" fill="none" stroke="#171717" stroke-width="2"/>
+    <!-- pivot -->
+    <circle cx="96" cy="84" r="12" fill="#171717"/>
+    <circle cx="96" cy="84" r="5" fill="#f3eee4"/>
+    <!-- handles -->
+    <ellipse cx="46" cy="50" rx="30" ry="24" transform="rotate(-30 46 50)" fill="none" stroke="#171717" stroke-width="13"/>
+    <ellipse cx="46" cy="50" rx="30" ry="24" transform="rotate(-30 46 50)" fill="none" stroke="#c8102e" stroke-width="7"/>
+    <ellipse cx="46" cy="120" rx="30" ry="24" transform="rotate(30 46 120)" fill="none" stroke="#171717" stroke-width="13"/>
+    <ellipse cx="46" cy="120" rx="30" ry="24" transform="rotate(30 46 120)" fill="none" stroke="#ff4f8b" stroke-width="7"/>
+    <!-- handle shanks -->
+    <path d="M72 64 L 96 80" fill="none" stroke="#171717" stroke-width="10" stroke-linecap="round"/>
+    <path d="M72 104 L 96 88" fill="none" stroke="#171717" stroke-width="10" stroke-linecap="round"/>
+
+  </g>
+</svg>

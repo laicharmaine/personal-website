@@ -108,7 +108,7 @@ export default function ContactView() {
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-ink bg-paper px-3.5 py-1.5 text-sm font-semibold transition-colors hover:bg-lime"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-ink bg-paper px-3.5 py-1.5 text-sm font-semibold transition-colors hover:bg-hover"
                 >
                   <T path={["contactPage", "links", i, "label"]} />
                   <span aria-hidden className="text-xs">
