@@ -346,6 +346,7 @@ type Piece = { src: string; x: number; y: number; w: number; r: number; z: numbe
   }
   if (q === "done" || q === "skip") {
     removeSheet();
+    try { sessionStorage.setItem(KEY, "1"); } catch {}
     return stopReveal;
   }
 

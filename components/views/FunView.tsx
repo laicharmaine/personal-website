@@ -110,7 +110,7 @@ export default function FunView() {
               <Window
                 as="section"
                 title={<T path={["fun", idx, "file"]} />}
-                tone={item.stat ? "lime" : "peri"}
+                tone="peri"
                 className={`relative ${idx < 2 ? "win-open" : "win-open-2"}`}
                 bodyClassName="px-5 pb-6 pt-5 sm:px-7 sm:pb-7"
                 labelledBy={`fun-${item.slug}`}
@@ -124,97 +124,51 @@ export default function FunView() {
                   className="right-10 top-1"
                 />
                 <div id={item.slug} className="scroll-mt-24">
-                  {item.stat ? (
-                    <div className="flex items-center gap-4 sm:gap-5">
-                      <div className="grid aspect-[16/7] min-w-0 flex-1 place-items-center rounded-md bg-ink text-center">
-                        <p>
-                          <span className="pixel block text-[5.5rem] text-lime sm:text-[6.5rem]">
-                            <T path={["fun", idx, "stat", "value"]} />
-                          </span>
-                          <span className="mt-1 block font-mono text-sm text-paper">
-                            <T path={["fun", idx, "stat", "label"]} />
-                          </span>
-                        </p>
-                      </div>
-                      {item.media[0] ? (
-                        <Block
-                          id={`fun.${item.slug || idx}.photo`}
-                          kind="image"
-                          label="Photo"
-                          as="span"
-                          className="relative block w-28 shrink-0 sm:w-32"
-                          sizes={{
-                            s: "relative block w-20 shrink-0 sm:w-24",
-                            l: "relative block w-36 shrink-0 sm:w-44",
-                          }}
-                        >
-                          <Frame
-                            m={item.media[0]}
-                            shape="square"
-                            i={1}
-                            path={["fun", idx, "media", 0]}
-                            small
-                          />
-                        </Block>
-                      ) : (
-                        editing && (
-                          <AddButton
-                            path={["fun", idx, "media"]}
-                            make={() => ({ ...templates.media })}
-                            label="Add photo"
-                          />
-                        )
-                      )}
-                    </div>
-                  ) : (
-                    <>
-                      <div
-                        className={`grid gap-4 ${
-                          item.media.length >= 3
-                            ? "grid-cols-3"
-                            : item.media.length === 2
-                              ? "grid-cols-2"
-                              : "grid-cols-1"
-                        }`}
+                  <div
+                    className={`grid gap-4 ${
+                      item.media.length >= 3
+                        ? "grid-cols-3"
+                        : item.media.length === 2
+                          ? "grid-cols-2"
+                          : "grid-cols-1"
+                    }`}
+                  >
+                    {item.media.map((m, i) => (
+                      <Block
+                        key={i}
+                        id={`fun.${item.slug || idx}.media.${i}`}
+                        kind="image"
+                        label="Photo"
+                        as="span"
+                        className="relative block"
+                        sizes={{
+                          s: "relative mx-auto block w-[72%]",
+                          l: "relative block",
+                        }}
                       >
-                        {item.media.map((m, i) => (
-                          <Block
-                            key={i}
-                            id={`fun.${item.slug || idx}.media.${i}`}
-                            kind="image"
-                            label="Photo"
-                            as="span"
-                            className="relative block"
-                            sizes={{
-                              s: "relative mx-auto block w-[72%]",
-                              l: "relative block",
-                            }}
-                          >
-                            <Frame
-                              m={m}
-                              shape={item.shape}
-                              i={i}
-                              path={["fun", idx, "media", i]}
-                            />
-                            <ItemTools
-                              path={["fun", idx, "media"]}
-                              index={i}
-                              length={item.media.length}
-                              noun="frame"
-                              className="-top-3 right-0"
-                            />
-                          </Block>
-                        ))}
-                      </div>
-                      {editing && (
-                        <AddButton
-                          path={["fun", idx, "media"]}
-                          make={() => ({ ...templates.media })}
-                          label="Add frame"
-                          className="mt-4"
+                        <Frame
+                          m={m}
+                          shape={item.shape}
+                          i={i}
+                          path={["fun", idx, "media", i]}
                         />
-                      )}
-                    </>
+                        <ItemTools
+                          path={["fun", idx, "media"]}
+                          index={i}
+                          length={item.media.length}
+                          noun="frame"
+                          className="-top-3 right-0"
+                        />
+                      </Block>
+                    ))}
+                  </div>
+                  {editing && (
+                    <AddButton
+                      path={["fun", idx, "media"]}
+                      make={() => ({ ...templates.media })}
+                      label="Add frame"
+                      className="mt-4"
+                    />
                   )}
 
                   <h2
@@ -223,6 +177,12 @@ export default function FunView() {
                   >
                     <T path={["fun", idx, "title"]} />
                   </h2>
+                  {item.stat && (
+                    <p className="mt-1 font-mono text-sm text-ink-soft">
+                      <T path={["fun", idx, "stat", "value"]} />{" "}
+                      <T path={["fun", idx, "stat", "label"]} />
+                    </p>
+                  )}
                   <Block
                     id={`fun.${item.slug || idx}.line`}
                     label="Card text"
