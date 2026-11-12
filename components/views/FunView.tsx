@@ -15,12 +15,6 @@ import { useEdit } from "@/components/edit/EditProvider";
 import { templates, type FunItem, type FunMedia } from "@/lib/content";
 import type { Path } from "@/lib/path";
 
-const aspect = {
-  portrait: "aspect-[3/4]",
-  wide: "aspect-video",
-  square: "aspect-square",
-} as const;
-
 function Frame({
   m,
   shape,
@@ -37,29 +31,27 @@ function Frame({
   const tilt = i % 2 === 0 ? "-rotate-[1.5deg]" : "rotate-[1.5deg]";
   const remote = Boolean(m.src && /^https?:/.test(m.src));
   const inner = m.src ? (
-    <span className={`photo-frame block bg-paper p-2 pb-3 ${tilt}`}>
-      <span className={`relative block overflow-hidden ${aspect[shape]}`}>
+    <span className={`photo-frame flex h-full min-h-0 flex-col bg-paper p-2 pb-3 ${tilt}`}>
+      <span className="relative min-h-0 w-full flex-1 overflow-hidden">
         <Image
           src={m.src}
           alt={m.alt ?? ""}
           fill
-          sizes={small ? "128px" : "(min-width: 768px) 260px, 45vw"}
+          sizes={small ? "128px" : "(min-width: 768px) 500px, 90vw"}
           className="object-cover"
           unoptimized={remote}
         />
       </span>
       {m.caption && (
         <span
-          className={`mt-2 block text-center font-mono text-ink-soft ${small ? "text-[0.6rem] leading-tight" : "text-xs"}`}
+          className={`mt-2 block shrink-0 text-center font-mono text-ink-soft ${small ? "text-[0.6rem] leading-tight" : "text-xs"}`}
         >
           <T path={[...path, "caption"]} />
         </span>
       )}
     </span>
   ) : (
-    <span
-      className={`placeholder-frame grid place-items-center rounded-md border-[1.5px] border-dashed border-ink/40 bg-desk/50 p-3 text-center ${aspect[shape]}`}
-    >
+    <span className="placeholder-frame grid h-full min-h-0 place-items-center rounded-md border-[1.5px] border-dashed border-ink/40 bg-desk/50 p-3 text-center">
       <span>
         <span aria-hidden className="block text-2xl text-peri-deep">
           {shape === "wide" ? "▶" : "✦"}
@@ -71,13 +63,13 @@ function Frame({
     </span>
   );
   return (
-    <span className="relative block">
+    <span className="relative block h-full min-h-0">
       {m.href ? (
         <a
           href={m.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block"
+          className="flex h-full min-h-0 flex-col"
         >
           {inner}
         </a>
@@ -106,13 +98,14 @@ export default function FunView() {
               kind="item"
               sortKey={`f${idx}`}
               label="Card"
+              className="h-full"
             >
               <Window
                 as="section"
                 title={<T path={["fun", idx, "file"]} />}
                 tone="peri"
-                className={`relative ${idx < 2 ? "win-open" : "win-open-2"}`}
-                bodyClassName="px-5 pb-6 pt-5 sm:px-7 sm:pb-7"
+                className={`relative flex h-full flex-col ${idx < 2 ? "win-open" : "win-open-2"}`}
+                bodyClassName="flex flex-1 flex-col px-5 pb-6 pt-5 sm:px-7 sm:pb-7"
                 labelledBy={`fun-${item.slug}`}
               >
                 <ItemTools
@@ -123,9 +116,9 @@ export default function FunView() {
                   confirmRemove
                   className="right-10 top-1"
                 />
-                <div id={item.slug} className="scroll-mt-24">
+                <div id={item.slug} className="flex flex-1 flex-col scroll-mt-24">
                   <div
-                    className={`grid gap-4 ${
+                    className={`fun-media grid gap-4 ${
                       item.media.length >= 3
                         ? "grid-cols-3"
                         : item.media.length === 2
@@ -140,10 +133,10 @@ export default function FunView() {
                         kind="image"
                         label="Photo"
                         as="span"
-                        className="relative block"
+                        className="relative block h-full min-h-0"
                         sizes={{
-                          s: "relative mx-auto block w-[72%]",
-                          l: "relative block",
+                          s: "relative mx-auto block h-full min-h-0 w-[72%]",
+                          l: "relative block h-full min-h-0",
                         }}
                       >
                         <Frame
@@ -171,28 +164,35 @@ export default function FunView() {
                     />
                   )}
 
+                  <div className="fun-copy">
                   <h2
                     id={`fun-${item.slug}`}
-                    className="pixel mt-6 text-[2.6rem]"
+                    className="pixel text-[2.6rem]"
                   >
                     <T path={["fun", idx, "title"]} />
                   </h2>
-                  {item.stat && (
-                    <p className="mt-1 font-mono text-sm text-ink-soft">
-                      <T path={["fun", idx, "stat", "value"]} />{" "}
-                      <T path={["fun", idx, "stat", "label"]} />
-                    </p>
-                  )}
+                  <p className="fun-stat font-mono text-sm text-ink-soft">
+                    {item.stat ? (
+                      <>
+                        <T path={["fun", idx, "stat", "value"]} />{" "}
+                        <T path={["fun", idx, "stat", "label"]} />
+                      </>
+                    ) : (
+                      <span aria-hidden className="invisible">
+                        &nbsp;
+                      </span>
+                    )}
+                  </p>
                   <Block
                     id={`fun.${item.slug || idx}.line`}
                     label="Card text"
                     as="p"
-                    className="mt-2 text-ink-soft"
+                    className="fun-line text-ink-soft"
                   >
                     <T path={["fun", idx, "line"]} multiline />
                   </Block>
-                  {(item.links?.length || editing) && (
-                    <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                  {(item.links?.length || editing) ? (
+                    <p className="fun-links flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
                       {item.links?.map((l, j) => (
                         <span key={j} className="relative">
                           <a
@@ -221,7 +221,12 @@ export default function FunView() {
                         label="Add link"
                       />
                     </p>
+                  ) : (
+                    <p className="fun-links" aria-hidden>
+                      &nbsp;
+                    </p>
                   )}
+                  </div>
                 </div>
               </Window>
             </Block>

@@ -624,6 +624,39 @@ input:focus-visible:not(.bare) {
   border-radius: 4px;
 }
 
+/* For fun: every card shares one media well and reserved text slots
+   so cat.gif is the same size as the other windows. 3/2 matches the
+   natural footprint of two 3:4 portraits or a 16:9 clip plus caption. */
+.fun-media {
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  min-height: 0;
+}
+.fun-copy {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+.fun-copy h2 {
+  /* Jersey 10 titles can wrap to two lines on a narrow card ("Dance & choreography"). */
+  min-height: calc(2.6rem * 0.85 * 2);
+}
+.fun-stat {
+  margin-top: 0.25rem;
+  min-height: 1.25rem;
+  line-height: 1.25rem;
+}
+.fun-line {
+  margin-top: 0.5rem;
+  /* Three lines covers the longest blurb at mobile width. */
+  min-height: calc(1.6em * 3);
+}
+.fun-links {
+  margin-top: 0.75rem;
+  min-height: 1.75rem;
+}
+
 /* For fun: photo prints + placeholder frames */
 .photo-frame {
   border: 1.5px solid var(--ink);
