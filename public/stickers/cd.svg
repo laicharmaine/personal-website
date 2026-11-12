@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 176" fill="none">
+  <defs>
+
+    <filter id="die" x="-35%" y="-35%" width="170%" height="175%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="1.2" dy="4" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.6" result="blur"/>
+      <feFlood flood-color="#5a0a18" flood-opacity="0.28" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(18 18)" filter="url(#die)">
+
+    <path d="M70.00,70.00 L117.49,109.85 A62,62 0 0 1 113.07,114.60 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L113.07,114.60 A62,62 0 0 1 108.17,118.86 Z" fill="#ff567a"/>
+<path d="M70.00,70.00 L108.17,118.86 A62,62 0 0 1 102.85,122.58 Z" fill="#ff5f81"/>
+<path d="M70.00,70.00 L102.85,122.58 A62,62 0 0 1 97.18,125.73 Z" fill="#ff6888"/>
+<path d="M70.00,70.00 L97.18,125.73 A62,62 0 0 1 91.21,128.26 Z" fill="#ff718e"/>
+<path d="M70.00,70.00 L91.21,128.26 A62,62 0 0 1 85.00,130.16 Z" fill="#ff7a95"/>
+<path d="M70.00,70.00 L85.00,130.16 A62,62 0 0 1 78.63,131.40 Z" fill="#ff839c"/>
+<path d="M70.00,70.00 L78.63,131.40 A62,62 0 0 1 72.16,131.96 Z" fill="#ff8ca3"/>
+<path d="M70.00,70.00 L72.16,131.96 A62,62 0 0 1 65.68,131.85 Z" fill="#ff94a9"/>
+<path d="M70.00,70.00 L65.68,131.85 A62,62 0 0 1 59.23,131.06 Z" fill="#ff9dae"/>
+<path d="M70.00,70.00 L59.23,131.06 A62,62 0 0 1 52.91,129.60 Z" fill="#ffa6c5"/>
+<path d="M70.00,70.00 L52.91,129.60 A62,62 0 0 1 46.77,127.49 Z" fill="#ffafb7"/>
+<path d="M70.00,70.00 L46.77,127.49 A62,62 0 0 1 40.89,124.74 Z" fill="#ffb8aa"/>
+<path d="M70.00,70.00 L40.89,124.74 A62,62 0 0 1 35.33,121.40 Z" fill="#ffc09d"/>
+<path d="M70.00,70.00 L35.33,121.40 A62,62 0 0 1 30.15,117.49 Z" fill="#ffc98f"/>
+<path d="M70.00,70.00 L30.15,117.49 A62,62 0 0 1 25.40,113.07 Z" fill="#ffd282"/>
+<path d="M70.00,70.00 L25.40,113.07 A62,62 0 0 1 21.14,108.17 Z" fill="#ffdb75"/>
+<path d="M70.00,70.00 L21.14,108.17 A62,62 0 0 1 17.42,102.85 Z" fill="#ffe367"/>
+<path d="M70.00,70.00 L17.42,102.85 A62,62 0 0 1 14.27,97.18 Z" fill="#f2c86b"/>
+<path d="M70.00,70.00 L14.27,97.18 A62,62 0 0 1 11.74,91.21 Z" fill="#eac171"/>
+<path d="M70.00,70.00 L11.74,91.21 A62,62 0 0 1 9.84,85.00 Z" fill="#edc277"/>
+<path d="M70.00,70.00 L9.84,85.00 A62,62 0 0 1 8.60,78.63 Z" fill="#f0c37d"/>
+<path d="M70.00,70.00 L8.60,78.63 A62,62 0 0 1 8.04,72.16 Z" fill="#f3c483"/>
+<path d="M70.00,70.00 L8.04,72.16 A62,62 0 0 1 8.15,65.68 Z" fill="#f6c589"/>
+<path d="M70.00,70.00 L8.15,65.68 A62,62 0 0 1 8.94,59.23 Z" fill="#f9c68f"/>
+<path d="M70.00,70.00 L8.94,59.23 A62,62 0 0 1 10.40,52.91 Z" fill="#fcc087"/>
+<path d="M70.00,70.00 L10.40,52.91 A62,62 0 0 1 12.51,46.77 Z" fill="#fdb87b"/>
+<path d="M70.00,70.00 L12.51,46.77 A62,62 0 0 1 15.26,40.89 Z" fill="#fab075"/>
+<path d="M70.00,70.00 L15.26,40.89 A62,62 0 0 1 18.60,35.33 Z" fill="#f6a970"/>
+<path d="M70.00,70.00 L18.60,35.33 A62,62 0 0 1 22.51,30.15 Z" fill="#f3a26a"/>
+<path d="M70.00,70.00 L22.51,30.15 A62,62 0 0 1 26.93,25.40 Z" fill="#ef7d65"/>
+<path d="M70.00,70.00 L26.93,25.40 A62,62 0 0 1 31.83,21.14 Z" fill="#eb725f"/>
+<path d="M70.00,70.00 L31.83,21.14 A62,62 0 0 1 37.15,17.42 Z" fill="#e86859"/>
+<path d="M70.00,70.00 L37.15,17.42 A62,62 0 0 1 42.82,14.27 Z" fill="#ef6054"/>
+<path d="M70.00,70.00 L42.82,14.27 A62,62 0 0 1 48.79,11.74 Z" fill="#fb574e"/>
+<path d="M70.00,70.00 L48.79,11.74 A62,62 0 0 1 55.00,9.84 Z" fill="#ff5652"/>
+<path d="M70.00,70.00 L55.00,9.84 A62,62 0 0 1 61.37,8.60 Z" fill="#ff595a"/>
+<path d="M70.00,70.00 L61.37,8.60 A62,62 0 0 1 67.84,8.04 Z" fill="#ff6066"/>
+<path d="M70.00,70.00 L67.84,8.04 A62,62 0 0 1 74.32,8.15 Z" fill="#ff6772"/>
+<path d="M70.00,70.00 L74.32,8.15 A62,62 0 0 1 80.77,8.94 Z" fill="#ff6e7e"/>
+<path d="M70.00,70.00 L80.77,8.94 A62,62 0 0 1 87.09,10.40 Z" fill="#ff758a"/>
+<path d="M70.00,70.00 L87.09,10.40 A62,62 0 0 1 93.23,12.51 Z" fill="#ff7c96"/>
+<path d="M70.00,70.00 L93.23,12.51 A62,62 0 0 1 99.11,15.26 Z" fill="#ff7697"/>
+<path d="M70.00,70.00 L99.11,15.26 A62,62 0 0 1 104.67,18.60 Z" fill="#fe6ab2"/>
+<path d="M70.00,70.00 L104.67,18.60 A62,62 0 0 1 109.85,22.51 Z" fill="#f767a8"/>
+<path d="M70.00,70.00 L109.85,22.51 A62,62 0 0 1 114.60,26.93 Z" fill="#f1639f"/>
+<path d="M70.00,70.00 L114.60,26.93 A62,62 0 0 1 118.86,31.83 Z" fill="#ea6096"/>
+<path d="M70.00,70.00 L118.86,31.83 A62,62 0 0 1 122.58,37.15 Z" fill="#e45c8c"/>
+<path d="M70.00,70.00 L122.58,37.15 A62,62 0 0 1 125.73,42.82 Z" fill="#dd5983"/>
+<path d="M70.00,70.00 L125.73,42.82 A62,62 0 0 1 128.26,48.79 Z" fill="#dd567c"/>
+<path d="M70.00,70.00 L128.26,48.79 A62,62 0 0 1 130.16,55.00 Z" fill="#eb5278"/>
+<path d="M70.00,70.00 L130.16,55.00 A62,62 0 0 1 131.40,61.37 Z" fill="#f94f75"/>
+<path d="M70.00,70.00 L131.40,61.37 A62,62 0 0 1 131.96,67.84 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L131.96,67.84 A62,62 0 0 1 131.85,74.32 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L131.85,74.32 A62,62 0 0 1 131.06,80.77 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L131.06,80.77 A62,62 0 0 1 129.60,87.09 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L129.60,87.09 A62,62 0 0 1 127.49,93.23 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L127.49,93.23 A62,62 0 0 1 124.74,99.11 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L124.74,99.11 A62,62 0 0 1 121.40,104.67 Z" fill="#ff4e74"/>
+<path d="M70.00,70.00 L121.40,104.67 A62,62 0 0 1 117.49,109.85 Z" fill="#ff4e74"/>
+    <circle cx="70" cy="70" r="62" fill="none" stroke="#ffffff" stroke-width="1.6" opacity=".5"/>
+    <circle cx="70" cy="70" r="50" fill="none" stroke="#ffffff" stroke-width=".7" opacity=".28"/>
+    <circle cx="70" cy="70" r="38" fill="none" stroke="#ffffff" stroke-width=".55" opacity=".2"/>
+    <ellipse cx="50" cy="44" rx="30" ry="13" transform="rotate(-34 50 44)" fill="#fff" opacity=".55"/>
+    <circle cx="70" cy="70" r="16.5" fill="#fff"/>
+    <circle cx="70" cy="70" r="10.5" fill="#efe8f4" stroke="#d4bdc6" stroke-width="1.3"/>
+    <circle cx="70" cy="70" r="4.6" fill="#e4dae8"/>
+
+  </g>
+</svg>

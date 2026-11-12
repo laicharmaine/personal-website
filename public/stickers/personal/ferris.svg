@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 208" fill="none">
+  <defs>
+    <filter id="die-ferris" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-ferris)">
+
+    <!-- legs -->
+    <path d="M90 86 L 48 168 L 64 168 L 90 100 L 116 168 L 132 168 Z" fill="#171717"/>
+    <!-- wheel -->
+    <circle cx="90" cy="86" r="70" fill="none" stroke="#171717" stroke-width="8"/>
+    <circle cx="90" cy="86" r="18" fill="#f3eee4" stroke="#171717" stroke-width="5"/>
+    <circle cx="90" cy="86" r="6" fill="#c8102e"/>
+    <rect x="80.0" y="8.0" width="20" height="16" rx="4" fill="#c8102e" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="90.0" y2="16.0" stroke="#171717" stroke-width="3"/>
+    <rect x="129.5" y="28.5" width="20" height="16" rx="4" fill="#f3eee4" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="139.5" y2="36.5" stroke="#171717" stroke-width="3"/>
+    <rect x="150.0" y="78.0" width="20" height="16" rx="4" fill="#ff4f8b" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="160.0" y2="86.0" stroke="#171717" stroke-width="3"/>
+    <rect x="129.5" y="127.5" width="20" height="16" rx="4" fill="#171717" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="139.5" y2="135.5" stroke="#171717" stroke-width="3"/>
+    <rect x="80.0" y="148.0" width="20" height="16" rx="4" fill="#c8102e" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="90.0" y2="156.0" stroke="#171717" stroke-width="3"/>
+    <rect x="30.5" y="127.5" width="20" height="16" rx="4" fill="#f3eee4" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="40.5" y2="135.5" stroke="#171717" stroke-width="3"/>
+    <rect x="10.0" y="78.0" width="20" height="16" rx="4" fill="#ff4f8b" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="20.0" y2="86.0" stroke="#171717" stroke-width="3"/>
+    <rect x="30.5" y="28.5" width="20" height="16" rx="4" fill="#171717" stroke="#171717" stroke-width="2"/>
+    <line x1="90" y1="86" x2="40.5" y2="36.5" stroke="#171717" stroke-width="3"/>
+    <!-- redraw rim on top of spokes a bit -->
+    <circle cx="90" cy="86" r="70" fill="none" stroke="#171717" stroke-width="8"/>
+
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 172" fill="none">
+  <defs>
+
+    <filter id="die" x="-35%" y="-35%" width="170%" height="175%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="1.2" dy="4" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.6" result="blur"/>
+      <feFlood flood-color="#4a1870" flood-opacity="0.28" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glitter" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -2.2" result="s"/>
+      <feBlend in="SourceGraphic" in2="s" mode="screen"/>
+    </filter>
+    <filter id="sparktex" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="dots">
+        <feFuncA type="discrete" tableValues="0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0"/>
+      </feComponentTransfer>
+      <feColorMatrix in="dots" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.85 0"/>
+    </filter>
+
+  </defs>
+  <g transform="translate(18 18)" filter="url(#die)">
+
+    <defs>
+      <linearGradient id="bf2L" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset=".2" stop-color="#ddd0ff"/>
+        <stop offset=".7" stop-color="#b8a0ff"/>
+        <stop offset="1" stop-color="#e0263f"/>
+      </linearGradient>
+      <linearGradient id="bf2R" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset=".2" stop-color="#c4ecff"/>
+        <stop offset=".7" stop-color="#7ec8ff"/>
+        <stop offset="1" stop-color="#5a88d8"/>
+      </linearGradient>
+    </defs>
+    <!-- left lower -->
+    <path fill="url(#bf2L)" d="M60 70 C 20 74 8 100 22 118 C 36 134 54 118 60 92 Z"/>
+    <!-- left upper -->
+    <path fill="url(#bf2L)" d="M60 62 C 8 40 4 8 32 8 C 58 8 66 32 60 62 Z"/>
+    <!-- right upper -->
+    <path fill="url(#bf2R)" d="M68 62 C 120 40 124 8 96 8 C 70 8 62 32 68 62 Z"/>
+    <!-- right lower -->
+    <path fill="url(#bf2R)" d="M68 70 C 108 74 120 100 106 118 C 92 134 74 118 68 92 Z"/>
+    <!-- spots -->
+    <ellipse cx="40" cy="36" rx="10" ry="9" fill="#fff" opacity=".55"/>
+    <ellipse cx="88" cy="36" rx="10" ry="9" fill="#fff" opacity=".55"/>
+    <ellipse cx="36" cy="96" rx="7" ry="6" fill="#fff" opacity=".35"/>
+    <ellipse cx="92" cy="96" rx="7" ry="6" fill="#fff" opacity=".35"/>
+    <!-- body -->
+    <ellipse cx="64" cy="72" rx="5" ry="28" fill="#5a3a78"/>
+    <circle cx="64" cy="44" r="5.5" fill="#5a3a78"/>
+    <!-- antennae -->
+    <path d="M62 40 Q 52 18 44 12" fill="none" stroke="#5a3a78" stroke-width="2" stroke-linecap="round"/>
+    <path d="M66 40 Q 76 18 84 12" fill="none" stroke="#5a3a78" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="44" cy="12" r="2.6" fill="#5a3a78"/>
+    <circle cx="84" cy="12" r="2.6" fill="#5a3a78"/>
+    <!-- wing shine -->
+    <ellipse cx="42" cy="30" rx="8" ry="5" fill="#fff" opacity=".5"/>
+    <ellipse cx="86" cy="30" rx="8" ry="5" fill="#fff" opacity=".5"/>
+
+  </g>
+</svg>

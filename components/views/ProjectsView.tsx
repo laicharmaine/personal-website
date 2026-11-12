@@ -119,7 +119,7 @@ function Feature({
                 key={k}
                 className={`relative rounded-full border px-2.5 py-0.5 font-mono text-[0.7rem] ${
                   k === 0
-                    ? "border-ink bg-lime text-ink"
+                    ? "border-ink bg-cta text-cta-ink"
                     : "border-line bg-paper/70 text-ink-soft"
                 }`}
               >
@@ -246,7 +246,7 @@ function Placeholder({ title, tag }: { title: string; tag?: string }) {
           {Array.from({ length: 28 }, (_, k) => (
             <span
               key={k}
-              className={`aspect-square rounded-[3px] border ${k === 9 ? "border-ink bg-lime" : [3, 15, 22].includes(k) ? "border-peri bg-peri/25" : "border-line bg-paper/70"}`}
+              className={`aspect-square rounded-[3px] border ${k === 9 ? "border-ink bg-cta" : [3, 15, 22].includes(k) ? "border-peri bg-peri/25" : "border-line bg-paper/70"}`}
             />
           ))}
         </div>

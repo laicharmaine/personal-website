@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 208" fill="none">
+  <defs>
+    <filter id="die-mic" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-mic)">
+
+    <!-- stand arm -->
+    <rect x="86" y="118" width="10" height="46" rx="3" fill="#171717"/>
+    <ellipse cx="91" cy="168" rx="28" ry="8" fill="#171717"/>
+    <!-- handle -->
+    <rect x="78" y="78" width="26" height="48" rx="8" fill="#c8102e"/>
+    <rect x="82" y="86" width="18" height="6" rx="2" fill="#2a1818"/>
+    <rect x="82" y="98" width="18" height="6" rx="2" fill="#2a1818"/>
+    <!-- grille ball -->
+    <circle cx="91" cy="48" r="40" fill="#171717"/>
+    <circle cx="91" cy="48" r="32" fill="#f3eee4"/>
+    <!-- grille lines -->
+    <g stroke="#171717" stroke-width="2.2" fill="none">
+      <ellipse cx="91" cy="48" rx="26" ry="10"/>
+      <ellipse cx="91" cy="48" rx="26" ry="18"/>
+      <ellipse cx="91" cy="48" rx="26" ry="26"/>
+      <line x1="91" y1="16" x2="91" y2="80"/>
+      <line x1="70" y1="20" x2="70" y2="76"/>
+      <line x1="112" y1="20" x2="112" y2="76"/>
+    </g>
+    <circle cx="91" cy="48" r="32" fill="none" stroke="#171717" stroke-width="3"/>
+
+  </g>
+</svg>

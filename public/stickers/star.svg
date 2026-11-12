@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 160" fill="none">
+  <defs>
+
+    <filter id="die" x="-35%" y="-35%" width="170%" height="175%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="1.2" dy="4" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.6" result="blur"/>
+      <feFlood flood-color="#4a1870" flood-opacity="0.28" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+    <filter id="glitter" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="1.05" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 5 -2.6" result="spark"/>
+      <feComposite in="spark" in2="SourceAlpha" operator="in" result="clipped"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="clipped"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+  <g transform="translate(18 18)" filter="url(#die)">
+
+    <defs>
+      <linearGradient id="stg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f0d8ff"/>
+        <stop offset=".35" stop-color="#c090ff"/>
+        <stop offset="1" stop-color="#8a40e8"/>
+      </linearGradient>
+    </defs>
+    <path fill="url(#stg)" filter="url(#glitter)" d="M64 6 L78 46 L120 48 L88 74 L98 116 L64 92 L30 116 L40 74 L8 48 L50 46 Z"/>
+    <path fill="#fff" opacity=".55" d="M64 18 L70 46 L64 52 L58 46 Z"/>
+    <circle cx="50" cy="50" r="3" fill="#fff" opacity=".9"/>
+    <circle cx="80" cy="64" r="2.2" fill="#fff" opacity=".85"/>
+    <circle cx="58" cy="78" r="1.8" fill="#fff" opacity=".9"/>
+    <circle cx="70" cy="40" r="1.4" fill="#fff" opacity=".8"/>
+    <path fill="#fff" opacity=".7" d="M88 54 l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+
+  </g>
+</svg>

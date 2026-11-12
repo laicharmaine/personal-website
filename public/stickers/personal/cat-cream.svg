@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 182" fill="none">
+  <defs>
+    <filter id="die-cat-cream" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-cat-cream)">
+
+    <!-- loaf body -->
+    <ellipse cx="84" cy="92" rx="68" ry="40" fill="#f3eee4"/>
+    <path d="M84 52 Q 20 52 16 92 Q 20 132 84 132 Q 148 132 152 92 Q 148 52 84 52 Z" fill="#f3eee4"/>
+    <!-- paws -->
+    <ellipse cx="50" cy="124" rx="16" ry="10" fill="#f3eee4"/>
+    <ellipse cx="118" cy="124" rx="16" ry="10" fill="#f3eee4"/>
+    <!-- tail curl -->
+    <path d="M148 100 C 180 88 176 48 150 54" fill="none" stroke="#f3eee4" stroke-width="12" stroke-linecap="round"/>
+    <!-- head -->
+    <circle cx="84" cy="58" r="38" fill="#f3eee4"/>
+    <!-- ears -->
+    <path d="M52 42 L 44 8 L 78 36 Z" fill="#f3eee4"/>
+    <path d="M116 42 L 124 8 L 90 36 Z" fill="#f3eee4"/>
+    <path d="M54 38 L 50 16 L 72 34 Z" fill="#ff4f8b"/>
+    <path d="M114 38 L 118 16 L 96 34 Z" fill="#ff4f8b"/>
+    <!-- eyes (sleepier / rounder than the black cat) -->
+    <path d="M62 58 Q 70 66 78 58" fill="none" stroke="#171717" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M90 58 Q 98 66 106 58" fill="none" stroke="#171717" stroke-width="3.2" stroke-linecap="round"/>
+    <!-- nose + mouth -->
+    <path d="M84 70 L 79 78 L 89 78 Z" fill="#c8102e"/>
+    <path d="M84 78 Q 76 86 68 82" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round"/>
+    <path d="M84 78 Q 92 86 100 82" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round"/>
+    <!-- whiskers -->
+    <g stroke="#171717" stroke-width="1.6" stroke-linecap="round">
+      <path d="M48 70 L 24 64"/>
+      <path d="M48 76 L 24 78"/>
+      <path d="M120 70 L 144 64"/>
+      <path d="M120 76 L 144 78"/>
+    </g>
+    <!-- blush -->
+    <ellipse cx="58" cy="72" rx="7" ry="4" fill="#ff4f8b" opacity=".85"/>
+    <ellipse cx="110" cy="72" rx="7" ry="4" fill="#ff4f8b" opacity=".85"/>
+
+  </g>
+</svg>

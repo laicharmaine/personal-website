@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 238 136" fill="none">
+  <defs>
+    <filter id="die-hk-taxi" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-hk-taxi)">
+
+    <!-- shadow / ground not needed -->
+    <!-- body -->
+    <path d="M18 78 L18 50 Q18 42 28 42 L48 42 L60 22 Q64 16 74 16 L132 16 Q140 16 144 24 L156 42 L178 42 Q190 42 190 54 L190 78 Z" fill="#c8102e"/>
+    <!-- cream roof light -->
+    <rect x="84" y="6" width="36" height="14" rx="3" fill="#f3eee4"/>
+    <rect x="84" y="6" width="36" height="14" rx="3" fill="none" stroke="#171717" stroke-width="3"/>
+    <!-- windows -->
+    <path d="M62 42 L70 24 L128 24 L140 42 Z" fill="#171717"/>
+    <path d="M74 28 L86 28 L86 38 L68 38 Z" fill="#f3eee4"/>
+    <path d="M92 28 L122 28 L130 38 L92 38 Z" fill="#f3eee4"/>
+    <!-- divider -->
+    <rect x="88" y="24" width="3" height="18" fill="#171717"/>
+    <!-- bumper / trim -->
+    <rect x="16" y="76" width="176" height="8" rx="2" fill="#171717"/>
+    <rect x="22" y="70" width="12" height="6" rx="1" fill="#f3eee4"/>
+    <rect x="174" y="70" width="10" height="6" rx="1" fill="#ff4f8b"/>
+    <!-- wheels -->
+    <circle cx="56" cy="86" r="16" fill="#171717"/>
+    <circle cx="56" cy="86" r="7" fill="#f3eee4"/>
+    <circle cx="154" cy="86" r="16" fill="#171717"/>
+    <circle cx="154" cy="86" r="7" fill="#f3eee4"/>
+
+  </g>
+</svg>

@@ -7,6 +7,7 @@ import Email from "@/components/views/Email";
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
 import Block, { Sections } from "@/components/edit/Block";
+import RevealCover from "@/components/RevealCover";
 
 export default function HomeView() {
   const { content: c, editing } = useEdit();
@@ -43,10 +44,7 @@ export default function HomeView() {
                 )}
               </>
             )}
-            <span
-              aria-hidden
-              className="blink ml-[0.08em] inline-block h-[0.55em] w-[0.2em] bg-lime align-baseline outline outline-[1.5px] outline-ink"
-            />
+            <span aria-hidden className="caret" />
           </h1>
           <div className="mt-8 grid gap-6 md:flex md:items-end md:gap-10">
             <Block
@@ -101,7 +99,7 @@ export default function HomeView() {
           aria-hidden={!editing}
         >
           <div className="burst grid h-24 w-24 place-items-center bg-ink sm:h-36 sm:w-36">
-            <div className="burst grid h-[5.6rem] w-[5.6rem] place-items-center bg-lime text-center sm:h-[8.5rem] sm:w-[8.5rem]">
+            <div className="burst grid h-[5.6rem] w-[5.6rem] place-items-center text-center sm:h-[8.5rem] sm:w-[8.5rem]">
               <span className="pixel whitespace-pre-line text-[1.15rem] leading-[0.95] sm:text-[1.75rem]">
                 <T path={["home", "sticker"]} multiline />
               </span>
@@ -335,15 +333,18 @@ export default function HomeView() {
   );
 
   return (
-    <Sections
-      page="home"
-      items={[
-        { id: "home.hero", node: hero },
-        { id: "home.numbers", node: numbers },
-        { id: "home.ticker", node: ticker },
-        { id: "home.work", node: work },
-        { id: "home.cta", node: cta },
-      ]}
-    />
+    <>
+      <RevealCover />
+      <Sections
+        page="home"
+        items={[
+          { id: "home.hero", node: hero },
+          { id: "home.numbers", node: numbers },
+          { id: "home.ticker", node: ticker },
+          { id: "home.work", node: work },
+          { id: "home.cta", node: cta },
+        ]}
+      />
+    </>
   );
 }

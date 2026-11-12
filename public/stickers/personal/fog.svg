@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 136" fill="none">
+  <defs>
+    <filter id="die-fog" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-fog)">
+
+    <!-- sun / sky disc barely peeking -->
+    <circle cx="110" cy="28" r="22" fill="#ff4f8b"/>
+    <!-- bridge tower peeking out of the fog -->
+    <g fill="#c8102e">
+      <rect x="96" y="8" width="8" height="54"/>
+      <rect x="112" y="8" width="8" height="54"/>
+      <rect x="94" y="8" width="28" height="8"/>
+      <rect x="96" y="28" width="24" height="5"/>
+    </g>
+    <!-- fog banks, solid overlapping ellipses -->
+    <ellipse cx="70" cy="62" rx="70" ry="20" fill="#f3eee4"/>
+    <ellipse cx="140" cy="58" rx="72" ry="22" fill="#ffffff"/>
+    <ellipse cx="40" cy="74" rx="44" ry="16" fill="#ffffff"/>
+    <ellipse cx="110" cy="76" rx="90" ry="18" fill="#f3eee4"/>
+    <ellipse cx="180" cy="74" rx="42" ry="16" fill="#f3eee4"/>
+    <ellipse cx="86" cy="86" rx="70" ry="14" fill="#ffffff"/>
+
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 204" fill="none">
+  <defs>
+
+    <filter id="die" x="-35%" y="-35%" width="170%" height="175%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="1.2" dy="4" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.6" result="blur"/>
+      <feFlood flood-color="#4a1870" flood-opacity="0.28" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glitter" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -2.2" result="s"/>
+      <feBlend in="SourceGraphic" in2="s" mode="screen"/>
+    </filter>
+    <filter id="sparktex" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="dots">
+        <feFuncA type="discrete" tableValues="0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0"/>
+      </feComponentTransfer>
+      <feColorMatrix in="dots" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.85 0"/>
+    </filter>
+
+  </defs>
+  <g transform="translate(18 18)" filter="url(#die)">
+
+    <defs>
+      <linearGradient id="tdg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd4ea"/>
+        <stop offset=".45" stop-color="#ff8ec0"/>
+        <stop offset="1" stop-color="#ff5aa0"/>
+      </linearGradient>
+      <linearGradient id="tdear" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffc0e0"/>
+        <stop offset="1" stop-color="#ff7ab0"/>
+      </linearGradient>
+    </defs>
+    <!-- ears -->
+    <circle cx="38" cy="28" r="16" fill="url(#tdear)"/>
+    <circle cx="90" cy="28" r="16" fill="url(#tdear)"/>
+    <circle cx="38" cy="28" r="8" fill="#ffb0d4"/>
+    <circle cx="90" cy="28" r="8" fill="#ffb0d4"/>
+    <!-- arms -->
+    <ellipse cx="22" cy="100" rx="14" ry="22" fill="url(#tdg)"/>
+    <ellipse cx="106" cy="100" rx="14" ry="22" fill="url(#tdg)"/>
+    <!-- legs -->
+    <ellipse cx="44" cy="148" rx="18" ry="14" fill="url(#tdg)"/>
+    <ellipse cx="84" cy="148" rx="18" ry="14" fill="url(#tdg)"/>
+    <!-- body -->
+    <ellipse cx="64" cy="112" rx="40" ry="38" fill="url(#tdg)"/>
+    <ellipse cx="64" cy="116" rx="22" ry="20" fill="#ffd0e8" opacity=".8"/>
+    <!-- head -->
+    <circle cx="64" cy="52" r="32" fill="url(#tdg)"/>
+    <!-- shine -->
+    <ellipse cx="50" cy="40" rx="12" ry="8" fill="#fff" opacity=".45"/>
+    <!-- snout -->
+    <ellipse cx="64" cy="62" rx="16" ry="12" fill="#ffe4f2"/>
+    <ellipse cx="64" cy="58" rx="6" ry="4.4" fill="#c04070"/>
+    <path d="M64 62 Q 58 70 52 68" fill="none" stroke="#c04070" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M64 62 Q 70 70 76 68" fill="none" stroke="#c04070" stroke-width="1.6" stroke-linecap="round"/>
+    <!-- eyes -->
+    <circle cx="52" cy="46" r="4.2" fill="#4a1870"/>
+    <circle cx="76" cy="46" r="4.2" fill="#4a1870"/>
+    <circle cx="53.4" cy="44.6" r="1.5" fill="#fff"/>
+    <circle cx="77.4" cy="44.6" r="1.5" fill="#fff"/>
+
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 200" fill="none">
+  <defs>
+    <filter id="die-cherry-pair" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-cherry-pair)">
+
+    <!-- stems -->
+    <path d="M84 86 Q 84 20 120 8" fill="none" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+    <path d="M148 90 Q 148 28 120 8" fill="none" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+    <!-- tiny join -->
+    <circle cx="120" cy="8" r="4" fill="#171717"/>
+    <!-- left cherry -->
+    <circle cx="80" cy="118" r="40" fill="#c8102e"/>
+    <circle cx="80" cy="118" r="40" fill="none" stroke="#171717" stroke-width="3"/>
+    <ellipse cx="66" cy="104" rx="12" ry="8" transform="rotate(-30 66 104)" fill="#ffffff" opacity="0.4"/>
+    <!-- right cherry -->
+    <circle cx="152" cy="122" r="38" fill="#e0263f"/>
+    <circle cx="152" cy="122" r="38" fill="none" stroke="#171717" stroke-width="3"/>
+    <ellipse cx="138" cy="108" rx="11" ry="7" transform="rotate(-30 138 108)" fill="#ffffff" opacity="0.4"/>
+
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 162" fill="none">
+  <defs>
+
+    <filter id="die" x="-35%" y="-35%" width="170%" height="175%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="7" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="1.2" dy="4" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.6" result="blur"/>
+      <feFlood flood-color="#4a1870" flood-opacity="0.28" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glitter" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -2.2" result="s"/>
+      <feBlend in="SourceGraphic" in2="s" mode="screen"/>
+    </filter>
+    <filter id="sparktex" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="dots">
+        <feFuncA type="discrete" tableValues="0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0"/>
+      </feComponentTransfer>
+      <feColorMatrix in="dots" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.85 0"/>
+    </filter>
+
+  </defs>
+  <g transform="translate(18 18)" filter="url(#die)">
+
+    <path fill="#ff5a8a" d="M8 118 C8 58 48 12 108 12 S208 58 208 118 h-18 C190 70 154 30 108 30 S26 70 26 118 Z"/>
+    <path fill="#ffd24a" d="M26 118 C26 70 62 34 108 34 S190 70 190 118 h-16 C174 80 146 50 108 50 S42 80 42 118 Z"/>
+    <path fill="#5ee08a" d="M42 118 C42 80 70 54 108 54 S174 80 174 118 h-16 C158 90 136 70 108 70 S58 90 58 118 Z"/>
+    <path fill="#5ac0ff" d="M58 118 C58 90 80 74 108 74 S158 90 158 118 h-16 C142 100 126 90 108 90 S74 100 74 118 Z"/>
+    <path fill="#c090ff" d="M74 118 C74 100 88 92 108 92 S142 100 142 118 Z"/>
+    <path fill="#fff" opacity=".4" d="M40 70 C58 40 88 28 108 28 C90 36 70 52 54 78 Z"/>
+
+  </g>
+</svg>

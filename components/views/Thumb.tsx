@@ -41,7 +41,7 @@ export default function Thumb({
       {m.href && (
         <span
           aria-hidden
-          className="absolute bottom-1.5 right-1.5 rounded-full border border-ink bg-lime px-1.5 font-mono text-[0.65rem] leading-4 text-ink"
+          className="absolute bottom-1.5 right-1.5 rounded-full border border-ink bg-cta px-1.5 font-mono text-[0.65rem] leading-4 text-cta-ink"
         >
           ↗
         </span>

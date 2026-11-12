@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 180" fill="none">
+  <defs>
+
+    <filter id="die" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die)">
+
+    <rect width="120" height="148" rx="4" fill="#f3eee4"/>
+    <rect x="8" y="8" width="50" height="44" fill="#2a2a2a"/>
+    <circle cx="33" cy="30" r="12" fill="#c8102e"/>
+    <rect x="64" y="8" width="48" height="44" fill="#c8bfb0"/>
+    <rect x="72" y="16" width="32" height="20" fill="#171717"/>
+    <rect x="8" y="58" width="104" height="40" fill="#3a2a28"/>
+    <rect x="16" y="66" width="40" height="24" fill="#f3eee4"/>
+    <rect x="64" y="66" width="36" height="24" fill="#c8102e"/>
+    <rect x="8" y="104" width="50" height="36" fill="#d8c8b8"/>
+    <rect x="64" y="104" width="48" height="36" fill="#1a1a1a"/>
+    <path fill="#f3eee4" d="M80 112 L88 124 L104 126 L92 136 L96 148 L80 140 L64 148 L68 136 L56 126 L72 124 Z"/>
+    
+  </g>
+</svg>

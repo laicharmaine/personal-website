@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 150" fill="none">
+  <defs>
+    <filter id="die-notes" x="-30%" y="-30%" width="160%" height="165%" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="wide"/>
+      <feFlood flood-color="#ffffff" result="white"/>
+      <feComposite in="white" in2="wide" operator="in" result="border"/>
+      <feOffset in="wide" dx="0.8" dy="3" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="2.1" result="blur"/>
+      <feFlood flood-color="#171717" flood-opacity="0.18" result="shc"/>
+      <feComposite in="shc" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="border"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(16 16)" filter="url(#die-notes)">
+
+    <!-- beamed pair -->
+    <ellipse cx="36" cy="96" rx="18" ry="13" transform="rotate(-18 36 96)" fill="#171717"/>
+    <ellipse cx="96" cy="84" rx="18" ry="13" transform="rotate(-18 96 84)" fill="#c8102e"/>
+    <rect x="50" y="24" width="8" height="74" fill="#171717"/>
+    <rect x="110" y="12" width="8" height="74" fill="#c8102e"/>
+    <path d="M50 24 L118 12 L118 28 L50 40 Z" fill="#171717"/>
+    <!-- single eighth -->
+    <ellipse cx="156" cy="100" rx="16" ry="12" transform="rotate(-18 156 100)" fill="#ff4f8b"/>
+    <rect x="168" y="28" width="7" height="72" fill="#ff4f8b"/>
+    <path d="M175 28 Q 196 36 190 62" fill="none" stroke="#ff4f8b" stroke-width="6" stroke-linecap="round"/>
+
+  </g>
+</svg>
