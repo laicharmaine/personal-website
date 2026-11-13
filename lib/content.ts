@@ -501,14 +501,6 @@ const articles: Article[] = [
     href: "https://medium.com/@Numenta/comparing-hintons-glom-model-to-numenta-s-thousand-brains-theory-88ed999ab13d",
   },
   {
-    title: "Introducing the Numenta Platform for Intelligent Computing",
-    outlet: "Numenta",
-    date: "2023",
-    href: "https://medium.com/@Numenta/introducing-nupic-a0834007659f",
-    summary:
-      "Covers the launch of NuPIC, which applies Thousand Brains research so large language models can run efficiently on CPUs.",
-  },
-  {
     title:
       "AI is harming our planet: addressing AI’s staggering energy cost (2023 update)",
     outlet: "Numenta",
@@ -524,22 +516,6 @@ const articles: Article[] = [
     href: "https://medium.com/@Numenta/exploring-the-role-of-neuromodulators-in-ai-brains-bay-meetup-369ea31b6285",
     summary:
       "Reports on a Brains@Bay meetup with Srikanth Ramaswamy, Jie Mei, and Thomas Miconi, plus a panel led by Subutai Ahmad, on how neuromodulators might make AI more flexible and adaptive.",
-  },
-  {
-    title: "Catching up on Numenta: Highlights of 2021",
-    outlet: "Numenta",
-    date: "2022",
-    href: "https://medium.com/@Numenta/catching-up-on-numenta-highlights-of-2021-12c6339a9632",
-    summary:
-      "Rounds up Numenta’s top 2021 work, from the release of Jeff Hawkins’s book A Thousand Brains to scientific papers and other research.",
-  },
-  {
-    title: "Yearly Recap: Taking a Look Back at Our Top Research Meetings",
-    outlet: "Numenta",
-    date: "2021",
-    href: "https://medium.com/@Numenta/yearly-recap-taking-a-look-back-at-our-top-research-meetings-206b61030bb3",
-    summary:
-      "Recaps Numenta’s research meetings—posted to YouTube and the HTM Forum—as the core of the company’s open-science practice.",
   },
   {
     title: "Brains@Bay: A Meetup on Brain-Inspired Machine Learning Algorithms",
