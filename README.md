@@ -50,7 +50,8 @@ npm run lint    # ESLint
 | `/projects` | Case-study cards |
 | `/blog` | Post list |
 | `/writing`, `/writing/*` | Permanent redirect to `/blog` (and matching subpaths) |
-| `/contact` | Email (mailto) + LinkedIn |
+| `/about` | About page (photo, bio, email + socials) |
+| `/contact`, `/contact/*` | Permanent redirect to `/about` (and matching subpaths) |
 
 ## Design notes
 

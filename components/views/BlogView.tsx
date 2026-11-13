@@ -43,7 +43,7 @@ export default function BlogView() {
                     <Href path={["articles", i, "href"]} />
                   </span>
                   {(a.summary || editing) && (
-                    <span className="mt-1 block text-sm font-normal text-ink-soft">
+                    <span className="mt-1.5 block max-w-2xl text-sm font-normal leading-relaxed text-ink-soft">
                       <T path={["articles", i, "summary"]} multiline />
                     </span>
                   )}

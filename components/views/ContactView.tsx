@@ -15,7 +15,7 @@ import { templates } from "@/lib/content";
 import Block from "@/components/edit/Block";
 import LivingPortrait, { hasGazeFrames } from "@/components/views/LivingPortrait";
 
-/** /contact: a small about + contact page. Portrait left, words and links right. */
+/** /about: a small about + contact page. Portrait left, words and links right. */
 export default function ContactView() {
   const { content: c, editing } = useEdit();
   const photo = c.contactPage.photo;

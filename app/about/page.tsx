@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import ContactView from "@/components/views/ContactView";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with Charmaine Lai.",
+  title: "About",
+  description: "About Charmaine Lai.",
 };
 
-export default function ContactPage() {
+export default function AboutPage() {
   return <ContactView />;
 }

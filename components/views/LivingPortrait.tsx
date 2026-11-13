@@ -68,7 +68,7 @@ const MASK_H = 175;
 const HIT_ALPHA = 40;
 
 /**
- * Die-cut head sticker for /contact. Looks toward the cursor.
+ * Die-cut head sticker for /about. Looks toward the cursor.
  *
  * Frames are preloaded transparent webps with a shared white sticker
  * outline. A smoothed gaze vector picks rest or one of eight directions.

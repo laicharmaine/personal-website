@@ -29,7 +29,7 @@ export const nav = [
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/fun", label: "For fun" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About" },
 ] as const;
 
 /** Home proof points: big number + 2–4 word label. */
@@ -481,24 +481,32 @@ const articles: Article[] = [
     outlet: "Intel · Parallel Universe Magazine",
     date: "2024",
     href: "https://www.intel.com/content/www/us/en/developer/articles/technical/usher-in-a-new-era-of-accelerated-ai-on-cpus.html",
+    summary:
+      "Shows how Numenta’s NuPIC platform uses Intel AMX to run large language models at scale on Intel CPUs, with better cost and energy efficiency than GPU-heavy setups.",
   },
   {
     title: "AI is harming our planet: addressing AI’s staggering energy cost",
     outlet: "Numenta (co-written, archived)",
     date: "2022",
     href: "https://web.archive.org/web/2023/https://www.numenta.com/blog/2022/05/24/ai-is-harming-our-planet/",
+    summary:
+      "Looks at why today’s deep learning uses so much energy, and how ideas from the brain—sparsity, structured learning, and continual learning—could sharply cut AI’s carbon footprint.",
   },
   {
     title: "How do I Pursue a Career in Brain-Based AI?",
     outlet: "Numenta on Medium",
     date: "2022",
     href: "https://medium.com/@Numenta/how-do-i-pursue-a-career-in-brain-based-ai-2014d0ecfe",
+    summary:
+      "Collects practical advice from Numenta’s research team on getting started in brain-based AI, from core skills and subfields to projects, papers, and community.",
   },
   {
     title: "Comparing Hinton’s GLOM Model to Numenta’s Thousand Brains Theory",
     outlet: "Numenta on Medium",
     date: "2021",
     href: "https://medium.com/@Numenta/comparing-hintons-glom-model-to-numenta-s-thousand-brains-theory-88ed999ab13d",
+    summary:
+      "Compares Geoffrey Hinton’s GLOM computer-vision model with Numenta’s Thousand Brains Theory, outlining where the two align on columns and voting, and where they differ on movement, hierarchy, and biology.",
   },
   {
     title:
@@ -507,7 +515,7 @@ const articles: Article[] = [
     date: "2023",
     href: "https://medium.com/@Numenta/ai-is-harming-our-planet-addressing-2023-update-6115e324d81e",
     summary:
-      "Updates Numenta’s 2022 energy-cost post, arguing that ChatGPT and other large language models have made the climate problem more urgent and that neuroscience-based techniques could cut AI’s energy use.",
+      "Revisits Numenta’s 2022 energy-cost essay in the ChatGPT era, laying out why large language models use so much power and how brain-based techniques could make AI far more efficient.",
   },
   {
     title: "Exploring the Role of Neuromodulators in AI | Brains@Bay Meetup",
@@ -523,7 +531,7 @@ const articles: Article[] = [
     date: "2021",
     href: "https://medium.com/@Numenta/brains-bay-a-meetup-on-brain-inspired-machine-learning-algorithms-a03e6b11ddf7",
     summary:
-      "Introduces Brains@Bay, Numenta’s meetup for people at the intersection of neuroscience and AI, and writes up a session on brain-inspired machine learning algorithms.",
+      "Tells the story of Brains@Bay, Numenta’s neuroscience-and-AI meetup, from a small journal club to a global community, and recaps talks on sparsity, learning, and grid cells.",
   },
   {
     title: "How Sparsity Enables Energy Efficient Deep Learning Networks",
@@ -531,7 +539,7 @@ const articles: Article[] = [
     date: "2020",
     href: "https://medium.com/@Numenta/how-sparsity-enables-energy-efficient-deep-learning-networks-c85a01ea597f",
     summary:
-      "Walks through a Numenta demonstration that brain-inspired sparse networks can be about 50 times faster and use far less power than dense deep-learning models, whose training can emit as much CO₂ as several cars over a lifetime.",
+      "Walks through a Numenta demonstration that brain-inspired sparse networks can be about 50 times faster and far more power-efficient than dense models on the same hardware.",
   },
 ];
 
@@ -629,7 +637,7 @@ export const defaultContent = {
   fun,
   contactPage: {
     path: "C:\\Charmaine\\say_hi.exe",
-    title: "Say hi",
+    title: "About",
     intro: "Ideas, collabs, or just hello. Email is fastest.",
     photoTitle: "hi.jpg",
     about:
@@ -698,6 +706,7 @@ export const templates = {
     outlet: "Outlet",
     date: "2026",
     href: "https://",
+    summary: "",
   } as Article,
   media: { caption: "Coming soon" } as FunMedia,
   funItem: (): FunItem => ({
