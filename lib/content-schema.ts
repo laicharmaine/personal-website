@@ -149,7 +149,10 @@ const schema: Schema = obj({
   resumeExtras: arr(obj({ label: "str", value: "text" }), 15),
   writingPage: obj({ path: "str", title: "str", intro: "text", window: "str" }),
   articles: arr(
-    obj({ title: "text", outlet: "str", date: "str", href: "url" }),
+    obj(
+      { title: "text", outlet: "str", date: "str", href: "url", summary: "text" },
+      ["summary"],
+    ),
     40,
   ),
   funPage: obj({ path: "str", title: "str", intro: "text" }),

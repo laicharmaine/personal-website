@@ -469,6 +469,8 @@ export type Article = {
   outlet: string;
   date: string;
   href: string;
+  /** Optional one-line blurb shown on the Blog page. */
+  summary?: string;
 };
 
 /** Published writing, verified by byline. Numenta’s own blog is offline, so
@@ -497,6 +499,63 @@ const articles: Article[] = [
     outlet: "Numenta on Medium",
     date: "2021",
     href: "https://medium.com/@Numenta/comparing-hintons-glom-model-to-numenta-s-thousand-brains-theory-88ed999ab13d",
+  },
+  {
+    title: "Introducing the Numenta Platform for Intelligent Computing",
+    outlet: "Numenta",
+    date: "2023",
+    href: "https://medium.com/@Numenta/introducing-nupic-a0834007659f",
+    summary:
+      "Covers the launch of NuPIC, which applies Thousand Brains research so large language models can run efficiently on CPUs.",
+  },
+  {
+    title:
+      "AI is harming our planet: addressing AI’s staggering energy cost (2023 update)",
+    outlet: "Numenta",
+    date: "2023",
+    href: "https://medium.com/@Numenta/ai-is-harming-our-planet-addressing-2023-update-6115e324d81e",
+    summary:
+      "Updates Numenta’s 2022 energy-cost post, arguing that ChatGPT and other large language models have made the climate problem more urgent and that neuroscience-based techniques could cut AI’s energy use.",
+  },
+  {
+    title: "Exploring the Role of Neuromodulators in AI | Brains@Bay Meetup",
+    outlet: "Numenta",
+    date: "2022",
+    href: "https://medium.com/@Numenta/exploring-the-role-of-neuromodulators-in-ai-brains-bay-meetup-369ea31b6285",
+    summary:
+      "Reports on a Brains@Bay meetup with Srikanth Ramaswamy, Jie Mei, and Thomas Miconi, plus a panel led by Subutai Ahmad, on how neuromodulators might make AI more flexible and adaptive.",
+  },
+  {
+    title: "Catching up on Numenta: Highlights of 2021",
+    outlet: "Numenta",
+    date: "2022",
+    href: "https://medium.com/@Numenta/catching-up-on-numenta-highlights-of-2021-12c6339a9632",
+    summary:
+      "Rounds up Numenta’s top 2021 work, from the release of Jeff Hawkins’s book A Thousand Brains to scientific papers and other research.",
+  },
+  {
+    title: "Yearly Recap: Taking a Look Back at Our Top Research Meetings",
+    outlet: "Numenta",
+    date: "2021",
+    href: "https://medium.com/@Numenta/yearly-recap-taking-a-look-back-at-our-top-research-meetings-206b61030bb3",
+    summary:
+      "Recaps Numenta’s research meetings—posted to YouTube and the HTM Forum—as the core of the company’s open-science practice.",
+  },
+  {
+    title: "Brains@Bay: A Meetup on Brain-Inspired Machine Learning Algorithms",
+    outlet: "Numenta",
+    date: "2021",
+    href: "https://medium.com/@Numenta/brains-bay-a-meetup-on-brain-inspired-machine-learning-algorithms-a03e6b11ddf7",
+    summary:
+      "Introduces Brains@Bay, Numenta’s meetup for people at the intersection of neuroscience and AI, and writes up a session on brain-inspired machine learning algorithms.",
+  },
+  {
+    title: "How Sparsity Enables Energy Efficient Deep Learning Networks",
+    outlet: "Numenta",
+    date: "2020",
+    href: "https://medium.com/@Numenta/how-sparsity-enables-energy-efficient-deep-learning-networks-c85a01ea597f",
+    summary:
+      "Walks through a Numenta demonstration that brain-inspired sparse networks can be about 50 times faster and use far less power than dense deep-learning models, whose training can emit as much CO₂ as several cars over a lifetime.",
   },
 ];
 
