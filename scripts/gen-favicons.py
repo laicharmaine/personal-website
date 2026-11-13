@@ -112,8 +112,10 @@ def make_cl():
     return g
 
 def make_heart():
+    # Transparent tile: cherry heart, 1px ink offset shadow, and two gloss pixels.
+    # No blush square — that stays on apple-icon.png only, because iOS
+    # fills transparency with black.
     g = blank()
-    apply_bg(g, MASK, BLUSH)
     # 11x10 pixel heart + 1px ink shadow, centered in the 16 tile.
     heart = [
         ".##.....##.",
@@ -254,16 +256,16 @@ if __name__ == "__main__":
         bg.save(work / f"{name}-zoom.png")
         print("wrote", name)
 
-    # Site icons: main pick is the pixel C
-    main = images["c"]
+    # Site icons: main pick is the pixel heart (transparent; apple stays opaque blush)
+    main = images["heart"]
     write_ico(main, root / "app" / "favicon.ico", sizes=(16, 32, 48))
-    write_ico(main, dest / "c.ico", sizes=(16, 32, 48))
-    img_to_svg(make_c(), root / "app" / "icon.svg")
+    write_ico(main, dest / "heart.ico", sizes=(16, 32, 48))
+    img_to_svg(make_heart(), root / "app" / "icon.svg")
     # Keep apple-icon opaque blush. iOS fills transparent apple-touch
-    # icons with black, which would hide the ink shadow and muddy the C.
+    # icons with black, which would hide the ink shadow and muddy the heart.
     apple = apple_icon(main)
     opaque = Image.new("RGBA", (180, 180), BLUSH)
     opaque.alpha_composite(apple)
     opaque.convert("RGBA").save(root / "app" / "apple-icon.png", "PNG")
-    opaque.save(dest / "c-apple-180.png")
+    opaque.save(dest / "heart-apple-180.png")
     print("wrote app/favicon.ico, app/icon.svg, app/apple-icon.png")
