@@ -27,7 +27,7 @@ const cat = {
 export const nav = [
   { href: "/projects", label: "Projects" },
   { href: "/experience", label: "Experience" },
-  { href: "/writing", label: "Writing" },
+  { href: "/blog", label: "Blog" },
   { href: "/fun", label: "For fun" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -581,7 +581,7 @@ export const defaultContent = {
   resumeExtras,
   writingPage: {
     path: "C:\\Charmaine\\posts.txt",
-    title: "Writing",
+    title: "Blog",
     intro: "22k+ readers, an Intel feature, a few Hacker News hits.",
     window: "posts.txt",
   },

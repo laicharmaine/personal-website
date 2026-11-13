@@ -35,7 +35,7 @@ npm run lint    # ESLint
 | Experience employers, dates, bullets | **Placeholders** (`[Company]`, `[DRAFT]…`) |
 | Education undergrad row | **Placeholder** |
 | Project case-study cards | **Stubs** — titles/tags are draft |
-| Writing posts | **Draft stubs** in `lib/content.ts` |
+| Blog posts | **Draft stubs** in `lib/content.ts` |
 | Contact email & LinkedIn URL | **Placeholders** — update before sharing |
 | Skills tool list | Mixed draft / learning notes |
 
@@ -48,8 +48,8 @@ npm run lint    # ESLint
 | `/` | Home / About |
 | `/experience` | Education, work, skills (timeline) |
 | `/projects` | Case-study cards |
-| `/writing` | Post list |
-| `/writing/[slug]` | Individual draft posts |
+| `/blog` | Post list |
+| `/writing`, `/writing/*` | Permanent redirect to `/blog` (and matching subpaths) |
 | `/contact` | Email (mailto) + LinkedIn |
 
 ## Design notes

@@ -6,7 +6,7 @@ import { AddButton, Href, ItemTools, T } from "@/components/edit/Editable";
 import { useEdit } from "@/components/edit/EditProvider";
 import { templates } from "@/lib/content";
 
-export default function WritingView() {
+export default function BlogView() {
   const { content: c, editing } = useEdit();
 
   return (
