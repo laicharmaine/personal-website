@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const base = "https://charmainel.ai";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/projects", "/experience", "/blog", "/fun", "/contact"].map(
+  return ["", "/experience", "/projects", "/blog", "/fun", "/contact"].map(
     (p) => ({
       url: `${base}${p}`,
       changeFrequency: "monthly",

@@ -78,7 +78,7 @@ export default function HomeView() {
                   <T path={["home", "intro"]} multiline />
                 </Block>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/projects" className="btn btn-lime">
+                  <Link href="/experience" className="btn btn-lime">
                     <T path={["home", "ctaWork"]} />{" "}
                     <span aria-hidden className="arrow">
                       →
