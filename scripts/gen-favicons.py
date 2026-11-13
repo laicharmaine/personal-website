@@ -96,8 +96,10 @@ def scale_nn(im, factor):
     return im.resize((im.width * factor, im.height * factor), Image.Resampling.NEAREST)
 
 def make_c():
+    # Transparent tile: just the cherry C and a 1px ink offset shadow.
+    # No blush square — that stays on apple-icon.png only, because iOS
+    # fills transparency with black.
     g = blank()
-    apply_bg(g, MASK, BLUSH)
     blit_glyph(g, C, 4, 3, CHERRY, shadow=INK, shadow_off=(1, 1))
     return g
 
@@ -257,8 +259,9 @@ if __name__ == "__main__":
     write_ico(main, root / "app" / "favicon.ico", sizes=(16, 32, 48))
     write_ico(main, dest / "c.ico", sizes=(16, 32, 48))
     img_to_svg(make_c(), root / "app" / "icon.svg")
+    # Keep apple-icon opaque blush. iOS fills transparent apple-touch
+    # icons with black, which would hide the ink shadow and muddy the C.
     apple = apple_icon(main)
-    # Apple touch icons should be opaque
     opaque = Image.new("RGBA", (180, 180), BLUSH)
     opaque.alpha_composite(apple)
     opaque.convert("RGBA").save(root / "app" / "apple-icon.png", "PNG")
